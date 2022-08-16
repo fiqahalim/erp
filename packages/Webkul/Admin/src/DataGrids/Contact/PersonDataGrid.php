@@ -39,16 +39,18 @@ class PersonDataGrid extends DataGrid
         $queryBuilder = DB::table('persons')
             ->addSelect(
                 'persons.id',
+                'persons.code',
                 'persons.name as person_name',
+                'persons.ceo_name',
                 'persons.emails',
                 'persons.contact_numbers',
-                'organizations.name as organization'
-            )
-            ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id');
+                // 'organizations.name as organization'
+            );
+            // ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id');
 
         $this->addFilter('id', 'persons.id');
         $this->addFilter('person_name', 'persons.name');
-        $this->addFilter('organization', 'organizations.id');
+        // $this->addFilter('organization', 'organizations.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -68,8 +70,22 @@ class PersonDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'    => 'code',
+            'label'    => trans('admin::app.contacts.persons.code'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
             'index'    => 'person_name',
-            'label'    => trans('admin::app.datagrid.name'),
+            'label'    => trans('admin::app.contacts.persons.company_name'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'ceo_name',
+            'label'    => trans('admin::app.contacts.persons.name'),
             'type'     => 'string',
             'sortable' => true,
         ]);
@@ -102,13 +118,13 @@ class PersonDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'            => 'organization',
-            'label'            => trans('admin::app.datagrid.organization_name'),
-            'type'             => 'dropdown',
-            'dropdown_options' => $this->getOrganizationDropdownOptions(),
-            'sortable'         => false,
-        ]);
+        // $this->addColumn([
+        //     'index'            => 'organization',
+        //     'label'            => trans('admin::app.datagrid.organization_name'),
+        //     'type'             => 'dropdown',
+        //     'dropdown_options' => $this->getOrganizationDropdownOptions(),
+        //     'sortable'         => false,
+        // ]);
     }
 
     /**
@@ -118,6 +134,13 @@ class PersonDataGrid extends DataGrid
      */
     public function prepareActions()
     {
+        $this->addAction([
+            'title'  => trans('ui::app.datagrid.view'),
+            'method' => 'GET',
+            'route'  => 'admin.contacts.persons.view',
+            'icon'   => 'eye-icon',
+        ]);
+
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'method' => 'GET',

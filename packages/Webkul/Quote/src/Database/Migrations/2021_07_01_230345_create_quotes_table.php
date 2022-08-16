@@ -30,10 +30,10 @@ class CreateQuotesTable extends Migration
 
             $table->datetime('expired_at')->nullable();
 
-            $table->integer('person_id')->unsigned();
+            $table->integer('person_id')->unsigned()->nullable();
             $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();

@@ -73,11 +73,11 @@
                                     ])
 
                                     <div class="form-group">
-                                        <label for="validation">{{ __('admin::app.quotes.lead') }}</label>
+                                        {{-- <label for="validation">{{ __('admin::app.quotes.lead') }}</label> --}}
 
                                         @include('admin::common.custom-attributes.edit.lookup')
 
-                                        @php
+                                        {{-- @php
                                             $lookUpEntityData = app('Webkul\Attribute\Repositories\AttributeRepository')
                                                 ->getLookUpEntity(
                                                     'leads',
@@ -93,7 +93,7 @@
                                         <lookup-component
                                             :attribute="{'code': 'lead_id', 'name': 'Lead', 'lookup_type': 'leads'}"
                                             :data='@json($lookUpEntityData)'
-                                        ></lookup-component>
+                                        ></lookup-component> --}}
                                     </div>
 
                                 </div>
@@ -179,7 +179,7 @@
                                 <div class="form-group">
                                     <label class="required">
                                          {{ __('admin::app.quotes.price') }}
-                                        <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                                        <span class="currency-code">(RM)</span>
                                     </label>
                                 </div>
                             </th>
@@ -188,25 +188,25 @@
                                 <div class="form-group">
                                     <label class="required">
                                         {{ __('admin::app.quotes.amount') }}
-                                        <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                                        <span class="currency-code">(RM)</span>
                                     </label>
                                 </div>
                             </th>
 
-                            <th class="discount">                            
+                            {{-- <th class="discount">
                                 <div class="form-group">
                                     <label class="required">
                                         {{ __('admin::app.quotes.discount') }}
-                                         <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                                         <span class="currency-code">(RM)</span>
                                     </label>
                                 <div>
-                            </th>
+                            </th> --}}
 
                             <th class="tax">
                                 <div class="form-group">
                                     <label class="required">
                                         {{ __('admin::app.quotes.tax') }}
-                                        <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                                        <span class="currency-code">(RM)</span>
                                     </label>
                                 </div>
                             </th>
@@ -214,7 +214,7 @@
                             <th class="total">
                                 <div class="form-group">     
                                     {{ __('admin::app.quotes.total') }}
-                                    <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                                    <span class="currency-code">(RM)</span>
                                     </div>
                             </th>
 
@@ -246,7 +246,7 @@
                     <tr>
                         <td>
                             {{ __('admin::app.quotes.sub-total') }}
-                            <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                            <span class="currency-code">(RM)</span>
                         </td>
 
                         <td>-</td>
@@ -258,10 +258,10 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    {{-- <tr>
                         <td>
                             {{ __('admin::app.quotes.discount') }}
-                            <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                            <span class="currency-code">(RM)</span>
                         </td>
 
                         <td>-</td>
@@ -271,12 +271,12 @@
                                 <input type="text" name="discount_amount" class="control" v-model="discountAmount" readonly>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
 
                     <tr>
                         <td>
                             {{ __('admin::app.quotes.tax') }}
-                            <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                            <span class="currency-code">(RM)</span>
                         </td>
 
                         <td>-</td>
@@ -288,10 +288,10 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    {{-- <tr>
                         <td>
                             {{ __('admin::app.quotes.adjustment') }}
-                            <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                            <span class="currency-code">(RM)</span>
                         </td>
 
                         <td>-</td>
@@ -312,12 +312,12 @@
                                 </span>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
 
                     <tr>
                         <td>
                             {{ __('admin::app.quotes.grand-total') }}
-                            <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                            <span class="currency-code">(RM)</span>
                         </td>
 
                         <td>-</td>
@@ -424,7 +424,7 @@
                 </div>
             </td>
 
-            <td>
+            {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[discount_amount]') ? 'has-error' : '']">
                     <input
                         type="text"
@@ -439,7 +439,7 @@
                         @{{ errors.first(inputName + '[discount_amount]') }}
                     </span>
                 </div>
-            </td>
+            </td> --}}
 
             <td>
                 <div class="form-group" :class="[errors.has(inputName + '[tax_amount]') ? 'has-error' : '']">

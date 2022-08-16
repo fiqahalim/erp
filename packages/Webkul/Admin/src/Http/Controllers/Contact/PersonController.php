@@ -106,6 +106,29 @@ class PersonController extends Controller
         return redirect()->route('admin.contacts.persons.index');
     }
 
+    public function view($id)
+    {
+        $person = $this->personRepository->findOrFail($id);
+
+        $currentUser = auth()->guard('user')->user();
+
+        if ($currentUser->view_permission != 'global') {
+            if ($currentUser->view_permission == 'group') {
+                $userIds = app('\Webkul\User\Repositories\UserRepository')->getCurrentUserGroupsUserIds();
+
+                if (! in_array($person->user_id, $userIds)) {
+                    return redirect()->route('admin.contacts.persons.index');
+                }
+            } else {
+                if ($person->user_id != $currentUser->id) {
+                    return redirect()->route('admin.contacts.persons.index');
+                }
+            }
+        }
+
+        return view('admin::contacts.persons.show', compact('person'));
+    }
+
     /**
      * Search person results.
      *
