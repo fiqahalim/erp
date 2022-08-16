@@ -500,6 +500,7 @@
             'quality_inspect_id'    => 'Quality Inspect ID',
             'barcode'               => 'Barcode',
             'quantity'              => 'Quantity',
+            'status'                => 'Active',
         ],
 
         'purchases' => [

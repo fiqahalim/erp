@@ -44,6 +44,7 @@ class PersonDataGrid extends DataGrid
                 'persons.ceo_name',
                 'persons.emails',
                 'persons.contact_numbers',
+                'persons.status',
                 // 'organizations.name as organization'
             );
             // ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id');
@@ -114,6 +115,20 @@ class PersonDataGrid extends DataGrid
 
                 if ($contactNumbers) {
                     return collect($contactNumbers)->pluck('value')->join(', ');
+                }
+            },
+        ]);
+
+        $this->addColumn([
+            'index'            => 'status',
+            'label'            => trans('admin::app.datagrid.status'),
+            'type'             => 'string',
+            'searchable'       => false,
+            'closure'          => function ($row) {
+                if ($row->status == 1) {
+                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.datagrid.active');
+                } else {
+                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.datagrid.inactive');
                 }
             },
         ]);
