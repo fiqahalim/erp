@@ -106,6 +106,13 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
+    public function view($id)
+    {
+        $product = $this->productRepository->findOrFail($id);
+
+        return view('admin::products.show', compact('product'));
+    }
+
     /**
      * Search product results
      *
