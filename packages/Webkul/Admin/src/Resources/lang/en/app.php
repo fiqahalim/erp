@@ -364,6 +364,20 @@
 
         'materials' => [
             'title'                   => 'Material Req.',
+            'date'                    => 'Date',
+            'qc_insp_req_no'          => 'QC Insp. Request No',
+            'inspection_method'       => 'Inspection Method',
+            'finish_status'           => 'Finish',
+            'create-success'          => 'Material Request created successfully.',
+            'update-success'          => 'Material Request updated successfully.',
+            'delete-success'          => 'Material Request deleted successfully.',
+            'delete-failed'           => 'Material Request can not be deleted.',
+            'create-title'            => 'New Material Request',
+            'edit-title'              => 'Edit Material Request',
+            'save-btn-title'          => 'Save Material Request',
+            'back'                    => 'Back',
+            'cancel'                  => 'Cancel',
+            'approved'                => 'Approval',
         ],
 
         'stocks' => [

@@ -128,6 +128,31 @@ Breadcrumbs::for('sales.edit', function (BreadcrumbTrail $trail, $sale) {
 });
 
 
+// Dashbord > Material Req.
+Breadcrumbs::for('materials', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin::app.materials.title'), route('admin.materials.index'));
+});
+
+// Dashboard > Material Req. > Create Material Req.
+Breadcrumbs::for('materials.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials.create-title'), route('admin.materials.create'));
+});
+
+// Dashboard > Products > Edit Material Req.
+Breadcrumbs::for('materials.edit', function (BreadcrumbTrail $trail, $material) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials.edit-title'), route('admin.materials.edit', $material->id));
+});
+
+// Dashboard > Products > View Material Req.
+Breadcrumbs::for('materials.view', function (BreadcrumbTrail $trail, $material) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials.view-title'), route('admin.materials.view', $material->id));
+});
+
+
 // Settings
 Breadcrumbs::for('settings', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
