@@ -87,7 +87,7 @@
                                     >
                                     @foreach ($persons as $person)
                                     <option value="{{ $person->id }}" {{ old('person_id') == $person->id ? 'selected' : '' }}>
-                                        {{ $person->code }} | {{ $person->company_name }}
+                                        {{ $person->code }} | {{ $person->name }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -120,6 +120,52 @@
                                 </span>
                             </div>
 
+                            <div class="form-group" :class="[errors.has('location') ? 'has-error' : '']">
+                                <label>
+                                    {{ __('admin::app.locations.title') }}
+                                </label>
+
+                                <select
+                                    name="location_id"
+                                    class="form control"
+                                    data-vv-as="{{ __('admin::app.locations.title') }}"
+                                    v-validate="'required'"
+                                    >
+                                    @foreach ($locations as $location)
+                                    <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
+                                        {{ $location->location_code }} | {{ $location->location_name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+
+                                <span class="control-error" v-if="errors.has('location_id')">
+                                    @{{ errors.first('location_id') }}
+                                </span>
+                            </div>
+
+                            <div class="form-group" :class="[errors.has('currency') ? 'has-error' : '']">
+                                <label>
+                                    {{ __('admin::app.currencies.title') }}
+                                </label>
+
+                                <select
+                                    name="currency_id"
+                                    class="form control"
+                                    data-vv-as="{{ __('admin::app.currencies.title') }}"
+                                    v-validate="'required'"
+                                    >
+                                    @foreach ($currencies as $currency)
+                                    <option value="{{ $currency->id }}" {{ old('currency_id') == $currency->id ? 'selected' : '' }}>
+                                        {{ $currency->currency_name }} | {{ $currency->fx_rate }}
+                                    </option>
+                                    @endforeach
+                                </select>
+
+                                <span class="control-error" v-if="errors.has('currency_id')">
+                                    @{{ errors.first('currency_id') }}
+                                </span>
+                            </div>
+
                             <div class="form-group" :class="[errors.has('product') ? 'has-error' : '']">
                                 <label>
                                     {{ __('admin::app.products.title') }}
@@ -133,7 +179,7 @@
                                     >
                                     @foreach ($products as $product)
                                     <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
-                                        {{ $product->item_code }} | {{ $product->item_name }}
+                                        {{ $product->sku }} | {{ $product->name }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -143,28 +189,6 @@
                                 </span>
                             </div>
 
-                            <div class="form-group" :class="[errors.has('location') ? 'has-error' : '']">
-                                <label>
-                                    {{ __('admin::app.products.title') }}
-                                </label>
-
-                                <select
-                                    name="product_id"
-                                    class="form control"
-                                    data-vv-as="{{ __('admin::app.products.title') }}"
-                                    v-validate="'required'"
-                                    >
-                                    @foreach ($locations as $location)
-                                    <option value="{{ $location->id }}" {{ old('product_id') == $location->id ? 'selected' : '' }}>
-                                        {{ $location->item_code }} | {{ $location->item_name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('product_id')">
-                                    @{{ errors.first('product_id') }}
-                                </span>
-                            </div>
 
                             {!! view_render_event('admin.purchases.create.form_controls.after') !!}
                         </div>

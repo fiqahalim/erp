@@ -18,9 +18,9 @@ class CreatePurchasesTable extends Migration
             $table->string('purchase_no')->nullable();
             $table->date('date');
 
-            $table->integer('user_id')->unsigned();
-            $table->integer('person_id')->unsigned();
-            $table->integer('product_id')->unsigned();
+            $table->integer('user_id')->unsigned();->nullable()
+            $table->integer('person_id')->unsigned()->nullable();
+            $table->integer('product_id')->unsigned()->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');

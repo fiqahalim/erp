@@ -86,20 +86,26 @@ Breadcrumbs::for('purchases.edit', function (BreadcrumbTrail $trail, $purchase) 
 
 // Dashboard > Quotes
 Breadcrumbs::for('quotes', function (BreadcrumbTrail $trail) {
-    $trail->parent('sales');
+    $trail->parent('dashboard');
     $trail->push(trans('admin::app.layouts.quotes'), route('admin.quotes.index'));
 });
 
 // Dashboard > Quotes > Add Quote
 Breadcrumbs::for('quotes.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('sales');
+    $trail->parent('quotes');
     $trail->push(trans('admin::app.quotes.create-title'), route('admin.quotes.create'));
 });
 
 // Dashboard > Quotes > Edit Quote
 Breadcrumbs::for('quotes.edit', function (BreadcrumbTrail $trail, $quote) {
-    $trail->parent('sales');
+    $trail->parent('quotes');
     $trail->push(trans('admin::app.quotes.edit-title'), route('admin.quotes.edit', $quote->id));
+});
+
+// Dashboard > Quotes > View Quote
+Breadcrumbs::for('quotes.view', function (BreadcrumbTrail $trail, $quote) {
+    $trail->parent('quotes');
+    $trail->push(trans('admin::app.quotes.view-title'), route('admin.quotes.view', $quote->id));
 });
 
 

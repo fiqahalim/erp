@@ -14,13 +14,12 @@ class AddRelationshipIntoPurchasesTable extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->unsignedBigInteger('location_id')->nullable()->after('product_id');
-            $table->unsignedBigInteger('currency_id')->nullable()->after('product_id');
+            $table->integer('location_id')->nullable()->after('product_id');
+            $table->integer('currency_id')->nullable()->after('product_id');
             $table->unsignedBigInteger('transaction_type_id')->nullable()->after('product_id');
 
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
-            $table->foreign('transaction_type_id')->references('id')->on('transaction_types')->onDelete('cascade');
         });
     }
 

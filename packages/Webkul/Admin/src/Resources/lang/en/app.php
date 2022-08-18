@@ -271,6 +271,7 @@
             'quote'               => 'Quotation',
             'create-title'        => 'Create Quotation',
             'edit-title'          => 'Edit Quotation',
+            'view-title'          => 'View Quotation',
             'save-btn-title'      => 'Save as Quotation',
             'back'                => 'Back',
             'cancel'              => 'Cancel',

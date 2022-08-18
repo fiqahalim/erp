@@ -138,6 +138,15 @@ class QuoteController extends Controller
         return redirect()->route('admin.quotes.index');
     }
 
+    public function view($id)
+    {
+        $quote = $this->quoteRepository->findOrFail($id);
+
+        $currentUser = auth()->guard('user')->user();
+
+        return view('admin::quotes.show', compact('quote'));
+    }
+
     /**
      * Search quote results
      *

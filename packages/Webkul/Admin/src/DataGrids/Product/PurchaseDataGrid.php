@@ -50,10 +50,14 @@ class PurchaseDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'date',
-            'label'    => trans('admin::app.purchases.date'),
-            'type'     => 'string',
-            'sortable' => true,
+            'index'      => 'date',
+            'label'      => trans('admin::app.purchases.date'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'sortable'   => true,
+            'closure'    => function ($row) {
+                return core()->formatDate($row->date);
+            },
         ]);
 
         $this->addColumn([
@@ -88,10 +92,10 @@ class PurchaseDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('ui::app.datagrid.edit'),
+            'title'  => trans('ui::app.datagrid.download'),
             'method' => 'GET',
-            'route'  => 'admin.purchases.edit',
-            'icon'   => 'eye-icon',
+            'route'  => 'admin.purchases.print',
+            'icon'   => 'export-icon',
         ]);
 
         $this->addAction([

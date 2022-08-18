@@ -12,6 +12,8 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Core\Repositories\LocationRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 
+use Barryvdh\DomPDF\Facade as PDF;
+
 class PurchaseController extends Controller
 {
     protected $purchaseRepository;
@@ -66,7 +68,7 @@ class PurchaseController extends Controller
         $users = $this->userRepository->all();
         $products = $this->productRepository->all();
         $locations = $this->locationRepository->all();
-        $currencies = $cthis->currencyRepository->all();
+        $currencies = $this->currencyRepository->all();
 
         return view('admin::purchases.create', compact('persons', 'users', 'products', 'locations', 'currencies'));
     }
@@ -110,5 +112,75 @@ class PurchaseController extends Controller
         session()->flash('success', trans('admin::app.purchases.create-success'));
 
         return redirect()->route('admin.purchases.index');
+    }
+
+    /**
+     * Search quote results
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        $results = $this->purchaseRepository->findWhere([
+            ['purchase_no', 'like', '%' . urldecode(request()->input('query')) . '%']
+        ]);
+
+        return response()->json($results);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $this->purchaseRepository->findOrFail($id);
+
+        try {
+
+            $this->purchaseRepository->delete($id);
+
+            return response()->json([
+                'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.purchases.title')]),
+            ], 200);
+        } catch(\Exception $exception) {
+            return response()->json([
+                'message' => trans('admin::app.response.destroy-failed', ['name' => trans('admin::app.purchases.title')]),
+            ], 400);
+        }
+    }
+
+    /**
+     * Mass Delete the specified resources.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy()
+    {
+        foreach (request('rows') as $purchaseId) {
+
+            $this->purchaseRepository->delete($purchaseId);
+        }
+
+        return response()->json([
+            'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.purchases.title')]),
+        ]);
+    }
+
+    /**
+     * Print and download the for the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function print($id)
+    {
+        $purchase = $this->purchaseRepository->findOrFail($id);
+
+        return PDF::loadHTML(view('admin::purchases.pdf', compact('purchase'))->render())
+            ->setPaper('a4')
+            ->download('Purchase_Request_' . $purchase->purchase_no . '.pdf');
     }
 }
