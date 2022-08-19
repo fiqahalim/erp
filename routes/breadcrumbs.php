@@ -153,6 +153,31 @@ Breadcrumbs::for('materials.view', function (BreadcrumbTrail $trail, $material) 
 });
 
 
+// Dashbord > Stock Count
+Breadcrumbs::for('stocks', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin::app.stocks.title'), route('admin.stocks.index'));
+});
+
+// Dashboard > Stock Count > Create Stock Count
+Breadcrumbs::for('stocks.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('stocks');
+    $trail->push(trans('admin::app.stocks.create-title'), route('admin.stocks.create'));
+});
+
+// Dashboard > Products > Edit Stock Count
+Breadcrumbs::for('stocks.edit', function (BreadcrumbTrail $trail, $stock) {
+    $trail->parent('stocks');
+    $trail->push(trans('admin::app.stocks.edit-title'), route('admin.stocks.edit', $stock->id));
+});
+
+// Dashboard > Products > View Stock Count
+Breadcrumbs::for('stocks.view', function (BreadcrumbTrail $trail, $stock) {
+    $trail->parent('stocks');
+    $trail->push(trans('admin::app.stocks.view-title'), route('admin.stocks.view', $stock->id));
+});
+
+
 // Settings
 Breadcrumbs::for('settings', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

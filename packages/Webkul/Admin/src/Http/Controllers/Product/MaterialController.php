@@ -21,13 +21,6 @@ class MaterialController extends Controller
 {
     protected $userRepository, $productRepository, $materialRepository, $materialProductRepository;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @param \Webkul\Product\Repositories\PurchaseRepository  $purchaseRepository
-     *
-     * @return void
-     */
     public function __construct(
         UserRepository $userRepository,
         ProductRepository $productRepository,

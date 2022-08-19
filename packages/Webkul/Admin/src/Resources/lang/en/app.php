@@ -382,6 +382,18 @@
 
         'stocks' => [
             'title'                   => 'Stock Count',
+            'balance'                 => 'Balance',
+            'expired_at'              => 'Expired Date',
+            'total'                   => 'Total Cost',
+            'create-success'          => 'Stock Count created successfully.',
+            'update-success'          => 'Stock Count updated successfully.',
+            'delete-success'          => 'Stock Count deleted successfully.',
+            'delete-failed'           => 'Stock Count can not be deleted.',
+            'create-title'            => 'New Stock Count',
+            'edit-title'              => 'Edit Stock Count',
+            'save-btn-title'          => 'Save Stock Count',
+            'back'                    => 'Back',
+            'cancel'                  => 'Cancel',
         ],
 
         'mail' => [
