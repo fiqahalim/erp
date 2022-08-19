@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Config;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
+use Webkul\Core\Repositories\BankRepository;
 
 class Core
 {
@@ -23,6 +24,8 @@ class Core
      * @var \Webkul\Core\Repositories\CountryStateRepository
      */
     protected $countryStateRepository;
+
+    protected $bankRepository;
 
     /**
      * CoreConfigRepository class
@@ -41,13 +44,16 @@ class Core
     public function __construct(
         CountryRepository $countryRepository,
         CoreConfigRepository $coreConfigRepository,
-        CountryStateRepository $countryStateRepository
+        CountryStateRepository $countryStateRepository,
+        BankRepository $bankRepository
     ) {
         $this->countryRepository = $countryRepository;
 
         $this->countryStateRepository = $countryStateRepository;
 
         $this->coreConfigRepository = $coreConfigRepository;
+
+        $this->bankRepository = $bankRepository;
     }
 
     /**
@@ -161,6 +167,16 @@ class Core
         } else {
             return false;
         }
+    }
+
+    /**
+     * Retrieve all banks.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function banks()
+    {
+        return $this->bankRepository->all();
     }
 
     /**
