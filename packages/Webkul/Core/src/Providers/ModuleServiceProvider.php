@@ -10,5 +10,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Core\Models\CountryState::class,
         \Webkul\Core\Models\Currency::class,
         \Webkul\Core\Models\Location::class,
+        \Webkul\Core\Models\Bank::class,
     ];
 }

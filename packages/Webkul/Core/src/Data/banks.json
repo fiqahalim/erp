@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "name": "Maybank",
+        "code": "27"
+    },
+    {
+        "id": 2,
+        "name": "CIMB Bank",
+        "code": "35"
+    },
+    {
+        "id": 3,
+        "name": "RHB Bank",
+        "code": "18"
+    },
+    {
+        "id": 4,
+        "name": "Bank Islam",
+        "code": "45"
+    },
+    {
+        "id": 5,
+        "name": "Bank Muamalat",
+        "code": "41"
+    },
+    {
+        "id": 6,
+        "name": "Bank Rakyat",
+        "code": "02"
+    },
+    {
+        "id": 7,
+        "name": "Bank Simpanan Nasional",
+        "code": "10"
+    },
+    {
+        "id": 8,
+        "name": "Citibank",
+        "code": "17"
+    },
+    {
+        "id": 9,
+        "name": "Hong Leong Bank",
+        "code": "24"
+    },
+    {
+        "id": 10,
+        "name": "HSBC Bank",
+        "code": "22"
+    },
+    {
+        "id": 11,
+        "name": "OCBC Bank",
+        "code": "29"
+    },
+    {
+        "id": 12,
+        "name": "Public Bank",
+        "code": "33"
+    },
+    {
+        "id": 13,
+        "name": "Affin Bank",
+        "code": "32"
+    },
+    {
+        "id": 14,
+        "name": "AmBank",
+        "code": "08"
+    },
+    {
+        "id": 15,
+        "name": "Agro Bank",
+        "code": "49"
+    },
+    {
+        "id": 16,
+        "name": "Alliance Bank",
+        "code": "12"
+    },
+    {
+        "id": 17,
+        "name": "Al-Rajhi Bank",
+        "code": "53"
+    },
+    {
+        "id": 18,
+        "name": "Bank of China",
+        "code": "42"
+    },
+    {
+        "id": 19,
+        "name": "Bank of America",
+        "code": "07"
+    },
+    {
+        "id": 20,
+        "name": "Bank of Tokyo-Mitsubishi UFJ",
+        "code": "52"
+    },
+    {
+        "id": 21,
+        "name": "BNP Paribas",
+        "code": "60"
+    },
+    {
+        "id": 22,
+        "name": "Deutsche Bank",
+        "code": "19"
+    },
+    {
+        "id": 23,
+        "name": "Industrial & Commercial Bank of China",
+        "code": "59"
+    },
+    {
+        "id": 24,
+        "name": "JP Morgan Chase Bank",
+        "code": "48"
+    },
+    {
+        "id": 25,
+        "name": "Kuwait Finance House",
+        "code": "47"
+    },
+    {
+        "id": 26,
+        "name": "Mizuho Bank",
+        "code": "73"
+    },
+    {
+        "id": 27,
+        "name": "Standard Chartered Bank",
+        "code": "14"
+    },
+    {
+        "id": 28,
+        "name": "Sumitomo Mitsui Banking Corporation",
+        "code": "51"
+    },
+    {
+        "id": 29,
+        "name": "The Royal Bank of Scotland",
+        "code": "46"
+    },
+    {
+        "id": 30,
+        "name": "United Overseas Bank",
+        "code": "26"
+    }
+]
