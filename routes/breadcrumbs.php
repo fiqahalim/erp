@@ -86,20 +86,26 @@ Breadcrumbs::for('purchases.edit', function (BreadcrumbTrail $trail, $purchase) 
 
 // Dashboard > Quotes
 Breadcrumbs::for('quotes', function (BreadcrumbTrail $trail) {
-    $trail->parent('sales');
+    $trail->parent('dashboard');
     $trail->push(trans('admin::app.layouts.quotes'), route('admin.quotes.index'));
 });
 
 // Dashboard > Quotes > Add Quote
 Breadcrumbs::for('quotes.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('sales');
+    $trail->parent('quotes');
     $trail->push(trans('admin::app.quotes.create-title'), route('admin.quotes.create'));
 });
 
 // Dashboard > Quotes > Edit Quote
 Breadcrumbs::for('quotes.edit', function (BreadcrumbTrail $trail, $quote) {
-    $trail->parent('sales');
+    $trail->parent('quotes');
     $trail->push(trans('admin::app.quotes.edit-title'), route('admin.quotes.edit', $quote->id));
+});
+
+// Dashboard > Quotes > View Quote
+Breadcrumbs::for('quotes.view', function (BreadcrumbTrail $trail, $quote) {
+    $trail->parent('quotes');
+    $trail->push(trans('admin::app.quotes.view-title'), route('admin.quotes.view', $quote->id));
 });
 
 
@@ -119,6 +125,56 @@ Breadcrumbs::for('sales.create', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('sales.edit', function (BreadcrumbTrail $trail, $sale) {
     $trail->parent('sales');
     $trail->push(trans('admin::app.sales.edit-title'), route('admin.sales.edit', $sale->id));
+});
+
+
+// Dashbord > Material Req.
+Breadcrumbs::for('materials', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin::app.materials.title'), route('admin.materials.index'));
+});
+
+// Dashboard > Material Req. > Create Material Req.
+Breadcrumbs::for('materials.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials.create-title'), route('admin.materials.create'));
+});
+
+// Dashboard > Products > Edit Material Req.
+Breadcrumbs::for('materials.edit', function (BreadcrumbTrail $trail, $material) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials.edit-title'), route('admin.materials.edit', $material->id));
+});
+
+// Dashboard > Products > View Material Req.
+Breadcrumbs::for('materials.view', function (BreadcrumbTrail $trail, $material) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials.view-title'), route('admin.materials.view', $material->id));
+});
+
+
+// Dashbord > Stock Count
+Breadcrumbs::for('stocks', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin::app.stocks.title'), route('admin.stocks.index'));
+});
+
+// Dashboard > Stock Count > Create Stock Count
+Breadcrumbs::for('stocks.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('stocks');
+    $trail->push(trans('admin::app.stocks.create-title'), route('admin.stocks.create'));
+});
+
+// Dashboard > Products > Edit Stock Count
+Breadcrumbs::for('stocks.edit', function (BreadcrumbTrail $trail, $stock) {
+    $trail->parent('stocks');
+    $trail->push(trans('admin::app.stocks.edit-title'), route('admin.stocks.edit', $stock->id));
+});
+
+// Dashboard > Products > View Stock Count
+Breadcrumbs::for('stocks.view', function (BreadcrumbTrail $trail, $stock) {
+    $trail->parent('stocks');
+    $trail->push(trans('admin::app.stocks.view-title'), route('admin.stocks.view', $stock->id));
 });
 
 

@@ -36,14 +36,14 @@
 
                             {!! view_render_event('admin.products.edit.form_buttons.after', ['product' => $product]) !!}
                         </div>
-        
+
                         <div class="panel-body">
                             {!! view_render_event('admin.products.edit.form_controls.before', ['product' => $product]) !!}
 
                             @csrf()
 
                             <input name="_method" type="hidden" value="PUT">
-                
+
                             @include('admin::common.custom-attributes.edit', [
                                 'customAttributes' => app('Webkul\Attribute\Repositories\AttributeRepository')->findWhere([
                                     'entity_type' => 'products',
@@ -55,12 +55,8 @@
 
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </form>
-
     </div>
 @stop

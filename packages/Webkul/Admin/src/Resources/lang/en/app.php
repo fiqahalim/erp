@@ -271,6 +271,7 @@
             'quote'               => 'Quotation',
             'create-title'        => 'Create Quotation',
             'edit-title'          => 'Edit Quotation',
+            'view-title'          => 'View Quotation',
             'save-btn-title'      => 'Save as Quotation',
             'back'                => 'Back',
             'cancel'              => 'Cancel',
@@ -363,10 +364,36 @@
 
         'materials' => [
             'title'                   => 'Material Req.',
+            'date'                    => 'Date',
+            'qc_insp_req_no'          => 'QC Insp. Request No',
+            'inspection_method'       => 'Inspection Method',
+            'finish_status'           => 'Finish',
+            'create-success'          => 'Material Request created successfully.',
+            'update-success'          => 'Material Request updated successfully.',
+            'delete-success'          => 'Material Request deleted successfully.',
+            'delete-failed'           => 'Material Request can not be deleted.',
+            'create-title'            => 'New Material Request',
+            'edit-title'              => 'Edit Material Request',
+            'save-btn-title'          => 'Save Material Request',
+            'back'                    => 'Back',
+            'cancel'                  => 'Cancel',
+            'approved'                => 'Approval',
         ],
 
         'stocks' => [
             'title'                   => 'Stock Count',
+            'balance'                 => 'Balance',
+            'expired_at'              => 'Expired Date',
+            'total'                   => 'Total Cost',
+            'create-success'          => 'Stock Count created successfully.',
+            'update-success'          => 'Stock Count updated successfully.',
+            'delete-success'          => 'Stock Count deleted successfully.',
+            'delete-failed'           => 'Stock Count can not be deleted.',
+            'create-title'            => 'New Stock Count',
+            'edit-title'              => 'Edit Stock Count',
+            'save-btn-title'          => 'Save Stock Count',
+            'back'                    => 'Back',
+            'cancel'                  => 'Cancel',
         ],
 
         'mail' => [
@@ -500,6 +527,7 @@
             'quality_inspect_id'    => 'Quality Inspect ID',
             'barcode'               => 'Barcode',
             'quantity'              => 'Quantity',
+            'status'                => 'Active',
         ],
 
         'purchases' => [

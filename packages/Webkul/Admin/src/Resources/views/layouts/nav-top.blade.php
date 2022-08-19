@@ -2,19 +2,16 @@
     <div class="navbar-top-left">
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
-                <img src="{{ asset('vendor/webkul/admin/assets/images/logo.svg') }}" alt="{{ config('app.name') }}"/>
+                <img src="{{ asset('/images/cellaax_logo_icon.png') }}" alt="{{ config('app.name') }}"/>
             </a>
         </div>
     </div>
 
     <div class="navbar-top-right">
-        @if (bouncer()->hasPermission('leads.create')
-            || bouncer()->hasPermission('quotes.create')
-            || bouncer()->hasPermission('mail.create')
+        @if (bouncer()->hasPermission('quotes.create')
             || bouncer()->hasPermission('contacts.persons.create')
             || bouncer()->hasPermission('contacts.organizations.create')
             || bouncer()->hasPermission('products.create')
-            || bouncer()->hasPermission('settings.automation.attributes.create')
             || bouncer()->hasPermission('settings.user.roles.create')
             || bouncer()->hasPermission('settings.user.users.create')
         )
@@ -26,12 +23,23 @@
                 <div class="dropdown-list bottom-right">
 
                     <div class="quick-link-container">
-                        @if (bouncer()->hasPermission('leads.create'))
-                            <div class="quick-link-item">
-                                <a href="{{ route('admin.leads.create') }}">
-                                    <i class="icon lead-icon"></i>
 
-                                    <span>{{ __('admin::app.layouts.lead') }}</span>
+                        @if (bouncer()->hasPermission('contacts.persons.create'))
+                            <div class="quick-link-item">
+                                <a href="{{ route('admin.contacts.persons.create') }}">
+                                    <i class="icon person-icon"></i>
+
+                                    <span>{{ __('admin::app.layouts.person') }}</span>
+                                </a>
+                            </div>
+                        @endif
+
+                        @if (bouncer()->hasPermission('products.create'))
+                            <div class="quick-link-item">
+                                <a href="{{ route('admin.products.create') }}">
+                                    <i class="icon product-icon"></i>
+
+                                    <span>{{ __('admin::app.layouts.product') }}</span>
                                 </a>
                             </div>
                         @endif
@@ -46,25 +54,6 @@
                             </div>
                         @endif
                         
-                        @if (bouncer()->hasPermission('mail.create'))
-                            <div class="quick-link-item">
-                                <a href="{{ route('admin.mail.index', ['route' => 'compose']) }}">
-                                    <i class="icon mail-icon"></i>
-
-                                    <span>{{ __('admin::app.layouts.email') }}</span>
-                                </a>
-                            </div>
-                        @endif
-                        
-                        @if (bouncer()->hasPermission('contacts.persons.create'))
-                            <div class="quick-link-item">
-                                <a href="{{ route('admin.contacts.persons.create') }}">
-                                    <i class="icon person-icon"></i>
-
-                                    <span>{{ __('admin::app.layouts.person') }}</span>
-                                </a>
-                            </div>
-                        @endif
                         
                         @if (bouncer()->hasPermission('contacts.organizations.create'))
                             <div class="quick-link-item">
@@ -72,26 +61,6 @@
                                     <i class="icon organization-icon"></i>
 
                                     <span>{{ __('admin::app.layouts.organization') }}</span>
-                                </a>
-                            </div>
-                        @endif
-                        
-                        @if (bouncer()->hasPermission('products.create'))
-                            <div class="quick-link-item">
-                                <a href="{{ route('admin.products.create') }}">
-                                    <i class="icon product-icon"></i>
-
-                                    <span>{{ __('admin::app.layouts.product') }}</span>
-                                </a>
-                            </div>
-                        @endif
-                        
-                        @if (bouncer()->hasPermission('settings.automation.attributes.create'))
-                            <div class="quick-link-item">
-                                <a href="{{ route('admin.settings.attributes.create') }}">
-                                    <i class="icon attribute-icon"></i>
-
-                                    <span>{{ __('admin::app.layouts.attribute') }}</span>
                                 </a>
                             </div>
                         @endif

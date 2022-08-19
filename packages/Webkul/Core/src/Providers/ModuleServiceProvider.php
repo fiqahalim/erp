@@ -8,5 +8,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Core\Models\CoreConfig::class,
         \Webkul\Core\Models\Country::class,
         \Webkul\Core\Models\CountryState::class,
+        \Webkul\Core\Models\Currency::class,
+        \Webkul\Core\Models\Location::class,
     ];
 }

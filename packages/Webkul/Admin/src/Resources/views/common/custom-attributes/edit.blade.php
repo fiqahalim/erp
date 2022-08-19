@@ -46,7 +46,8 @@
                 {{ $attribute->name }}
 
                 @if ($attribute->type == 'price')
-                    <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
+                    {{-- <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span> --}}
+                    <span class="currency-code">(RM)</span>
                 @endif
 
             </label>

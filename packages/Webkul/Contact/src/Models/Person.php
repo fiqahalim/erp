@@ -17,6 +17,9 @@ class Person extends Model implements PersonContract
     protected $casts = [
         'emails'          => 'array',
         'contact_numbers' => 'array',
+        'phone_numbers'   => 'array',
+        'fax_numbers'     => 'array',
+        'address_1'       => 'array',
     ];
 
     /**
@@ -25,10 +28,10 @@ class Person extends Model implements PersonContract
      * @var array
      */
     protected $fillable = [
-        'name',
-        'emails',
-        'contact_numbers',
-        'organization_id',
+        'name', 'code', 'ceo_name', 'business_type', 'business_item',
+        'emails', 'phone_numbers', 'fax_numbers', 'keyword',
+        'contact_numbers', 'address_1', 'remarks', 'status',
+        'organization_id', 'created_at', 'updated_at',
     ];
 
     /**
