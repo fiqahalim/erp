@@ -46,6 +46,8 @@
             ],
             'sales'                => 'Sales',
             'purchases'            => 'Purchases',
+            'purchases_req'        => 'Purchase Request',
+            'purchases_order'      => 'Purchase Order',
             'activities'           => 'Activities',
             'productions'          => 'Productions',
             'contacts'             => 'Contacts',
