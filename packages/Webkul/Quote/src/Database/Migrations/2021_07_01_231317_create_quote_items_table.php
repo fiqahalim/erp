@@ -18,19 +18,20 @@ class CreateQuoteItemsTable extends Migration
             $table->string('sku')->nullable();
             $table->string('name')->nullable();
             $table->integer('quantity')->default(0)->nullable();
-            $table->decimal('price', 12, 4)->default(0);
+            $table->decimal('price', 12, 2)->default(0);
 
             $table->string('coupon_code')->nullable();
-            $table->decimal('discount_percent', 12, 4)->default(0)->nullable();
-            $table->decimal('discount_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('discount_percent', 12, 2)->default(0)->nullable();
+            $table->decimal('discount_amount', 12, 2)->default(0)->nullable();
 
-            $table->decimal('tax_percent', 12, 4)->default(0)->nullable();
-            $table->decimal('tax_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('tax_percent', 12, 2)->default(0)->nullable();
+            $table->decimal('tax_amount', 12, 2)->default(0)->nullable();
+            $table->decimal('total', 12, 2)->default(0);
 
-            $table->decimal('total', 12, 4)->default(0);
+            $table->boolean('approved')->default(0)->nullable();
 
-            $table->integer('product_id')->unsigned();
-            $table->integer('quote_id')->unsigned();
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->integer('quote_id')->unsigned()->nullable();
             $table->foreign('quote_id')->references('id')->on('quotes')->onDelete('cascade');
 
             $table->timestamps();

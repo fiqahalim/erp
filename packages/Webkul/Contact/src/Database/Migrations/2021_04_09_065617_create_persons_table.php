@@ -18,6 +18,8 @@ class CreatePersonsTable extends Migration
             $table->string('name');
             $table->string('code')->nullable();
             $table->string('ceo_name')->nullable();
+            $table->string('account_no')->nullable();
+            $table->string('account_holder')->nullable();
             $table->string('business_type')->nullable();
             $table->string('business_item')->nullable();
             $table->json('contact_numbers')->nullable();
