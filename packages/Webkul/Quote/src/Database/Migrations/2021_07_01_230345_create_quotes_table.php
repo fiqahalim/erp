@@ -21,13 +21,14 @@ class CreateQuotesTable extends Migration
             $table->json('billing_address')->nullable();
             $table->json('shipping_address')->nullable();
 
-            $table->decimal('discount_percent', 12, 4)->default(0)->nullable();
-            $table->decimal('discount_amount', 12, 4)->nullable();
-            $table->decimal('tax_amount', 12, 4)->nullable();
-            $table->decimal('adjustment_amount', 12, 4)->nullable();
-            $table->decimal('sub_total', 12, 4)->nullable();
-            $table->decimal('grand_total', 12, 4)->nullable();
+            $table->decimal('discount_percent', 12, 2)->default(0)->nullable();
+            $table->decimal('discount_amount', 12, 2)->nullable();
+            $table->decimal('tax_amount', 12, 2)->nullable();
+            $table->decimal('adjustment_amount', 12, 2)->nullable();
+            $table->decimal('sub_total', 12, 2)->nullable();
+            $table->decimal('grand_total', 12, 2)->nullable();
 
+            $table->boolean('approved')->default(0)->nullable();
             $table->datetime('expired_at')->nullable();
 
             $table->integer('person_id')->unsigned()->nullable();

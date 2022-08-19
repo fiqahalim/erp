@@ -26,11 +26,11 @@ class CreateProductsTable extends Migration
             $table->string('item_category')->nullable();
             $table->string('catalogue_number')->nullable();
 
-            $table->decimal('price', 12, 4)->nullable();
-            $table->decimal('sale_price', 12, 4)->nullable();
+            $table->decimal('price', 12, 2)->nullable();
+            $table->decimal('sale_price', 12, 2)->nullable();
 
             $table->datetime('lead_time')->nullable();
-            $table->string('shelf_life')->nullable();
+            $table->datetime('shelf_life')->nullable();
             $table->boolean('status')->default(0);
 
             $table->integer('person_id')->unsigned()->nullable();
