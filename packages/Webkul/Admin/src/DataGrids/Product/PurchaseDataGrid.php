@@ -17,20 +17,19 @@ class PurchaseDataGrid extends DataGrid
         $queryBuilder = DB::table('purchases')
             ->addSelect(
                 'purchases.id',
+                'purchases.delivery_date',
                 'purchases.purchase_no',
-                'purchases.date',
+                'purchases.progress_status',
+                'purchases.approved',
+                'purchases.approved_date',
                 'users.id as user_id',
                 'users.name as sales_person',
-                'persons.id as person_id',
-                'persons.name as person_name',
             )
-            ->leftJoin('users', 'purchases.user_id', '=', 'users.id')
-            ->leftJoin('persons', 'purchases.person_id', '=', 'persons.id');
+            ->leftJoin('users', 'purchases.user_id', '=', 'users.id');
 
+        $this->addFilter('id', 'purchases.id');
         $this->addFilter('user', 'purchases.user_id');
         $this->addFilter('sales_person', 'purchases.user_id');
-        $this->addFilter('person_name', 'persons.name');
-        $this->addFilter('id', 'purchases.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -50,7 +49,7 @@ class PurchaseDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'date',
+            'index'      => 'delivery_date',
             'label'      => trans('admin::app.purchases.date'),
             'type'       => 'date_range',
             'searchable' => false,
@@ -65,14 +64,6 @@ class PurchaseDataGrid extends DataGrid
             'label'    => trans('admin::app.purchases.purchase_no'),
             'type'     => 'string',
             'sortable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'person_name',
-            'label'      => trans('admin::app.contacts.persons.title'),
-            'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
