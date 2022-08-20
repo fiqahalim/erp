@@ -28,7 +28,7 @@ class CreatePersonsTable extends Migration
             $table->json('fax_numbers')->nullable();
             $table->json('emails');
             $table->string('keyword')->nullable();
-            $table->string('business_type')->nullable();
+            $table->string('supplier_type')->nullable();
 
             $table->json('address_1')->nullable();
             $table->longText('remarks')->nullable();

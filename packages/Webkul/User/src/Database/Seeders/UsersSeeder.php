@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([
             'id'              => 1,
             'name'            => 'Admin',
-            'code'            => 'ADM0001'
+            'code'            => 'ADM0001',
             'email'           => 'admin@example.com',
             'password'        => bcrypt('admin123'),
             // 'api_token'       => Str::random(80),
