@@ -102,9 +102,9 @@
                             {!! view_render_event('admin.quotes.edit.form_controls.information.after', ['quote' => $quote]) !!}
 
 
-                            {!! view_render_event('admin.quotes.edit.form_controls.address.before', ['quote' => $quote]) !!}
+                            {{-- {!! view_render_event('admin.quotes.edit.form_controls.address.before', ['quote' => $quote]) !!} --}}
 
-                            <accordian :title="'{{ __('admin::app.quotes.address-information') }}'" :active="true">
+                            {{-- <accordian :title="'{{ __('admin::app.quotes.address-information') }}'" :active="true">
                                 <div slot="body">
 
                                     @include('admin::common.custom-attributes.edit', [
@@ -121,9 +121,9 @@
                                     ])
 
                                 </div>
-                            </accordian>
+                            </accordian> --}}
 
-                            {!! view_render_event('admin.quotes.edit.form_controls.address.after', ['quote' => $quote]) !!}
+                            {{-- {!! view_render_event('admin.quotes.edit.form_controls.address.after', ['quote' => $quote]) !!} --}}
 
 
                             {!! view_render_event('admin.quotes.edit.form_controls.items.before', ['quote' => $quote]) !!}

@@ -16,7 +16,7 @@ class CreateCurrenciesTable extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id')->startingValue(00001);
             $table->string('currency_name')->nullable();
-            $table->decimal('fx_rate', 12, 4)->nullable();
+            $table->decimal('fx_rate', 12, 2)->nullable();
             $table->boolean('active')->default(0);
             $table->timestamps();
         });

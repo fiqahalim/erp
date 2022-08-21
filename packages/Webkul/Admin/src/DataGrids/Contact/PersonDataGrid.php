@@ -44,6 +44,10 @@ class PersonDataGrid extends DataGrid
                 'persons.ceo_name',
                 'persons.emails',
                 'persons.contact_numbers',
+                'persons.business_type',
+                'persons.bank_name',
+                'persons.account_no',
+                'persons.account_holder',
                 'persons.status',
                 // 'organizations.name as organization'
             );
@@ -51,6 +55,7 @@ class PersonDataGrid extends DataGrid
 
         $this->addFilter('id', 'persons.id');
         $this->addFilter('person_name', 'persons.name');
+        $this->addFilter('emails', 'persons.emails');
         // $this->addFilter('organization', 'organizations.id');
 
         $this->setQueryBuilder($queryBuilder);
@@ -117,6 +122,34 @@ class PersonDataGrid extends DataGrid
                     return collect($contactNumbers)->pluck('value')->join(', ');
                 }
             },
+        ]);
+
+        $this->addColumn([
+            'index'    => 'business_type',
+            'label'    => trans('admin::app.contacts.persons.business_type'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'bank_name',
+            'label'    => trans('admin::app.contacts.persons.bank_name'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'account_no',
+            'label'    => trans('admin::app.contacts.persons.account_no'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'account_holder',
+            'label'    => trans('admin::app.contacts.persons.account_holder'),
+            'type'     => 'string',
+            'sortable' => true,
         ]);
 
         $this->addColumn([

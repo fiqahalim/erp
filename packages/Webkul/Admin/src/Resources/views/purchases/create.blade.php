@@ -59,19 +59,21 @@
                                 </span>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group date">
                                 <label>{{ __('admin::app.purchases.date') }}</label>
-                                <input
-                                    type="date"
-                                    name="date"
-                                    class="control"
-                                    placeholder="{{ __('admin::app.purchases.date') }}"
-                                    data-vv-as="{{ __('admin::app.purchases.date') }}"
-                                />
+                                <date>
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        class="control"
+                                        placeholder="{{ __('admin::app.purchases.date') }}"
+                                        data-vv-as="{{ __('admin::app.purchases.date') }}"
+                                    />
 
-                                <span class="control-error" v-if="errors.has('date')">
-                                    @{{ errors.first('date') }}
-                                </span>
+                                    <span class="control-error" v-if="errors.has('date')">
+                                        @{{ errors.first('date') }}
+                                    </span>
+                                </date>
                             </div>
 
                             <div class="form-group" :class="[errors.has('person') ? 'has-error' : '']">
