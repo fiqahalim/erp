@@ -84,14 +84,14 @@ class PersonDataGrid extends DataGrid
 
         $this->addColumn([
             'index'    => 'person_name',
-            'label'    => trans('admin::app.contacts.persons.company_name'),
+            'label'    => trans('admin::app.contacts.persons.name'),
             'type'     => 'string',
             'sortable' => true,
         ]);
 
         $this->addColumn([
             'index'    => 'ceo_name',
-            'label'    => trans('admin::app.contacts.persons.name'),
+            'label'    => trans('admin::app.contacts.persons.ceo_name'),
             'type'     => 'string',
             'sortable' => true,
         ]);
