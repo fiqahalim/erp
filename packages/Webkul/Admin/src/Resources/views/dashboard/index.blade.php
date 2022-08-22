@@ -110,23 +110,6 @@
                 </div>
             </template>
 
-            <div class="lead" v-else-if="cardType == 'top_card'" v-for="(data, index) in dataCollection.data">
-                <a :href="'{{ route('admin.leads.view') }}/' + data.id">@{{ data.title }}</a>
-
-                <div class="details">
-                    <span>@{{ data.amount | toFixed }}</span>
-                    <span>@{{ data.created_at | formatDate }}</span>
-                    <span>
-                        <span
-                            class="badge badge-round badge-primary"
-                            :class="{'badge-danger': data.statusLabel == 'Lost', 'badge-success': data.statusLabel == 'Won'}"
-                        ></span>
-
-                        @{{ data.statusLabel }}
-                    </span>
-                </div>
-            </div>
-
             <div class="column-container" v-else-if="cardType == 'column-grid-2'" v-for="(data, index) in dataCollection.data">
                 <span>@{{ data.count }}</span>
                 <span>@{{ data.label }}</span>

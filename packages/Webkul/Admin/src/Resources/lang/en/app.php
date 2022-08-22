@@ -969,6 +969,13 @@
             'delete'          => 'Delete',
             'export'          => 'Export',
             'mass-delete'     => 'Mass Delete',
+            'purchases'       => 'Purchase Request',
+            'purchase_inb'    => 'Purchase Inbound',
+            'materials'       => 'Material Request',
+            'stocks'          => 'Stock Count',
+            'currencies'      => 'Foreign Currency',
+            'locations'       => 'Location',
+            'trans_type'      => 'Transaction Types',
         ],
 
         'common' => [
