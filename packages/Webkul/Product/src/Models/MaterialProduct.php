@@ -12,7 +12,7 @@ class MaterialProduct extends Model implements MaterialProductContract
     protected $table = 'material_products';
 
     protected $fillable = [
-        'name', 'quantity', 'price', 'amount', 'material_id',
+        'name', 'quantity', 'price', 'amount', 'material_id', 'sku', 'description', 'remarks',
         'product_id', 'created_at', 'updated_at',
     ];
 

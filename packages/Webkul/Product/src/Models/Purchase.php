@@ -17,7 +17,7 @@ class Purchase extends Model implements PurchaseContract
     protected $casts = [
         'delivery_date' => 'date',
         'expired_date'  => 'date',
-        'approved_date' => 'date',
+        'approved_date' => 'datetime',
     ];
 
     protected $fillable = [

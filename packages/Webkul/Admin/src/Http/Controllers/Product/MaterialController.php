@@ -73,7 +73,7 @@ class MaterialController extends Controller
     {
         $this->validate(request(), [
             'date'              => 'required',
-            'qc_insp_req_no'    => 'nullable',
+            'qc_insp_req_no'    => 'nullable|unique:materials',
             'inspection_method' => 'nullable',
             'finish_status'     => 'nullable',
         ]);

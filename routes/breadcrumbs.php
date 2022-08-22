@@ -83,6 +83,12 @@ Breadcrumbs::for('purchases.edit', function (BreadcrumbTrail $trail, $purchase) 
     $trail->push(trans('admin::app.purchases.edit-title'), route('admin.purchases.edit', $purchase->id));
 });
 
+// Dashboard > Purchases > View Purchases
+Breadcrumbs::for('purchases.view', function (BreadcrumbTrail $trail, $purchase) {
+    $trail->parent('purchases');
+    $trail->push(trans('admin::app.purchases.view-title'), route('admin.purchases.view', $purchase->id));
+});
+
 
 // Dashboard > Quotes
 Breadcrumbs::for('quotes', function (BreadcrumbTrail $trail) {

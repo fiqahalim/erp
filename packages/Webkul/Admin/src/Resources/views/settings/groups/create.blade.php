@@ -80,6 +80,23 @@
                                 </span>
                             </div>
 
+                            <div class="form-group" :class="[errors.has('address') ? 'has-error' : '']">
+                                <label class="required">
+                                    {{ __('admin::app.settings.groups.address') }}
+                                </label>
+
+                                <textarea
+                                    class="control"
+                                    name="address"
+                                    placeholder="{{ __('admin::app.settings.groups.address') }}"
+                                    data-vv-as="{{ __('admin::app.settings.groups.address') }}"
+                                >{{ old('name') }}</textarea>
+
+                                <span class="control-error" v-if="errors.has('address')">
+                                    @{{ errors.first('address') }}
+                                </span>
+                            </div>
+
                             {!! view_render_event('admin.settings.groups.create.form_controls.after') !!}
                         </div>
                     </div>
