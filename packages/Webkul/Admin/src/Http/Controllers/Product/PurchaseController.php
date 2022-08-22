@@ -81,6 +81,10 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
+        $purchase = $this->purchaseRepository->findOrFail($id);
+        $products = $this->materialProductRepository->where('material_id', $purchase->id)->get();
+        $users = $this->userRepository->where('id', $purchase->user_id)->get();
+
         return view('admin::purchases.edit');
     }
 

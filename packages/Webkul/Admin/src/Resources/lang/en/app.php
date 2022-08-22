@@ -291,15 +291,10 @@
             'address-information' => 'Address Information',
             'quote-items'         => 'Quotation Items',
             'name'                => 'Name',
-            'quantity'            => 'Quantity',
-            'price'               => 'Price',
-            'amount'              => 'Amount',
             'discount'            => 'Discount',
             'tax'                 => 'Tax',
             'total'               => 'Total',
-            'sub-total'           => 'Sub Total',
             'discount'            => 'Discount',
-            'tax'                 => 'Tax',
             'adjustment'          => 'Adjustment',
             'grand-total'         => 'Grand Total',
             'create-success'      => 'Quotation created successfully.',
@@ -321,7 +316,10 @@
             'tax'                 => 'Tax',
             'adjustment'          => 'Adjustment',
             'grand-total'         => 'Grand Total',
-            'search'              => 'Search..'
+            'search'              => 'Search..',
+            'expired_at'          => 'Expiration Date',
+            'created_at'          => 'Date',
+            'subject'             => 'Quotation No.',
         ],
 
         'sales' => [
