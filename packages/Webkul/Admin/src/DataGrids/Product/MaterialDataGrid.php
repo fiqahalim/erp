@@ -136,13 +136,6 @@ class MaterialDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('ui::app.datagrid.download'),
-            'method' => 'GET',
-            'route'  => 'admin.materials.print',
-            'icon'   => 'export-icon',
-        ]);
-
-        $this->addAction([
             'title'  => trans('ui::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'admin.materials.view',

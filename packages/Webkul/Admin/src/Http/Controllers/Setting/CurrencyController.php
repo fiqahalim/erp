@@ -2,8 +2,11 @@
 
 namespace Webkul\Admin\Http\Controllers\Setting;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
+
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\Setting\CurrencyDataGrid;
@@ -73,18 +76,31 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        return view('admin::settings.currencies.edit');
+        $currency = $this->currencyRepository->findOrFail($id);
+
+        return view('admin::settings.currencies.edit', compact('currency'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        
+        Event::dispatch('admin.settings.currencies.update.before', $id);
+
+        $currency = $this->currencyRepository->update(request()->all(), $id);
+
+        Event::dispatch('admin.settings.currencies.update.after', $currency);
+
+        session()->flash('success', trans('admin::app.currencies.update-success'));
+
+        return redirect()->route('admin.settings.currencies.index');
+    }
+
+    public function search()
+    {
+        $results = $this->currencyRepository->findWhere([
+            ['currency_name', 'like', '%' . urldecode(request()->input('query')) . '%']
+        ]);
+
+        return response()->json($results);
     }
 
     /**
@@ -95,6 +111,42 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        
+        $this->currencyRepository->findOrFail($id);
+
+        try {
+            Event::dispatch('admin.settings.currencies.before', $id);
+
+            $this->currencyRepository->delete($id);
+
+            Event::dispatch('admin.settings.currencies.after', $id);
+
+            return response()->json([
+                'message' => trans('admin::app.currencies.delete-success', ['name' => trans('admin::app.currencies.quote')]),
+            ], 200);
+        } catch(\Exception $exception) {
+            return response()->json([
+                'message' => trans('admin::app.currencies.delete-failed', ['name' => trans('admin::app.currencies.quote')]),
+            ], 400);
+        }
+    }
+
+    /**
+     * Mass Delete the specified resources.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy()
+    {
+        foreach (request('rows') as $currencyId) {
+            Event::dispatch('admin.settings.currencies.before', $currencyId);
+
+            $this->currencyRepository->delete($currencyId);
+
+            Event::dispatch('admin.settings.currencies.after', $currencyId);
+        }
+
+        return response()->json([
+            'message' => trans('admin::app.currencies.delete-success', ['name' => trans('admin::app.currencies.title')]),
+        ]);
     }
 }

@@ -110,6 +110,38 @@ class PersonController extends Controller
     {
         $person = $this->personRepository->findOrFail($id);
 
+        $arrayMobile = isset($person->contact_numbers) ? $person->contact_numbers : [];
+        $arrayPhone = isset($person->phone_numbers) ? $person->phone_numbers : [];
+        $arrayFax = isset($person->fax_numbers) ? $person->fax_numbers : [];
+        $arrayEmail = isset($person->emails) ? $person->emails : [];
+        $arrayAddress = isset($person->address_1) ? $person->address_1 : [];
+
+        $perAddr = array(
+                $arrayAddress['address'],
+                $arrayAddress['postcode'],
+                $arrayAddress['city'],
+                $arrayAddress['state'],
+                $arrayAddress['country'],
+            );
+
+        $address = implode(", ", $perAddr);
+
+        foreach ($arrayMobile as $value) {
+            $mobile = $value['value'];
+        }
+
+        foreach ($arrayPhone as $value) {
+            $phone = $value['value'];
+        }
+
+        foreach ($arrayFax as $value) {
+            $fax = $value['value'];
+        }
+
+        foreach ($arrayEmail as $value) {
+            $email = $value['value'];
+        }
+
         $currentUser = auth()->guard('user')->user();
 
         if ($currentUser->view_permission != 'global') {
@@ -126,7 +158,7 @@ class PersonController extends Controller
             }
         }
 
-        return view('admin::contacts.persons.show', compact('person'));
+        return view('admin::contacts.persons.show', compact('person', 'mobile', 'phone', 'fax', 'email', 'address'));
     }
 
     /**

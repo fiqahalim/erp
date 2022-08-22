@@ -10,6 +10,12 @@ class Product extends Model implements ProductContract
 {
     use CustomAttribute;
 
+    protected $table = 'products';
+
+    protected $casts = [
+        'item_category'   => 'array',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

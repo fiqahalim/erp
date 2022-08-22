@@ -134,4 +134,38 @@ class MaterialController extends Controller
 
         return response()->json($results);
     }
+
+    public function destroy($id)
+    {
+        $this->materialRepository->findOrFail($id);
+
+        try {
+
+            $this->materialRepository->delete($id);
+
+            return response()->json([
+                'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.materials.title')]),
+            ], 200);
+        } catch(\Exception $exception) {
+            return response()->json([
+                'message' => trans('admin::app.response.destroy-failed', ['name' => trans('admin::app.materials.title')]),
+            ], 400);
+        }
+    }
+
+    /**
+     * Mass Delete the specified resources.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy()
+    {
+        foreach (request('rows') as $materialId) {
+            $this->materialRepository->delete($materialId);
+        }
+
+        return response()->json([
+            'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.materials.title')]),
+        ]);
+    }
 }

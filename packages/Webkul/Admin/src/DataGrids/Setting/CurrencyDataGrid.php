@@ -38,14 +38,6 @@ class CurrencyDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'currency_name',
             'label'      => trans('admin::app.currencies.currency-name'),
             'type'       => 'string',

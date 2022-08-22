@@ -15,11 +15,15 @@ class Purchase extends Model implements PurchaseContract
     protected $table = 'purchases';
 
     protected $casts = [
-        'date' => 'date',
+        'delivery_date' => 'date',
+        'expired_date'  => 'date',
+        'approved_date' => 'date',
     ];
 
     protected $fillable = [
-        'purchase_no', 'date', 'user_id', 'person_id', 'product_id', 'created_at', 'updated_at',
+        'purchase_no', 'ref_no', 'delivery_date', 'expired_date', 'progress_status',
+        'approved', 'approved_date', 'location_id', 'currency_id', 'transaction_type_id',
+        'user_id', 'person_id', 'product_id', 'created_at', 'updated_at',
     ];
 
     /**

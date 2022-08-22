@@ -123,10 +123,14 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'shelf_life',
-            'label'    => trans('admin::app.products.shelf_life'),
-            'type'     => 'string',
-            'sortable' => true,
+            'index'      => 'shelf_life',
+            'label'      => trans('admin::app.products.shelf_life'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'sortable'   => true,
+            'closure'    => function ($row) {
+                return core()->formatDate($row->shelf_life);
+            },
         ]);
 
         $this->addColumn([
@@ -146,7 +150,7 @@ class ProductDataGrid extends DataGrid
             'index'    => 'item_category',
             'label'    => trans('admin::app.products.item_category'),
             'type'     => 'string',
-            'sortable' => true,
+            'sortable' => false,
         ]);
 
         $this->addColumn([
