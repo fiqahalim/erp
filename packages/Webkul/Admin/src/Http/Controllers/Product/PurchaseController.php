@@ -157,9 +157,15 @@ class PurchaseController extends Controller
             'approved'          => request('approved'),
             'user_id'           => request('user_id'),
             'person_id'         => request('person_id'),
-            'location_id'       => request('location_id'),
-            'approved_date'     => Carbon::now()
+            'location_id'       => request('location_id')
         ], $id);
+
+        if (request('approved') == 1) {
+            $approved = $this->purchaseRepository->update([
+                'approved_date'     => Carbon::now(),
+                'approved_by'       => session('login_user_59ba36addc2b2f9401580f014c7f58ea4e30989d')
+            ], $id);
+        }
 
         if (isset($data['products'])) {
             foreach ($data['products'] as $productId => $product) {

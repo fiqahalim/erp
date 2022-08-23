@@ -84,23 +84,6 @@
                                     </span>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="required">
-                                        {{ __('admin::app.settings.users.status') }}
-                                    </label>
-
-                                    <label class="switch">
-                                        <input
-                                            type="checkbox"
-                                            name="status"
-                                            class="control"
-                                            id="status"
-                                            {{ old('status') ? 'checked' : '' }}
-                                        />
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
                                 <div class="form-group" :class="[errors.has('password') ? 'has-error' : '']">
                                     <label class="required">
                                         {{ __('admin::app.settings.users.password') }}
@@ -138,6 +121,23 @@
                                     <span class="control-error" v-if="errors.has('confirm_password')">
                                         @{{ errors.first('confirm_password') }}
                                     </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="required">
+                                        {{ __('admin::app.settings.users.status') }}
+                                    </label>
+
+                                    <label class="switch">
+                                        <input
+                                            type="checkbox"
+                                            name="status"
+                                            class="control"
+                                            id="status"
+                                            {{ old('status') ? 'checked' : '' }}
+                                        />
+                                        <span class="slider round"></span>
+                                    </label>
                                 </div>
 
                                 {!! view_render_event('admin.settings.users.create.form_controls.general.after') !!}

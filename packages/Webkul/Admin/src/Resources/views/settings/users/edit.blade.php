@@ -85,26 +85,6 @@
                                     </span>
                                 </div>
 
-                                @if ($admin->id != auth()->guard('user')->user()->id)
-                                    <div class="form-group" :class="[errors.has('status') ? 'has-error' : '']">
-                                        <label class="required">
-                                            {{ __('admin::app.settings.users.status') }}
-                                        </label>
-
-                                        <label class="switch">
-                                            <input
-                                                type="checkbox"
-                                                name="status"
-                                                class="control"
-                                                id="status"
-                                                {{ (old('status') || $admin->status) ? 'checked' : '' }}
-                                            />
-
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                @endif
-
                                 <div class="form-group" :class="[errors.has('password') ? 'has-error' : '']">
                                     <label>
                                         {{ __('admin::app.settings.users.password') }}
@@ -143,6 +123,26 @@
                                         @{{ errors.first('confirm_password') }}
                                     </span>
                                 </div>
+
+                                @if ($admin->id != auth()->guard('user')->user()->id)
+                                    <div class="form-group" :class="[errors.has('status') ? 'has-error' : '']">
+                                        <label class="required">
+                                            {{ __('admin::app.settings.users.status') }}
+                                        </label>
+
+                                        <label class="switch">
+                                            <input
+                                                type="checkbox"
+                                                name="status"
+                                                class="control"
+                                                id="status"
+                                                {{ (old('status') || $admin->status) ? 'checked' : '' }}
+                                            />
+
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                @endif
 
                                 {!! view_render_event('admin.settings.users.edit.form_controls.general.after', ['admin' => $admin]) !!}
                             </tab>

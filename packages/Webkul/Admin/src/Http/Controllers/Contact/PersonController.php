@@ -116,6 +116,8 @@ class PersonController extends Controller
         $arrayEmail = isset($person->emails) ? $person->emails : [];
         $arrayAddress = isset($person->address_1) ? $person->address_1 : [];
 
+        $mobile = $phone = $fax = $email = '';
+
         $perAddr = array(
                 $arrayAddress['address'],
                 $arrayAddress['postcode'],

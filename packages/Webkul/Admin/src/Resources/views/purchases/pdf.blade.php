@@ -97,10 +97,7 @@
             <div class="header">
                 <div class="row">
                     <div class="col-6">
-                        <img class="logo" src="{{ asset('/images/cellaax_logo_main.png') }}" style="width:auto; height:100px;"/>
-                    </div>
-                    <div class="col-6">
-                        <h1 class="text-center">{{ __('admin::app.purchases.title') }}</h1>
+                        <h3 class="text-center">{{ __('admin::app.purchases.title') }}</h3>
                     </div>
                 </div>
             </div>
@@ -113,15 +110,20 @@
 
                 <div class="row">
                     <span class="label">{{ __('admin::app.purchases.ref_no') }} -</span>
-                    <span class="value">#{{ $purchase->ref_no }}</span>
+                    <span class="value">{{ $purchase->ref_no }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('admin::app.purchases.delivery_date') }} -</span>
-                    <span class="value">{{ $purchase->delivery_date->format('d/m/Y') }}</span>
+                    <span class="value">{{ $purchase->created_at->format('d/m/Y') }}</span>
                 </div>
 
-                <div class="table address">
+                <div class="row">
+                    <span class="label">Prepared by procurement officer -</span>
+                    <span class="value">{{ $purchase->user->name ?? '' }}</span>
+                </div>
+
+                {{-- <div class="table address">
                     <table>
                         <thead>
                             <tr>
@@ -142,7 +144,7 @@
                                     </td>
                                 @endif
 
-                                @if (isset($purchase->shipping_address))
+                                @if (isset($purchase->user))
                                     <td>
                                         <p>{{ $purchase->shipping_address['address'] ?? '' }}</p>
                                         <p>{{ $purchase->shipping_address['postcode'] . ' ' .$purchase->shipping_address['city'] ?? '' }} </p>
@@ -153,7 +155,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
 
                 <div class="table items">
                     <table>
@@ -249,18 +251,17 @@
                     <tr >
                         <td></td>
                     </tr>
-
                     <tr>
                         <td><hr></td>
                     </tr>
-
                     <tr>
-                        <td>Name: {{ $purchase-> }}</td>
+                        <td>Name: {{ $purchase->approvedBy->name ?? '' }}</td>
                     </tr>
-
+                    @if(isset($purchase->approved_date) && !is_null($purchase->approved_date))
                     <tr>
-                        <td>Date: {{ $purchase->approved_date }}</td>
+                        <td>Date: {{ $purchase->approved_date->format('d/m/Y') }}</td>
                     </tr>
+                    @endif
                     @endforeach
                 </table>
 

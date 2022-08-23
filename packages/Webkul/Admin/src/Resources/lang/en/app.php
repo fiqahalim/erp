@@ -557,12 +557,13 @@
             'ref_no'                => 'Ref No.',
             'delivery_date'         => 'Delivery Date',
             'expired_date'          => 'Expiration Date',
+            'created_at'            => 'Requested Date',
             'approved_date'         => 'Approved Date',
             'progress_status'       => 'Progress Status',
             'approved'              => 'Approved',
             'progress_status'       => 'Progress Status',
             'not_approved'          => 'Not Approved',
-            'amount'                 => 'Total Purchase Order Amount'
+            'amount'                => 'Total Purchase Order Amount'
         ],
 
         'sessions' => [

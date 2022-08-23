@@ -66,14 +66,13 @@
 
             <div class="top-control-group">
                 <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]') ? 'has-error' : '']">
-                    <label for="sku" class="required">{{ __('admin::app.products.item_code') }}</label>
+                    <label for="sku">{{ __('admin::app.products.item_code') }}</label>
 
                     <input
                         type="text"
                         :name="[inputName + '[sku]']"
                         class="control"
                         v-model="product.sku"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.products.item_code') }}&quot;"
                         readonly
                     />
@@ -84,14 +83,13 @@
                 </div>
 
                 <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[description]') ? 'has-error' : '']">
-                    <label for="description" class="required">{{ __('admin::app.products.spec') }}</label>
+                    <label for="description">{{ __('admin::app.products.spec') }}</label>
 
                     <input
                         type="text"
                         :name="[inputName + '[description]']"
                         class="control"
                         v-model="product.description"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.products.spec') }}&quot;"
                         readonly
                     />
