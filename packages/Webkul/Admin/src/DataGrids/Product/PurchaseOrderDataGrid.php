@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderDataGrid extends DataGrid
 {
+    protected $export;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->export = bouncer()->hasPermission('purchases-orders.export') ? true : false;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('purchase_orders')

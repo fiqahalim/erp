@@ -92,3 +92,20 @@
         <option value="Cancel">Cancel</option>
     </select>
 </div>
+
+<div class="form-group" :class="[errors.has('approved') ? 'has-error' : '']">
+    <label>
+        {{ __('admin::app.purchases.approved') }}?
+    </label>
+    <label class="switch">
+        <input
+            type="checkbox"
+            name="approved"
+            class="control"
+            value="1"
+            data-vv-as="&quot;{{ $material->id }}&quot;"
+            {{ $material->approved ? 'checked' : ''}}
+        >
+        <span class="slider round"></span>
+    </label>
+</div>

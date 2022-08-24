@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Param and their desciption
+ * used for roles > permissions type
+ * key: unique key,
+ * name: name of permissions menu,
+ * route: route name for your permissions menu,
+ * sort: sort number on which your menu icon should display,
+ * **/
+
 return [
     // DASHBOARD
     [
@@ -105,16 +114,46 @@ return [
     ], [
         'key'   => 'purchases.print',
         'name'  => 'admin::app.acl.print',
-        'route' => ['admin.materials.print', 'admin.materials.print'],
+        'route' => ['admin.purchases.print', 'admin.purchases.print'],
         'sort'  => 5,
     ],
 
-    // PURCHASE INBOUND
+    // PURCHASE ORDERS (To Supplier)
     [
         'key'   => 'purchases-orders',
         'name'  => 'admin::app.acl.purchase_inb',
         'route' => 'admin.purchases-orders.index',
         'sort'  => 5,
+    ], [
+        'key'   => 'purchases-orders.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => ['admin.purchases-orders.create', 'admin.purchases-orders.store'],
+        'sort'  => 1,
+    ], [
+        'key'   => 'purchases-orders.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => ['admin.purchases-orders.edit', 'admin.purchases-orders.update'],
+        'sort'  => 2,
+    ], [
+        'key'   => 'purchases-orders.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => ['admin.purchases-orders.view', 'admin.purchases-orders.view'],
+        'sort'  => 3,
+    ], [
+        'key'   => 'purchases-orders.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => ['admin.purchases-orders.delete', 'admin.purchases-orders.mass_delete'],
+        'sort'  => 4,
+    ], [
+        'key'   => 'purchases-orders.print',
+        'name'  => 'admin::app.acl.print',
+        'route' => ['admin.materials.print', 'admin.materials.print'],
+        'sort'  => 5,
+    ], [
+        'key'   => 'purchases-orders.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'ui.datagrid.export',
+        'sort'  => 6,
     ],
 
     // QUOTATIONS
@@ -181,6 +220,11 @@ return [
         'name'  => 'admin::app.acl.print',
         'route' => 'admin.materials.print',
         'sort'  => 5,
+    ], [
+        'key'   => 'materials.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'ui.datagrid.export',
+        'sort'  => 6,
     ],
 
     // STOCK COUNT
@@ -190,30 +234,10 @@ return [
         'route' => 'admin.stocks.index',
         'sort'  => 8,
     ], [
-        'key'   => 'stocks.create',
-        'name'  => 'admin::app.acl.create',
-        'route' => ['admin.stocks.create', 'admin.stocks.store'],
+        'key'   => 'stocks.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'ui.datagrid.export',
         'sort'  => 1,
-    ], [
-        'key'   => 'stocks.edit',
-        'name'  => 'admin::app.acl.edit',
-        'route' => ['admin.stocks.edit', 'admin.stocks.update'],
-        'sort'  => 2,
-    ], [
-        'key'   => 'stocks.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => ['admin.stocks.view', 'admin.stocks.view'],
-        'sort'  => 3,
-    ], [
-        'key'   => 'stocks.delete',
-        'name'  => 'admin::app.acl.delete',
-        'route' => ['admin.stocks.delete', 'admin.stocks.mass_delete'],
-        'sort'  => 4,
-    ], [
-        'key'   => 'stocks.print',
-        'name'  => 'admin::app.acl.print',
-        'route' => 'admin.stocks.print',
-        'sort'  => 5,
     ],
 
     // SETTINGS DEPARTMENT

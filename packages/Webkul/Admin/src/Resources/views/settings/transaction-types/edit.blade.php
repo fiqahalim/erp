@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
     <div class="content full-page adjacent-center">
-        {!! view_render_event('admin.settings.locations.edit.header.before', ['transactionType' => $transactionType]) !!}
+        {!! view_render_event('admin.settings.transaction-types.edit.header.before', ['transactionType' => $transactionType]) !!}
 
         <div class="page-header">
 
@@ -17,28 +17,28 @@
             </div>
         </div>
 
-        {!! view_render_event('admin.settings.locations.edit.header.after', ['transactionType' => $transactionType]) !!}
+        {!! view_render_event('admin.settings.transaction-types.edit.header.after', ['transactionType' => $transactionType]) !!}
 
-        <form method="POST" action="{{ route('admin.settings.locations.update', $transactionType->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.settings.transaction-types.update', $transactionType->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
                         <div class="panel-header">
-                            {!! view_render_event('admin.settings.locations.edit.form_buttons.before', ['transactionType' => $transactionType]) !!}
+                            {!! view_render_event('admin.settings.transaction-types.edit.form_buttons.before', ['transactionType' => $transactionType]) !!}
 
                             <button type="submit" class="btn btn-md btn-primary">
                                 {{ __('admin::app.transaction_types.save-btn-title') }}
                             </button>
 
-                            <a href="{{ route('admin.settings.locations.index') }}">
+                            <a href="{{ route('admin.settings.transaction-types.index') }}">
                                 {{ __('admin::app.layouts.back') }}
                             </a>
 
-                            {!! view_render_event('admin.settings.locations.edit.form_buttons.after', ['transactionType' => $transactionType]) !!}
+                            {!! view_render_event('admin.settings.transaction-types.edit.form_buttons.after', ['transactionType' => $transactionType]) !!}
                         </div>
 
                         <div class="panel-body">
-                            {!! view_render_event('admin.settings.locations.edit.form_controls.before', ['transactionType' => $transactionType]) !!}
+                            {!! view_render_event('admin.settings.transaction-types.edit.form_controls.before', ['transactionType' => $transactionType]) !!}
 
                             @csrf()
                             <input name="_method" type="hidden" value="PUT">

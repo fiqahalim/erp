@@ -31,7 +31,7 @@ class MaterialDataGrid extends DataGrid
 
         parent::__construct();
 
-        $this->export = bouncer()->hasPermission('contacts.persons.export') ? true : false;
+        $this->export = bouncer()->hasPermission('materials.export') ? true : false;
     }
 
     /**
@@ -46,9 +46,12 @@ class MaterialDataGrid extends DataGrid
                 'materials.id',
                 'materials.date',
                 'materials.finish_status',
+                'materials.approved',
+                'materials.approved_date',
                 'users.id as user_id',
                 'users.name as pic_name',
                 'material_products.id as material_prod_id',
+                'material_products.sku as material_prod_sku',
                 'material_products.name as material_prod_name',
                 'material_products.quantity as material_prod_quantity',
             )
@@ -104,6 +107,14 @@ class MaterialDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'      => 'material_prod_sku',
+            'label'      => trans('admin::app.products.item_code'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'material_prod_name',
             'label'      => trans('admin::app.products.item_name'),
             'type'       => 'string',
@@ -113,7 +124,7 @@ class MaterialDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'material_prod_quantity',
-            'label'      => trans('admin::app.products.quantity'),
+            'label'      => trans('admin::app.materials.request_qty'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -125,6 +136,34 @@ class MaterialDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'            => 'approved',
+            'label'            => trans('admin::app.purchases.approved'),
+            'type'             => 'string',
+            'searchable'       => false,
+            'closure'          => function ($row) {
+                if ($row->approved == 1) {
+                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.purchases.approved');
+                } else {
+                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.purchases.not_approved');
+                }
+            },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'approved_date',
+            'label'      => trans('admin::app.materials.approved_date'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'sortable'   => true,
+            'closure'    => function ($row) {
+                if (! $row->approved_date) {
+                    return '--';
+                }
+                return core()->formatDate($row->approved_date);
+            },
         ]);
     }
 
