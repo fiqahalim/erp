@@ -8,7 +8,7 @@ use Webkul\Attribute\Http\Requests\AttributeForm;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\PurchaseOrderItemRepository;
 use Webkul\Product\Repositories\StockRepository;
 use Webkul\User\Repositories\UserRepository;
 use Webkul\User\Repositories\GroupRepository;
@@ -17,17 +17,17 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class StockCountController extends Controller
 {
-    protected $userRepository, $productRepository, $stockRepository, $groupRepository;
+    protected $userRepository, $purchaseOrderItemRepository, $stockRepository, $groupRepository;
 
     public function __construct(
         UserRepository $userRepository,
-        ProductRepository $productRepository,
+        PurchaseOrderItemRepository $purchaseOrderItemRepository,
         StockRepository $stockRepository,
         GroupRepository $groupRepository
     )
     {
         $this->userRepository = $userRepository;
-        $this->productRepository = $productRepository;
+        $this->purchaseOrderItemRepository = $purchaseOrderItemRepository;
         $this->stockRepository = $stockRepository;
         $this->groupRepository = $groupRepository;
 
@@ -45,8 +45,9 @@ class StockCountController extends Controller
 
     public function create()
     {
+        $users = $this->userRepository->all();
         $groups = $this->groupRepository->all();
-        $products = $this->productRepository->all();
+        $purchaseOrderItem = $this->purchaseOrderItemRepository->all();
 
         return view('admin::stocks.create', compact('groups', 'products'));
     }

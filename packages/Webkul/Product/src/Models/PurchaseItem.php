@@ -11,6 +11,8 @@ class PurchaseItem extends Model implements PurchaseItemContract
 {
     protected $table = 'purchase_items';
 
+    protected $with = ['product', 'purchase'];
+
     protected $fillable = [
         'name', 'sku', 'description', 'remarks', 'quantity', 'price',
         'amount', 'purchase_id', 'product_id', 'created_at', 'updated_at',
@@ -18,7 +20,7 @@ class PurchaseItem extends Model implements PurchaseItemContract
 
     public function purchase()
     {
-        return $this->belongsTo(PurchaseProxy::modelClass());
+        return $this->belongsTo(PurchaseProxy::modelClass(), 'purchase_id');
     }
 
     /**
@@ -26,7 +28,7 @@ class PurchaseItem extends Model implements PurchaseItemContract
      */
     public function product()
     {
-        return $this->belongsTo(ProductProxy::modelClass());
+        return $this->belongsTo(ProductProxy::modelClass(), 'product_id');
     }
 
     /**

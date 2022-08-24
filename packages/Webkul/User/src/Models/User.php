@@ -5,11 +5,15 @@ namespace Webkul\User\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Models\PurchaseProxy;
+
 use Webkul\User\Contracts\User as UserContract;
 
 class User extends Authenticatable implements UserContract
 {
     use Notifiable;
+
+    protected $with = ['groups'];
 
     /**
      * The attributes that are mass assignable.

@@ -20,13 +20,12 @@ class TransactionTypeDataGrid extends DataGrid
         $queryBuilder = DB::table('transaction_types')
             ->addSelect(
                 'transaction_types.id',
+                'transaction_types.transaction_code',
                 'transaction_types.transaction_name',
-                // 'transaction_types.transaction_code',
-                // 'transaction_types.amount',
+                'transaction_types.amount',
             );
 
         $this->addFilter('id', 'transaction_types.id');
-
         $this->setQueryBuilder($queryBuilder);
     }
 
@@ -37,13 +36,21 @@ class TransactionTypeDataGrid extends DataGrid
      */
     public function addColumns()
     {
-        // $this->addColumn([
-        //     'index'      => 'transaction_code',
-        //     'label'      => trans('admin::app.transaction_types.transaction_code'),
-        //     'type'       => 'string',
-        //     'searchable' => false,
-        //     'sortable'   => true,
-        // ]);
+        $this->addColumn([
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'string',
+            'searchable' => false,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'transaction_code',
+            'label'      => trans('admin::app.transaction_types.transaction_code'),
+            'type'       => 'string',
+            'searchable' => false,
+            'sortable'   => true,
+        ]);
 
         $this->addColumn([
             'index'      => 'transaction_name',
@@ -53,15 +60,14 @@ class TransactionTypeDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
-        // $this->addColumn([
-        //     'index'    => 'amount',
-        //     'label'      => trans('admin::app.transaction_types.amount'),
-        //     'type'     => 'string',
-        //     'sortable' => true,
-        //     'closure'  => function ($row) {
-        //         return number_format($row->amount, 2);
-        //     },
-        // ]);
+        $this->addColumn([
+            'index'      => 'amount',
+            'label'      => trans('admin::app.transaction_types.amount'),
+            'type'       => 'string',
+            'searchable' => false,
+            'sortable'   => true,
+        ]);
+
     }
 
     /**
@@ -74,14 +80,14 @@ class TransactionTypeDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.settings.transaction_types.edit',
+            'route'  => 'admin.settings.transaction-types.edit',
             'icon'   => 'pencil-icon',
         ]);
 
         $this->addAction([
             'title'        => trans('ui::app.datagrid.delete'),
             'method'       => 'DELETE',
-            'route'        => 'admin.settings.transaction_types.delete',
+            'route'        => 'admin.settings.transaction-types.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'source']),
             'icon'         => 'trash-icon',
         ]);
@@ -97,7 +103,7 @@ class TransactionTypeDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('ui::app.datagrid.delete'),
-            'action' => route('admin.settings.transaction_types.mass_delete'),
+            'action' => route('admin.settings.transaction-types.mass_delete'),
             'method' => 'PUT',
         ]);
     }

@@ -589,6 +589,7 @@
             'progress_status'       => 'Progress Status',
             'not_approved'          => 'Not Approved',
             'amount'                => 'Total Purchase Order Amount',
+            'quantity_order'        => 'Quantity Ordered',
         ],
 
         'purchases_order' => [

@@ -4,97 +4,134 @@ namespace Webkul\Admin\DataGrids\Product;
 
 use Webkul\UI\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
-use Webkul\Admin\Traits\ProvideDropdownOptions;
-use Illuminate\Support\Facades\Storage;
-
-use Webkul\User\Repositories\UserRepository;
 
 class StockCountDataGrid extends DataGrid
 {
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('stocks')
+        $queryBuilder = DB::table('purchase_orders')
             ->addSelect(
-                'stocks.id',
-                'stocks.expired_at',
-                'stocks.current_stock',
-                // 'users.id as user_id',
-                // 'users.name as pic_name',
-                // 'material_products.id as material_prod_id',
-                // 'material_products.name as material_prod_name',
-                // 'material_products.quantity as material_prod_quantity',
-            );
-            // ->leftJoin('users', 'materials.user_id', '=', 'users.id')
-            // ->leftJoin('material_products', 'material_products.material_id', '=', 'materials.id');
+                'purchase_orders.id',
+                'purchase_orders.expired_date',
+                'purchase_orders.purchase_no',
+                'users.id as user_id',
+                'users.name as sales_person',
+                'purchase_order_items.id as purchase_order_items_id',
+                'purchase_order_items.name as purchase_order_items_name',
+                'purchase_order_items.quantity as purchase_order_items_quantity',
+            )
+            ->leftJoin('users', 'purchase_orders.user_id', '=', 'users.id')
+            ->leftJoin('purchase_order_items', 'purchase_order_items.purchase_order_id', '=', 'purchase_orders.id');
 
-        $this->addFilter('expired_at', 'stocks.expired_at');
-        $this->addFilter('user', 'materials.user_id');
-        $this->addFilter('pic_name', 'materials.user_id');
+        $this->addFilter('id', 'purchase_orders.id');
+        $this->addFilter('user', 'purchase_orders.user_id');
+        $this->addFilter('sales_person', 'purchase_orders.user_id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'string',
-            'sortable'   => true,
+            'index'    => 'id',
+            'label'    => trans('admin::app.datagrid.id'),
+            'type'     => 'string',
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'expired_at',
-            'label'      => trans('admin::app.stocks.expired_at'),
+            'index'      => 'expired_date',
+            'label'      => trans('admin::app.purchases.expired_date'),
             'type'       => 'date_range',
             'searchable' => false,
             'sortable'   => true,
             'closure'    => function ($row) {
-                if (! $row->expired_at) {
-                    return '--';
-                }
-                return core()->formatDate($row->expired_at);
+                return core()->formatDate($row->expired_date);
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'current_stock',
-            'label'      => trans('admin::app.stocks.current_stock'),
+            'index'    => 'purchase_no',
+            'label'    => trans('admin::app.purchases.purchase_no'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'sales_person',
+            'label'      => trans('admin::app.settings.users.title'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => false,
+            'sortable'   => false,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'purchase_order_items_name',
+            'label'      => trans('admin::app.products.item_name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'purchase_order_items_quantity',
+            'label'      => trans('admin::app.purchases.quantity_order'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'closure'  => function ($row) {
+                return number_format($row->purchase_order_items_quantity, 2);
+            },
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('ui::app.datagrid.download'),
-            'method' => 'GET',
-            'route'  => 'admin.stocks.print',
-            'icon'   => 'export-icon',
-        ]);
-
-        $this->addAction([
             'title'  => trans('ui::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.stocks.view',
+            'route'  => 'admin.purchases-orders.view',
             'icon'   => 'eye-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.stocks.edit',
+            'route'  => 'admin.purchases-orders.edit',
             'icon'   => 'pencil-icon',
         ]);
 
         $this->addAction([
             'title'        => trans('ui::app.datagrid.delete'),
             'method'       => 'DELETE',
-            'route'        => 'admin.stocks.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => trans('admin::app.stocks.title')]),
+            'route'        => 'admin.purchases-orders.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'user']),
             'icon'         => 'trash-icon',
+        ]);
+    }
+
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'type'   => 'delete',
+            'label'  => trans('ui::app.datagrid.delete'),
+            'action' => route('admin.purchases-orders.mass_delete'),
+            'method' => 'PUT',
         ]);
     }
 }

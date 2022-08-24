@@ -13,6 +13,8 @@ class PurchaseOrderItem extends Model implements PurchaseOrderItemContract
 {
     protected $table = 'purchase_order_items';
 
+    protected $with = ['product', 'purchase'];
+
     protected $fillable = [
         'name', 'sku', 'description', 'remarks', 'quantity', 'price',
         'amount', 'purchase_order_id', 'product_id', 'created_at', 'updated_at',
@@ -20,7 +22,7 @@ class PurchaseOrderItem extends Model implements PurchaseOrderItemContract
 
     public function purchase()
     {
-        return $this->belongsTo(PurchaseOrderProxy::modelClass());
+        return $this->belongsTo(PurchaseOrderProxy::modelClass(), 'purchase_order_id');
     }
 
     /**
@@ -28,7 +30,7 @@ class PurchaseOrderItem extends Model implements PurchaseOrderItemContract
      */
     public function product()
     {
-        return $this->belongsTo(ProductProxy::modelClass());
+        return $this->belongsTo(ProductProxy::modelClass(), 'product_id');
     }
 
     /**
