@@ -334,6 +334,18 @@ Breadcrumbs::for('settings.locations.edit', function (BreadcrumbTrail $trail, $l
     $trail->push(trans('admin::app.locations.edit-title'), route('admin.settings.locations.edit', $location->id));
 });
 
+// Settings > Transaction Types
+Breadcrumbs::for('settings.transaction-types', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push(trans('admin::app.locations.title'), route('admin.settings.locations.index'));
+});
+
+// Settings > Transaction Types > Edit
+Breadcrumbs::for('settings.transaction-types.edit', function (BreadcrumbTrail $trail, $transactionType) {
+    $trail->parent('settings.transaction-types');
+    $trail->push(trans('admin::app.locations.edit-title'), route('admin.settings.locations.edit', $transactionType->id));
+});
+
 
 // Configuration
 Breadcrumbs::for('configuration', function (BreadcrumbTrail $trail) {

@@ -370,6 +370,23 @@ Route::group(['middleware' => ['web']], function () {
 
                     Route::put('mass-destroy', 'LocationController@massDestroy')->name('admin.settings.locations.mass_delete');
                 });
+
+                // Transaction Types
+                Route::prefix('transaction-types')->group(function () {
+                    Route::get('', 'TransactionTypeController@index')->name('admin.settings.transaction-types.index');
+
+                    Route::post('create', 'TransactionTypeController@store')->name('admin.settings.transaction-types.store');
+
+                    Route::get('edit/{id?}', 'TransactionTypeController@edit')->name('admin.settings.transaction-types.edit');
+
+                    Route::put('edit/{id}', 'TransactionTypeController@update')->name('admin.settings.transaction-types.update');
+
+                    Route::get('search', 'TransactionTypeController@search')->name('admin.settings.transaction-types.search');
+
+                    Route::delete('{id}', 'TransactionTypeController@destroy')->name('admin.settings.transaction-types.delete');
+
+                    Route::put('mass-destroy', 'TransactionTypeController@massDestroy')->name('admin.settings.transaction-types.mass_delete');
+                });
             });
 
 

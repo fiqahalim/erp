@@ -139,9 +139,9 @@ return [
         'sort'       => 1,
         'icon-class' => 'source-icon',
     ], [
-        'key'        => 'settings.other_settings.organizations',
-        'name'       => 'admin::app.layouts.organizations',
-        'route'      => 'admin.contacts.organizations.index',
+        'key'        => 'settings.other_settings.transaction-types',
+        'name'       => 'admin::app.layouts.transaction-types',
+        'route'      => 'admin.settings.transaction-types.index',
         'sort'       => 3,
         'icon-class' => 'folder-icon',
     ], [

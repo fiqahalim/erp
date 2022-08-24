@@ -100,6 +100,7 @@
             'configuration'        => 'Configuration',
             'activities'           => 'Activities',
             'howdy'                => 'Hello!',
+            'transaction-types'    => 'Transaction Type',
         ],
 
         'contacts' => [
@@ -168,6 +169,27 @@
             'delete-success'  => 'Currency deleted successfully.',
             'delete-failed'   => 'Currency can not be deleted.',
             'destroy-success' => 'Selected currency deleted successfully.',
+        ],
+
+        'transaction_types' => [
+            'title'             => 'Transaction Types',
+            'transaction_name'  => 'Transaction Type Name',
+            'transaction_code'  => 'Transaction Type Code',
+            'amount'            => 'Amount',
+            'decimal'           => 'Decimal',
+            'status'            => 'Active',
+            'create-title'      => 'Create Transaction Type',
+            'edit-title'        => 'Edit Transaction Type',
+            'save-btn-title'    => 'Save Transaction Type',
+            'save'              => 'Save',
+            'upload'            => 'Upload',
+            'back'              => 'Back',
+            'cancel'            => 'Cancel',
+            'create-success'    => 'Transaction Type created successfully.',
+            'update-success'    => 'Transaction Type updated successfully.',
+            'delete-success'    => 'Transaction Type deleted successfully.',
+            'delete-failed'     => 'Transaction Type can not be deleted.',
+            'destroy-success'   => 'Selected transaction type deleted successfully.',
         ],
 
         'leads' => [
