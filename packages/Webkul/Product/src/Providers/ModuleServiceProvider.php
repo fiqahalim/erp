@@ -13,5 +13,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Product\Models\Material::class,
         \Webkul\Product\Models\MaterialProduct::class,
         \Webkul\Product\Models\Stock::class,
+        \Webkul\Product\Models\PurchaseOrder::class,
+        \Webkul\Product\Models\PurchaseOrderItem::class,
     ];
 }

@@ -121,7 +121,7 @@ return [
         'key'        => 'settings.other_settings',
         'name'       => 'admin::app.layouts.other-settings',
         'info'       => 'admin::app.layouts.other-settings-info',
-        'route'      => 'admin.settings.tags.index',
+        'route'      => 'admin.settings.currencies.index',
         'sort'       => 9,
         'icon-class' => 'settings-icon',
     ], [
@@ -157,20 +157,6 @@ return [
         'route'      => 'admin.settings.attributes.index',
         'sort'       => 1,
         'icon-class' => 'attribute-icon',
-    ], [
-        'key'        => 'settings.automation.email_templates',
-        'name'       => 'admin::app.layouts.email-templates',
-        'info'       => 'admin::app.layouts.email-templates-info',
-        'route'      => 'admin.settings.email_templates.index',
-        'sort'       => 2,
-        'icon-class' => 'email-template-icon',
-    ], [
-        'key'        => 'settings.automation.workflows',
-        'name'       => 'admin::app.layouts.workflows',
-        'info'       => 'admin::app.layouts.workflows-info',
-        'route'      => 'admin.settings.workflows.index',
-        'sort'       => 3,
-        'icon-class' => 'workflow-icon',
     ],
 
     // CONFIGURATION MENU
