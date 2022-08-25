@@ -69,7 +69,7 @@ class MaterialController extends Controller
         $products = $this->materialProductRepository->where('material_id', $material->id)->get();
         $users = $this->userRepository->where('id', $material->user_id)->get();
 
-        return view('admin::materials.show', compact('material'));
+        return view('admin::materials.show', compact('material', 'products', 'users'));
     }
 
     public function store()
@@ -184,5 +184,15 @@ class MaterialController extends Controller
         return response()->json([
             'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.materials.title')]),
         ]);
+    }
+
+    public function print($id)
+    {
+        $material = $this->materialRepository->findOrFail($id);
+        $products = $this->materialProductRepository->where('material_id', $material->id)->get();
+
+        return PDF::loadHTML(view('admin::materials.pdf', compact('material', 'products'))->render())
+            ->setPaper('a4')
+            ->download('Material_Request_' . $material->qc_insp_req_no . '.pdf');
     }
 }

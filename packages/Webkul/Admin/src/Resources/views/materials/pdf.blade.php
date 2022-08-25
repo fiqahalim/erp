@@ -97,41 +97,28 @@
             <div class="header">
                 <div class="row">
                     <div class="col-6">
-                        <img class="logo" src="{{ asset('/images/cellaax_logo_main.png') }}" style="width:auto; height:100px;"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header">
-                <div class="row">
-                    <div class="col-6">
-                        <h3 class="text-center">{{ __('admin::app.purchases_order.title') }}</h3>
+                        <h3 class="text-center">{{ __('admin::app.materials.title') }}</h3>
                     </div>
                 </div>
             </div>
 
             <div class="quote-summary">
                 <div class="row">
-                    <span class="label">{{ __('admin::app.purchases_order.purchase_no') }} -</span>
-                    <span class="value">{{ $purchase->purchase_no }}</span>
+                    <span class="label">{{ __('admin::app.materials.qc_insp_req_no') }} -</span>
+                    <span class="value">{{ $material->qc_insp_req_no }}</span>
                 </div>
 
                 <div class="row">
-                    <span class="label">{{ __('admin::app.purchases_order.ref_no') }} -</span>
-                    <span class="value">{{ $purchase->ref_no }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('admin::app.purchases_order.delivery_date') }} -</span>
-                    <span class="value">{{ $purchase->created_at->format('d/m/Y') }}</span>
+                    <span class="label">{{ __('admin::app.materials.date') }} -</span>
+                    <span class="value">{{ $material->created_at->format('d/m/Y') }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">Prepared by procurement officer -</span>
-                    <span class="value">{{ $purchase->user->name ?? '' }}</span>
+                    <span class="value">{{ $material->user->name ?? '' }}</span>
                 </div>
 
-                <div class="table address">
+                {{-- <div class="table address">
                     <table>
                         <thead>
                             <tr>
@@ -152,18 +139,18 @@
                                     </td>
                                 @endif
 
-                                @if (isset($purchase->user->groups))
-                                    @foreach($purchase->user->groups as $data)
+                                @if (isset($purchase->user))
                                     <td>
-                                        <p>{{ $data->name ?? '' }}</p>
-                                        <p>{{ $data->address ?? '' }}</p>
+                                        <p>{{ $purchase->shipping_address['address'] ?? '' }}</p>
+                                        <p>{{ $purchase->shipping_address['postcode'] . ' ' .$purchase->shipping_address['city'] ?? '' }} </p>
+                                        <p>{{ $purchase->shipping_address['state'] ?? '' }}</p>
+                                        <p>{{ core()->country_name($purchase->shipping_address['country']) ?? '' }}</p>
                                     </td>
-                                    @endforeach
                                 @endif
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
 
                 <div class="table items">
                     <table>
@@ -263,11 +250,11 @@
                         <td><hr></td>
                     </tr>
                     <tr>
-                        <td>Name: {{ $purchase->approvedBy->name ?? '' }}</td>
+                        <td>Name: {{ $material->approvedBy->name ?? '' }}</td>
                     </tr>
-                    @if(isset($purchase->approved_date) && !is_null($purchase->approved_date))
+                    @if(isset($material->approved_date) && !is_null($material->approved_date))
                     <tr>
-                        <td>Date: {{ $purchase->approved_date->format('d/m/Y') }}</td>
+                        <td>Date: {{ $material->approved_date->format('d/m/Y') }}</td>
                     </tr>
                     @endif
                     @endforeach
