@@ -38,4 +38,17 @@ class MaterialRepository extends Repository
     {
         return 'Webkul\Product\Contracts\Material';
     }
+
+    /**
+     * Retrieves material request count based on date
+     *
+     * @return number
+     */
+    public function getMaterialsCount($startDate, $endDate)
+    {
+        return $this
+                ->whereBetween('created_at', [$startDate, $endDate])
+                ->get()
+                ->count();
+    }
 }

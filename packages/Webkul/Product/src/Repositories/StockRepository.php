@@ -15,4 +15,17 @@ class StockRepository extends Repository
     {
         return 'Webkul\Product\Contracts\Stock';
     }
+
+    /**
+     * Retrieves stock count based on date
+     *
+     * @return number
+     */
+    public function getStocksCount($startDate, $endDate)
+    {
+        return $this
+                ->whereBetween('created_at', [$startDate, $endDate])
+                ->get()
+                ->count();
+    }
 }

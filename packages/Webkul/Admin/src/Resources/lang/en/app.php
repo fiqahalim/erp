@@ -669,7 +669,7 @@
                 'update-success'    => 'Department updated successfully.',
                 'destroy-success'   => 'Department deleted successfully.',
                 'delete-failed'     => 'Department can not be deleted.',
-                'user-define-error' => 'Can not delete system group.',
+                'user-define-error' => 'Can not delete system department.',
             ],
 
             'roles' => [
@@ -703,11 +703,11 @@
                 'email'               => 'Email',
                 'back'                => 'Back',
                 'password'            => 'Password',
-                'groups'              => 'Groups',
+                'groups'              => 'Departments',
                 'role'                => 'Role',
                 'view-permission'     => 'View Permission',
                 'global'              => 'Global',
-                'group'               => 'Group',
+                'group'               => 'Department',
                 'individual'          => 'Individual',
                 'status'              => 'Status',
                 'save-btn-title'      => 'Save as Employee/PIC',
