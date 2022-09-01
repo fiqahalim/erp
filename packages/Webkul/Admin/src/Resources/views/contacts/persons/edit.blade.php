@@ -13,7 +13,7 @@
 
             {{ Breadcrumbs::render('contacts.persons.edit', $person) }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.contacts.persons.edit-title') }}</h1>
             </div>
         </div>
@@ -26,18 +26,6 @@
                 <div class="form-container">
 
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.contacts.persons.edit.form_buttons.before', ['person' => $person]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.contacts.persons.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.contacts.persons.index') }}">{{ __('admin::app.contacts.persons.back') }}</a>
-
-                            {!! view_render_event('admin.contacts.persons.edit.form_buttons.after', ['person' => $person]) !!}
-                        </div>
-        
                         <div class="panel-body">
                             {!! view_render_event('admin.contacts.persons.edit.form_controls.before', ['person' => $person]) !!}
 
@@ -53,12 +41,22 @@
                             ])
 
                             {!! view_render_event('admin.contacts.persons.edit.form_controls.after', ['person' => $person]) !!}
+                        </div>
 
+                        <div class="panel-header">
+                            {!! view_render_event('admin.contacts.persons.edit.form_buttons.before', ['person' => $person]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.contacts.persons.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.contacts.persons.index') }}">{{ __('admin::app.contacts.persons.back') }}</a>
+
+                            {!! view_render_event('admin.contacts.persons.edit.form_buttons.after', ['person' => $person]) !!}
                         </div>
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 @stop

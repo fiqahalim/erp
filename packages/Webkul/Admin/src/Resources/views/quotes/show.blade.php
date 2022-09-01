@@ -1,35 +1,47 @@
 @extends('admin::layouts.master')
 
 @section('page_title')
-    {{ __('admin::app.quotes.edit-title') }}
+    {{ __('admin::app.quotes.view-title') }}
 @stop
 
 @section('content-wrapper')
     <div class="content full-page adjacent-center">
-        {!! view_render_event('admin.quotes.edit.header.before', ['quote' => $quote]) !!}
+        {!! view_render_event('admin.quotes.view.header.before', ['quote' => $quote]) !!}
 
         <div class="page-header">
-            {{ Breadcrumbs::render('quotes.edit', $quote) }}
 
-            <div class="page-title" style="padding-top:25px;">
-                <h1>{{ __('admin::app.quotes.edit-title') }}</h1>
+            {{ Breadcrumbs::render('quotes.view', $quote) }}
+
+            <div class="page-title">
+                <h1>{{ __('admin::app.quotes.view-title') }}</h1>
             </div>
         </div>
 
-        {!! view_render_event('admin.quotes.edit.header.after', ['quote' => $quote]) !!}
+        {!! view_render_event('admin.quotes.view.header.after', ['quote' => $quote]) !!}
 
-        <form method="POST" action="{{ route('admin.quotes.update', $quote->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-content">
-                <div class="form-container">
-                    <div class="panel">
-                        <div class="panel-body">
-                            {!! view_render_event('admin.quotes.edit.form_controls.before', ['quote' => $quote]) !!}
+        {!! view_render_event('admin.quotes.view.informations.before', ['quote' => $quote]) !!}
 
-                            @csrf()
+        <div class="page-content">
+            <div class="form-container">
+                <div class="panel">
+                    <div class="panel-header">
+                        {!! view_render_event('admin.quotes.view.form_buttons.before', ['quote' => $quote]) !!}
 
-                            <input name="_method" type="hidden" value="PUT">
+                        <a href="{{ route('admin.quotes.print', ['id' => $quote]) }}">
+                            <button type="submit" class="btn btn-md btn-primary">
+                            {{ __('admin::app.acl.print') }}
+                            </button>
+                        </a>
 
-                            {!! view_render_event('admin.quotes.edit.form_controls.information.before', ['quote' => $quote]) !!}
+                        <a href="{{ route('admin.quotes.index') }}">{{ __('admin::app.quotes.back') }}</a>
+
+                        {!! view_render_event('admin.quotes.view.form_buttons.after', ['quote' => $quote]) !!}
+                    </div>
+
+                    <div class="panel-body">
+                            {!! view_render_event('admin.quotes.view.form_controls.before', ['quote' => $quote]) !!}
+
+                            {!! view_render_event('admin.quotes.view.form_controls.information.before', ['quote' => $quote]) !!}
 
                             <accordian :title="'{{ __('admin::app.quotes.quote-information') }}'" :active="true">
                                 <div slot="body">
@@ -58,58 +70,12 @@
                                     ])
 
                                     <div class="form-group">
-                                        {{-- <label for="validation">{{ __('admin::app.quotes.lead') }}</label> --}}
-
                                         @include('admin::common.custom-attributes.edit.lookup')
-
-                                        {{-- @php
-                                            $lookUpEntityData = app('Webkul\Attribute\Repositories\AttributeRepository')
-                                                ->getLookUpEntity(
-                                                    'leads',
-                                                    old('lead_id')
-                                                        ?: (
-                                                            ($lead = $quote->leads()->first())
-                                                            ? $lead->id
-                                                            : null
-                                                        )
-                                                    );
-                                        @endphp
-
-                                        <lookup-component
-                                            :attribute="{'code': 'lead_id', 'name': 'Lead', 'lookup_type': 'leads'}"
-                                            :data='@json($lookUpEntityData)'
-                                        ></lookup-component> --}}
                                     </div>
-
                                 </div>
                             </accordian>
 
                             {!! view_render_event('admin.quotes.edit.form_controls.information.after', ['quote' => $quote]) !!}
-
-
-                            {{-- {!! view_render_event('admin.quotes.edit.form_controls.address.before', ['quote' => $quote]) !!} --}}
-
-                            {{-- <accordian :title="'{{ __('admin::app.quotes.address-information') }}'" :active="true">
-                                <div slot="body">
-
-                                    @include('admin::common.custom-attributes.edit', [
-                                        'customAttributes' => app('Webkul\Attribute\Repositories\AttributeRepository')
-                                        ->scopeQuery(function($query){
-                                            return $query
-                                                ->where('entity_type', 'quotes')
-                                                ->whereIn('code', [
-                                                    'billing_address',
-                                                    'shipping_address',
-                                                ]);
-                                        })->get(),
-                                        'entity'           => $quote,
-                                    ])
-
-                                </div>
-                            </accordian> --}}
-
-                            {{-- {!! view_render_event('admin.quotes.edit.form_controls.address.after', ['quote' => $quote]) !!} --}}
-
 
                             {!! view_render_event('admin.quotes.edit.form_controls.items.before', ['quote' => $quote]) !!}
 
@@ -125,22 +91,9 @@
 
                             {!! view_render_event('admin.quotes.edit.form_controls.after', ['quote' => $quote]) !!}
                         </div>
-
-                        <div class="panel-header">
-                            {!! view_render_event('admin.quotes.edit.form_buttons.before', ['quote' => $quote]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.quotes.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.quotes.index') }}">{{ __('admin::app.quotes.back') }}</a>
-
-                            {!! view_render_event('admin.quotes.edit.form_buttons.after', ['quote' => $quote]) !!}
-                        </div>
-                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 @stop
 
@@ -165,7 +118,7 @@
                                     <label class="required">
                                         {{ __('admin::app.quotes.quantity') }}
                                     </label>
-                                </div>                                
+                                </div>
                             </th>
 
                             <th class="price">
@@ -205,7 +158,7 @@
                             </th>
 
                             <th class="total">
-                                <div class="form-group">     
+                                <div class="form-group">
                                     {{ __('admin::app.quotes.total') }}
                                     <span class="currency-code">(RM)</span>
                                     </div>

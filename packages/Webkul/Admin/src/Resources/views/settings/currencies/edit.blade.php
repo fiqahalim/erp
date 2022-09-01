@@ -12,7 +12,7 @@
 
             {{ Breadcrumbs::render('settings.currencies.edit', $currency) }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.currencies.edit-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.currencies.edit.form_buttons.before', ['currency' => $currency]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.currencies.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.currencies.index') }}">
-                                {{ __('admin::app.layouts.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.currencies.edit.form_buttons.after', ['currency' => $currency]) !!}
-                        </div>
-
                         <div class="panel-body">
                             {!! view_render_event('admin.settings.currencies.edit.form_controls.before', ['currency' => $currency]) !!}
 
@@ -82,6 +68,20 @@
                                     @{{ errors.first('fx_rate') }}
                                 </span>
                             </div>
+                        </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.currencies.edit.form_buttons.before', ['currency' => $currency]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.currencies.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.currencies.index') }}">
+                                {{ __('admin::app.layouts.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.currencies.edit.form_buttons.after', ['currency' => $currency]) !!}
                         </div>
                     </div>
                 </div>

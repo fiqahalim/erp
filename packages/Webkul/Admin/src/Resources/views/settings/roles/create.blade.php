@@ -12,7 +12,7 @@
             
             {{ Breadcrumbs::render('settings.roles.create') }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.settings.roles.create-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.roles.create.form_buttons.before') !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.settings.roles.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.roles.index') }}">
-                                {{ __('admin::app.layouts.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.roles.create.form_buttons.after') !!}
-                        </div>
-
                         <div class="panel-body">
                             {!! view_render_event('admin.settings.roles.create.form_controls.before') !!}
 
@@ -111,6 +97,20 @@
                             </div>
 
                             {!! view_render_event('admin.settings.roles.create.form_controls.after') !!}
+                        </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.roles.create.form_buttons.before') !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.settings.roles.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.roles.index') }}">
+                                {{ __('admin::app.layouts.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.roles.create.form_buttons.after') !!}
                         </div>
                     </div>
                 </div>

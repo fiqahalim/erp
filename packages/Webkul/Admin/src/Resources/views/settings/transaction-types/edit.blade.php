@@ -12,7 +12,7 @@
 
             {{ Breadcrumbs::render('settings.locations.edit', $transactionType) }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.transaction_types.edit-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.transaction-types.edit.form_buttons.before', ['transactionType' => $transactionType]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.transaction_types.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.transaction-types.index') }}">
-                                {{ __('admin::app.layouts.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.transaction-types.edit.form_buttons.after', ['transactionType' => $transactionType]) !!}
-                        </div>
-
                         <div class="panel-body">
                             {!! view_render_event('admin.settings.transaction-types.edit.form_controls.before', ['transactionType' => $transactionType]) !!}
 
@@ -99,6 +85,20 @@
                                     @{{ errors.first('amount') }}
                                 </span>
                             </div>
+                        </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.transaction-types.edit.form_buttons.before', ['transactionType' => $transactionType]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.transaction_types.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.transaction-types.index') }}">
+                                {{ __('admin::app.layouts.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.transaction-types.edit.form_buttons.after', ['transactionType' => $transactionType]) !!}
                         </div>
                     </div>
                 </div>

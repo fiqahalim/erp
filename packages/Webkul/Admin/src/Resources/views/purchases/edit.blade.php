@@ -12,7 +12,7 @@
 
              {{ Breadcrumbs::render('purchases.edit', $purchase) }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.purchases.edit-title') }}</h1>
             </div>
         </div>
@@ -23,18 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.purchases.edit.form_buttons.before', ['purchase' => $purchase]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.purchases.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.purchases.index') }}">{{ __('admin::app.purchases.back') }}</a>
-
-                            {!! view_render_event('admin.purchases.edit.form_buttons.after', ['purchase' => $purchase]) !!}
-                        </div>
-
                         {!! view_render_event('admin.purchases.edit.form_controls.before') !!}
 
                         @csrf()
@@ -57,8 +45,19 @@
                             </tab>
 
                             {!! view_render_event('admin.purchases.edit.form_controls.products.after') !!}
-
                         </tabs>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.purchases.edit.form_buttons.before', ['purchase' => $purchase]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.purchases.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.purchases.index') }}">{{ __('admin::app.purchases.back') }}</a>
+
+                            {!! view_render_event('admin.purchases.edit.form_buttons.after', ['purchase' => $purchase]) !!}
+                        </div>
                     </div>
                 </div>
             </div>

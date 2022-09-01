@@ -12,7 +12,7 @@
 
             {{ Breadcrumbs::render('purchases.create') }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.purchases.create-title') }}</h1>
             </div>
         </div>
@@ -23,18 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.purchases.create.form_buttons.before') !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.purchases.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.purchases.index') }}">{{ __('admin::app.purchases.back') }}</a>
-
-                            {!! view_render_event('admin.purchases.create.form_buttons.after') !!}
-                        </div>
-
                         @csrf()
 
                         <tabs>
@@ -55,6 +43,18 @@
                             {!! view_render_event('admin.purchases.create.form_controls.products.after') !!}
 
                         </tabs>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.purchases.create.form_buttons.before') !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.purchases.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.purchases.index') }}">{{ __('admin::app.purchases.back') }}</a>
+
+                            {!! view_render_event('admin.purchases.create.form_buttons.after') !!}
+                        </div>
                     </div>
                 </div>
             </div>

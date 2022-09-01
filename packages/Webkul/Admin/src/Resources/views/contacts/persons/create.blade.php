@@ -13,7 +13,7 @@
 
             {{ Breadcrumbs::render('contacts.persons.create') }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.contacts.persons.create-title') }}</h1>
             </div>
         </div>
@@ -26,18 +26,6 @@
                 <div class="form-container">
 
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.contacts.persons.create.form_buttons.before') !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.contacts.persons.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.contacts.persons.index') }}">{{ __('admin::app.contacts.persons.back') }}</a>
-
-                            {!! view_render_event('admin.contacts.persons.create.form_buttons.after') !!}
-                        </div>
-        
                         <div class="panel-body">
                             {!! view_render_event('admin.contacts.persons.create.form_controls.before') !!}
 
@@ -52,10 +40,21 @@
                             {!! view_render_event('admin.contacts.persons.create.form_controls.after') !!}
 
                         </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.contacts.persons.create.form_buttons.before') !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.contacts.persons.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.contacts.persons.index') }}">{{ __('admin::app.contacts.persons.back') }}</a>
+
+                            {!! view_render_event('admin.contacts.persons.create.form_buttons.after') !!}
+                        </div>
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 @stop

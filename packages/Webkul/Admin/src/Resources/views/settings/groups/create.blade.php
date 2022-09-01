@@ -12,7 +12,7 @@
             
             {{ Breadcrumbs::render('settings.groups.create') }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.settings.groups.create-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.groups.create.form_buttons.before') !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.settings.groups.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.groups.index') }}">
-                                {{ __('admin::app.layouts.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.groups.create.form_buttons.after') !!}
-                        </div>
-
                         <div class="panel-body">
                             {!! view_render_event('admin.settings.groups.create.form_controls.before') !!}
 
@@ -98,6 +84,20 @@
                             </div>
 
                             {!! view_render_event('admin.settings.groups.create.form_controls.after') !!}
+                        </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.groups.create.form_buttons.before') !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.settings.groups.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.groups.index') }}">
+                                {{ __('admin::app.layouts.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.groups.create.form_buttons.after') !!}
                         </div>
                     </div>
                 </div>

@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Traits\CustomAttribute;
 use Webkul\Contact\Contracts\Person as PersonContract;
 
+use Webkul\Product\Models\ProductProxy;
+
 class Person extends Model implements PersonContract
 {
     use CustomAttribute;
 
     protected $table = 'persons';
 
-    protected $with = 'organization';
+    protected $with = ['organization', 'products'];
 
     protected $casts = [
         'emails'          => 'array',
@@ -39,5 +41,10 @@ class Person extends Model implements PersonContract
     public function organization()
     {
         return $this->belongsTo(OrganizationProxy::modelClass());
+    }
+
+    public function products()
+    {
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 }

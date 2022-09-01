@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Http\Requests\AttributeForm;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Contact\Repositories\PersonRepository;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductController extends Controller
      *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $productRepository;
+    protected $productRepository, $personRepository;
 
     /**
      * Create a new controller instance.
@@ -23,9 +24,11 @@ class ProductController extends Controller
      *
      * @return void
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, PersonRepository $personRepository)
     {
         $this->productRepository = $productRepository;
+
+        $this->personRepository = $personRepository;
 
         request()->request->add(['entity_type' => 'products']);
     }
@@ -109,8 +112,9 @@ class ProductController extends Controller
     public function view($id)
     {
         $product = $this->productRepository->findOrFail($id);
+        $person = $this->personRepository->where('id', '=', $product->person_id)->first();
 
-        return view('admin::products.show', compact('product'));
+        return view('admin::products.show', compact('product', 'person'));
     }
 
     /**
