@@ -71,7 +71,7 @@ class PurchaseController extends Controller
     public function create()
     {
         $persons = $this->personRepository->all();
-        $users = $this->userRepository->all();
+        $users = auth()->guard('user')->user();
         $products = $this->productRepository->all();
         $locations = $this->locationRepository->all();
         $currencies = $this->currencyRepository->all();

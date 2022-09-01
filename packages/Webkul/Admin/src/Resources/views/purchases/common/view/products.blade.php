@@ -10,14 +10,28 @@
                     {{ $product->name }}
                 </div>
             </div>
-        </div>
 
-        <div class="bottom-control-group" style="padding-right: 0;">
             <div class="form-group">
-                <label>{{ __('admin::app.leads.price') }} (RM)</label>
+                <label>{{ __('admin::app.products.item_code') }}</label>
 
                 <div class="control-faker">
-                    {{ $product->price }}
+                    {{ $product->sku }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ __('admin::app.products.spec') }}</label>
+
+                <div class="control-faker">
+                    {{ $product->description }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ __('admin::app.products.remarks') }}</label>
+
+                <div class="control-faker">
+                    {{ $product->remarks }}
                 </div>
             </div>
 
@@ -26,14 +40,6 @@
 
                 <div class="control-faker">
                     {{ $product->quantity }}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>{{ __('admin::app.leads.amount') }} (RM)</label>
-
-                <div class="control-faker">
-                    {{ $product->amount }}
                 </div>
             </div>
         </div>
@@ -80,7 +86,6 @@
                         :name="[inputName + '[product_id]']"
                         class="control"
                         v-model="product['name']"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.leads.item') }}&quot;"
                         v-on:keyup="search"
                         placeholder="{{ __('admin::app.common.start-typing') }}"
@@ -90,7 +95,6 @@
                         type="hidden"
                         :name="[inputName + '[product_id]']"
                         v-model="product.product_id"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.leads.item') }}&quot;"
                     />
 

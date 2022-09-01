@@ -87,6 +87,7 @@
                         name="user_id"
                         class="control"
                         data-vv-as="{{ __('admin::app.settings.users.title') }}"
+                        disabled
                         >
                         @foreach ($users as $user)
                         <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>

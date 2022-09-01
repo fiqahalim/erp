@@ -97,6 +97,9 @@
             <div class="header">
                 <div class="row">
                     <div class="col-6">
+                        <img class="logo" src="{{ asset('/images/cellaax_logo_main.png') }}" style="width:auto; height:100px;"/>
+                    </div>
+                    <div class="col-6">
                         <h3 class="text-center">{{ __('admin::app.purchases.title') }}</h3>
                     </div>
                 </div>
@@ -123,7 +126,7 @@
                     <span class="value">{{ $purchase->user->name ?? '' }}</span>
                 </div>
 
-                {{-- <div class="table address">
+                <div class="table address">
                     <table>
                         <thead>
                             <tr>
@@ -145,17 +148,18 @@
                                 @endif
 
                                 @if (isset($purchase->user))
-                                    <td>
-                                        <p>{{ $purchase->shipping_address['address'] ?? '' }}</p>
-                                        <p>{{ $purchase->shipping_address['postcode'] . ' ' .$purchase->shipping_address['city'] ?? '' }} </p>
-                                        <p>{{ $purchase->shipping_address['state'] ?? '' }}</p>
-                                        <p>{{ core()->country_name($purchase->shipping_address['country']) ?? '' }}</p>
-                                    </td>
+                                    @if(isset($purchase->user->groups))
+                                        @foreach($purchase->user->groups as $department)
+                                        <td>
+                                            <p>{{ $department->address ?? 'No Information' }}</p>
+                                        </td>
+                                        @endforeach
+                                    @endif
                                 @endif
                             </tr>
                         </tbody>
                     </table>
-                </div> --}}
+                </div>
 
                 <div class="table items">
                     <table>
@@ -167,15 +171,15 @@
                                     {{ __('admin::app.products.item_name') }}[Spec.]
                                 </th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.price') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.price') }}</th> --}}
 
                                 <th class="text-center">{{ __('admin::app.quotes.quantity') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.amount') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.amount') }}</th> --}}
 
-                                <th class="text-center">{{ __('admin::app.quotes.tax') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.tax') }}</th> --}}
 
-                                <th class="text-center">{{ __('admin::app.quotes.total') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.total') }}</th> --}}
                             </tr>
                         </thead>
 
@@ -188,15 +192,15 @@
                                         {{ $item->name ?? '' }} [{{ $item->description ?? '' }}]
                                     </td>
 
-                                    <td>RM{{ number_format($item->price, 2) }}</td>
+                                    {{-- <td>RM{{ number_format($item->price, 2) }}</td> --}}
 
                                     <td class="text-center">{{ $item->quantity }}</td>
 
-                                    <td class="text-center">RM{!! number_format($item->amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->amount, 2) !!}</td> --}}
 
-                                    <td class="text-center">RM{!! number_format($item->tax_amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->tax_amount, 2) !!}</td> --}}
 
-                                    <td class="text-center">RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -204,8 +208,8 @@
                 </div>
 
                 <table class="sale-summary">
-                    @foreach ($products as $item)
-                    <tr>
+                    {{-- @foreach ($products as $item) --}}
+                    {{-- <tr>
                         <td>{{ __('admin::app.quotes.sub-total') }}</td>
                         <td>-</td>
                         <td>RM{!! number_format($item->amount, 2) ?? '0' !!}</td>
@@ -221,7 +225,7 @@
                         <td><strong>{{ __('admin::app.quotes.total') }}</strong></td>
                         <td><strong>-</strong></td>
                         <td><strong>RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</strong></td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td></td>
                     </tr>
@@ -262,7 +266,7 @@
                         <td>Date: {{ $purchase->approved_date->format('d/m/Y') }}</td>
                     </tr>
                     @endif
-                    @endforeach
+                    {{-- @endforeach --}}
                 </table>
 
                 <div class="row">

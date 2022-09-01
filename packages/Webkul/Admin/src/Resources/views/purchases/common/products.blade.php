@@ -100,38 +100,18 @@
                 </div>
 
                 <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[remarks]') ? 'has-error' : '']">
-                    <label for="remarks" class="required">{{ __('admin::app.products.remarks') }}</label>
+                    <label for="remarks">{{ __('admin::app.products.remarks') }}</label>
 
                     <input
                         type="text"
                         :name="[inputName + '[remarks]']"
                         class="control"
                         v-model="product.remarks"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.products.remarks') }}&quot;"
                     />
 
                     <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]')">
                         @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[sku]') }}
-                    </span>
-                </div>
-            </div>
-
-            <div class="bottom-control-group">
-                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[price]') ? 'has-error' : '']">
-                    <label for="price" class="required">{{ __('admin::app.leads.price') }}(RM)</label>
-
-                    <input
-                        type="text"
-                        :name="[inputName + '[price]']"
-                        class="control"
-                        v-model="product.price"
-                        v-validate="'required'"
-                        data-vv-as="&quot;{{ __('admin::app.leads.price') }}&quot;"
-                    />
-
-                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[price]')">
-                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[price]') }}
                     </span>
                 </div>
 
@@ -152,7 +132,45 @@
                     </span>
                 </div>
 
-                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[amount]') ? 'has-error' : '']">
+                <i class="icon trash-icon" @click="removeProduct"></i>
+            </div>
+
+            {{-- <div class="bottom-control-group"> --}}
+                {{-- <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[price]') ? 'has-error' : '']">
+                    <label for="price" class="required">{{ __('admin::app.leads.price') }}(RM)</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[price]']"
+                        class="control"
+                        v-model="product.price"
+                        v-validate="'required'"
+                        data-vv-as="&quot;{{ __('admin::app.leads.price') }}&quot;"
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[price]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[price]') }}
+                    </span>
+                </div> --}}
+
+                {{-- <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]') ? 'has-error' : '']">
+                    <label for="quantity" class="required">{{ __('admin::app.leads.quantity') }}</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[quantity]']"
+                        class="control"
+                        v-model="product.quantity"
+                        v-validate="'required'"
+                        data-vv-as="&quot;{{ __('admin::app.leads.quantity') }}&quot;"
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[quantity]') }}
+                    </span>
+                </div> --}}
+
+                {{-- <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[amount]') ? 'has-error' : '']">
                     <label for="amount" class="required">{{ __('admin::app.leads.amount') }}(RM)</label>
 
                     <input
@@ -168,10 +186,10 @@
                     <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[amount]')">
                         @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[amount]') }}
                     </span>
-                </div>
+                </div> --}}
 
-                <i class="icon trash-icon" @click="removeProduct"></i>
-            </div>
+                {{-- <i class="icon trash-icon" @click="removeProduct"></i> --}}
+            {{-- </div> --}}
         </div>
     </script>
 

@@ -89,11 +89,10 @@
                         data-vv-as="{{ __('admin::app.settings.users.title') }}"
                         v-validate="'required'"
                         >
-                        @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                            {{ $user->code }} | {{ $user->name }}
+
+                        <option value="{{ $users->id }}" {{ old('user_id') == $users->id ? 'selected' : '' }}>
+                            {{ $users->code }} | {{ $users->name }}
                         </option>
-                        @endforeach
                     </select>
                 </div>
             </div>
