@@ -97,6 +97,9 @@
             <div class="header">
                 <div class="row">
                     <div class="col-6">
+                        <img class="logo" src="{{ asset('/images/cellaax_logo_main.png') }}" style="width:auto; height:100px;"/>
+                    </div>
+                    <div class="col-6">
                         <h3 class="text-center">{{ __('admin::app.materials.title') }}</h3>
                     </div>
                 </div>
@@ -115,42 +118,8 @@
 
                 <div class="row">
                     <span class="label">Prepared by procurement officer -</span>
-                    <span class="value">{{ $material->user->name ?? '' }}</span>
+                    <span class="value">{{ $material->users->name ?? '' }}</span>
                 </div>
-
-                {{-- <div class="table address">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 50%">Vendor</th>
-                                <th>{{ __('admin::app.quotes.ship-to') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                @if (isset($purchase->person->address_1))
-                                    <td>
-                                        <p>{{ $purchase->person->name ?? '' }}</p>
-                                        <p>{{ $purchase->person->address_1['address'] }}</p>
-                                        <p>{{ $purchase->person->address_1['postcode'] . ' ' .$purchase->person->address_1['city'] }} </p>
-                                        <p>{{ $purchase->person->address_1['state'] }}</p>
-                                        <p>{{ core()->country_name($purchase->person->address_1['country']) }}</p>
-                                    </td>
-                                @endif
-
-                                @if (isset($purchase->user))
-                                    <td>
-                                        <p>{{ $purchase->shipping_address['address'] ?? '' }}</p>
-                                        <p>{{ $purchase->shipping_address['postcode'] . ' ' .$purchase->shipping_address['city'] ?? '' }} </p>
-                                        <p>{{ $purchase->shipping_address['state'] ?? '' }}</p>
-                                        <p>{{ core()->country_name($purchase->shipping_address['country']) ?? '' }}</p>
-                                    </td>
-                                @endif
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> --}}
 
                 <div class="table items">
                     <table>
@@ -162,15 +131,15 @@
                                     {{ __('admin::app.products.item_name') }}[Spec.]
                                 </th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.price') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.price') }}</th> --}}
 
                                 <th class="text-center">{{ __('admin::app.quotes.quantity') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.amount') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.amount') }}</th> --}}
 
-                                <th class="text-center">{{ __('admin::app.quotes.tax') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.tax') }}</th> --}}
 
-                                <th class="text-center">{{ __('admin::app.quotes.total') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.total') }}</th> --}}
                             </tr>
                         </thead>
 
@@ -183,15 +152,15 @@
                                         {{ $item->name ?? '' }} [{{ $item->description ?? '' }}]
                                     </td>
 
-                                    <td>RM{{ number_format($item->price, 2) }}</td>
+                                    {{-- <td>RM{{ number_format($item->price, 2) }}</td> --}}
 
                                     <td class="text-center">{{ $item->quantity }}</td>
 
-                                    <td class="text-center">RM{!! number_format($item->amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->amount, 2) !!}</td> --}}
 
-                                    <td class="text-center">RM{!! number_format($item->tax_amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->tax_amount, 2) !!}</td> --}}
 
-                                    <td class="text-center">RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -199,8 +168,8 @@
                 </div>
 
                 <table class="sale-summary">
-                    @foreach ($products as $item)
-                    <tr>
+                    {{-- @foreach ($products as $item) --}}
+                    {{-- <tr>
                         <td>{{ __('admin::app.quotes.sub-total') }}</td>
                         <td>-</td>
                         <td>RM{!! number_format($item->amount, 2) ?? '0' !!}</td>
@@ -216,7 +185,7 @@
                         <td><strong>{{ __('admin::app.quotes.total') }}</strong></td>
                         <td><strong>-</strong></td>
                         <td><strong>RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</strong></td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td></td>
                     </tr>
@@ -257,7 +226,7 @@
                         <td>Date: {{ $material->approved_date->format('d/m/Y') }}</td>
                     </tr>
                     @endif
-                    @endforeach
+                    {{-- @endforeach --}}
                 </table>
 
                 <div class="row">

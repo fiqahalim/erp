@@ -117,9 +117,28 @@
                         @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[sku]') }}
                     </span>
                 </div>
+
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]') ? 'has-error' : '']">
+                    <label for="quantity" class="required">{{ __('admin::app.leads.quantity') }}</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[quantity]']"
+                        class="control"
+                        v-model="product.quantity"
+                        v-validate="'required'"
+                        data-vv-as="&quot;{{ __('admin::app.leads.quantity') }}&quot;"
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[quantity]') }}
+                    </span>
+                </div>
+
+                <i class="icon trash-icon" @click="removeProduct"></i>
             </div>
 
-            <div class="bottom-control-group">
+            {{-- <div class="bottom-control-group">
                 <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[price]') ? 'has-error' : '']">
                     <label for="price" class="required">{{ __('admin::app.leads.price') }}(RM)</label>
 
@@ -173,7 +192,7 @@
                 </div>
 
                 <i class="icon trash-icon" @click="removeProduct"></i>
-            </div>
+            </div> --}}
         </div>
     </script>
 
