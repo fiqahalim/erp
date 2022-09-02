@@ -18,14 +18,19 @@ class PurchaseDataGrid extends DataGrid
             ->addSelect(
                 'purchases.id',
                 'purchases.delivery_date',
+                'purchases.expired_date',
                 'purchases.purchase_no',
                 'purchases.progress_status',
                 'purchases.approved',
                 'purchases.approved_date',
                 'users.id as user_id',
                 'users.name as sales_person',
+                'purchase_items.id as purchase_items_id',
+                'purchase_items.name as purchase_items_name',
+                'purchase_items.amount as purchase_items_amount',
             )
-            ->leftJoin('users', 'purchases.user_id', '=', 'users.id');
+            ->leftJoin('users', 'purchases.user_id', '=', 'users.id')
+            ->leftJoin('purchase_items', 'purchase_items.purchase_id', '=', 'purchases.id');
 
         $this->addFilter('id', 'purchases.id');
         $this->addFilter('user', 'purchases.user_id');
@@ -50,12 +55,23 @@ class PurchaseDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'delivery_date',
-            'label'      => trans('admin::app.purchases.date'),
+            'label'      => trans('admin::app.purchases.delivery_date'),
             'type'       => 'date_range',
             'searchable' => false,
             'sortable'   => true,
             'closure'    => function ($row) {
-                return core()->formatDate($row->date);
+                return core()->formatDate($row->delivery_date);
+            },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'expired_date',
+            'label'      => trans('admin::app.purchases.expired_date'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'sortable'   => true,
+            'closure'    => function ($row) {
+                return core()->formatDate($row->expired_date);
             },
         ]);
 
@@ -73,6 +89,58 @@ class PurchaseDataGrid extends DataGrid
             'searchable' => false,
             'sortable'   => false,
         ]);
+
+        $this->addColumn([
+            'index'      => 'purchase_items_name',
+            'label'      => trans('admin::app.products.item_name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'purchase_items_amount',
+            'label'      => trans('admin::app.purchases.amount'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'closure'  => function ($row) {
+                return number_format($row->purchase_items_amount, 2);
+            },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'progress_status',
+            'label'      => trans('admin::app.purchases.progress_status'),
+            'type'       => 'string',
+            'searchable' => false,
+            'sortable'   => false,
+        ]);
+
+        $this->addColumn([
+            'index'            => 'approved',
+            'label'            => trans('admin::app.purchases.approved'),
+            'type'             => 'string',
+            'searchable'       => false,
+            'closure'          => function ($row) {
+                if ($row->approved == 1) {
+                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.purchases.approved');
+                } else {
+                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.purchases.not_approved');
+                }
+            },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'approved_date',
+            'label'      => trans('admin::app.purchases.approved_date'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'sortable'   => true,
+            'closure'    => function ($row) {
+                return core()->formatDate($row->approved_date);
+            },
+        ]);
     }
 
     /**
@@ -83,10 +151,10 @@ class PurchaseDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('ui::app.datagrid.download'),
+            'title'  => trans('ui::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.purchases.print',
-            'icon'   => 'export-icon',
+            'route'  => 'admin.purchases.view',
+            'icon'   => 'eye-icon',
         ]);
 
         $this->addAction([

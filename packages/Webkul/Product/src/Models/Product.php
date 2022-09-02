@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Traits\CustomAttribute;
 use Webkul\Product\Contracts\Product as ProductContract;
 
+use Webkul\Contact\Models\PersonProxy;
+
 class Product extends Model implements ProductContract
 {
     use CustomAttribute;
 
     protected $table = 'products';
+
+    protected $with = ['persons'];
 
     protected $casts = [
         'item_category'   => 'array',
@@ -28,4 +32,9 @@ class Product extends Model implements ProductContract
         'lead_time', 'shelf_life', 'status', 'person_id',
         'created_at', 'updated_at',
     ];
+
+    public function persons()
+    {
+        return $this->belongsTo(PersonProxy::modelClass(), 'person_id');
+    }
 }

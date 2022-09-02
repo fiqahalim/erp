@@ -11,8 +11,10 @@ class MaterialProduct extends Model implements MaterialProductContract
 {
     protected $table = 'material_products';
 
+    protected $with = ['product', 'material'];
+
     protected $fillable = [
-        'name', 'quantity', 'price', 'amount', 'material_id',
+        'name', 'quantity', 'price', 'amount', 'material_id', 'sku', 'description', 'remarks',
         'product_id', 'created_at', 'updated_at',
     ];
 
@@ -21,7 +23,7 @@ class MaterialProduct extends Model implements MaterialProductContract
      */
     public function material()
     {
-        return $this->belongsTo(MaterialProxy::modelClass());
+        return $this->belongsTo(MaterialProxy::modelClass(), 'material_id');
     }
 
     /**
@@ -29,7 +31,7 @@ class MaterialProduct extends Model implements MaterialProductContract
      */
     public function product()
     {
-        return $this->belongsTo(ProductProxy::modelClass());
+        return $this->belongsTo(ProductProxy::modelClass(), 'product_id');
     }
 
     /**

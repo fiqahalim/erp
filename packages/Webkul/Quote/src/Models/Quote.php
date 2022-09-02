@@ -15,6 +15,8 @@ class Quote extends Model implements QuoteContract
 
     protected $table = 'quotes';
 
+    protected $with = ['person', 'user'];
+
     protected $casts = [
         'billing_address'  => 'array',
         'shipping_address' => 'array',
@@ -40,6 +42,7 @@ class Quote extends Model implements QuoteContract
         'expired_at',
         'user_id',
         'person_id',
+        'approved_by',
     ];
 
     /**
@@ -72,5 +75,10 @@ class Quote extends Model implements QuoteContract
     public function leads()
     {
         return $this->belongsToMany(LeadProxy::modelClass(), 'lead_quotes');
+    }
+
+    public function approvedBy()
+    {
+        return $this->belongsTo(UserProxy::modelClass(), 'approved_by');
     }
 }

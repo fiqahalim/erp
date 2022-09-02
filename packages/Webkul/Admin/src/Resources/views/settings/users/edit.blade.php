@@ -12,7 +12,7 @@
             
             {{ Breadcrumbs::render('settings.users.edit', $admin) }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.settings.users.edit-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.users.edit.form_buttons.before', ['admin' => $admin]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.settings.users.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.users.index') }}">
-                                {{ __('admin::app.settings.users.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.users.edit.form_buttons.after', ['admin' => $admin]) !!}
-                        </div>
-
                         <tabs>
                             <tab name="{{ __('admin::app.settings.users.general') }}" :selected="true">
                                 {!! view_render_event('admin.settings.users.edit.form_controls.general.before', ['admin' => $admin]) !!}
@@ -85,26 +71,6 @@
                                     </span>
                                 </div>
 
-                                @if ($admin->id != auth()->guard('user')->user()->id)
-                                    <div class="form-group" :class="[errors.has('status') ? 'has-error' : '']">
-                                        <label class="required">
-                                            {{ __('admin::app.settings.users.status') }}
-                                        </label>
-
-                                        <label class="switch">
-                                            <input
-                                                type="checkbox"
-                                                name="status"
-                                                class="control"
-                                                id="status"
-                                                {{ (old('status') || $admin->status) ? 'checked' : '' }}
-                                            />
-
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                @endif
-
                                 <div class="form-group" :class="[errors.has('password') ? 'has-error' : '']">
                                     <label>
                                         {{ __('admin::app.settings.users.password') }}
@@ -143,6 +109,26 @@
                                         @{{ errors.first('confirm_password') }}
                                     </span>
                                 </div>
+
+                                @if ($admin->id != auth()->guard('user')->user()->id)
+                                    <div class="form-group" :class="[errors.has('status') ? 'has-error' : '']">
+                                        <label class="required">
+                                            {{ __('admin::app.settings.users.status') }}
+                                        </label>
+
+                                        <label class="switch">
+                                            <input
+                                                type="checkbox"
+                                                name="status"
+                                                class="control"
+                                                id="status"
+                                                {{ (old('status') || $admin->status) ? 'checked' : '' }}
+                                            />
+
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                @endif
 
                                 {!! view_render_event('admin.settings.users.edit.form_controls.general.after', ['admin' => $admin]) !!}
                             </tab>
@@ -230,6 +216,20 @@
                                 {!! view_render_event('admin.settings.users.edit.form_controls.permission.after', ['admin' => $admin]) !!}
                             </tab>
                         </tabs>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.users.edit.form_buttons.before', ['admin' => $admin]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.settings.users.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.users.index') }}">
+                                {{ __('admin::app.settings.users.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.users.edit.form_buttons.after', ['admin' => $admin]) !!}
+                        </div>
                     </div>
                 </div>
             </div>

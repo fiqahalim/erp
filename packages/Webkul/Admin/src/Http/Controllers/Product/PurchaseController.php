@@ -5,10 +5,16 @@ namespace Webkul\Admin\Http\Controllers\Product;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Http\Requests\AttributeForm;
-use Webkul\Product\Repositories\PurchaseRepository;
-use Webkul\Contact\Repositories\PersonRepository;
+
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 use Webkul\User\Repositories\UserRepository;
+use Webkul\Contact\Repositories\PersonRepository;
+use Webkul\Product\Repositories\PurchaseRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\PurchaseItemRepository;
 use Webkul\Core\Repositories\LocationRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 
@@ -16,10 +22,8 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class PurchaseController extends Controller
 {
-    protected $purchaseRepository;
-    protected $personRepository;
-    protected $userRepository;
-    protected $productRepository;
+    protected $purchaseRepository, $purchaseItemRepository, $productRepository;
+    protected $personRepository, $userRepository;
     protected $locationRepository, $currencyRepository;
 
     /**
@@ -35,7 +39,8 @@ class PurchaseController extends Controller
         UserRepository $userRepository,
         ProductRepository $productRepository,
         LocationRepository $locationRepository,
-        CurrencyRepository $currencyRepository
+        CurrencyRepository $currencyRepository,
+        PurchaseItemRepository $purchaseItemRepository
     )
     {
         $this->purchaseRepository = $purchaseRepository;
@@ -44,6 +49,7 @@ class PurchaseController extends Controller
         $this->productRepository = $productRepository;
         $this->locationRepository = $locationRepository;
         $this->currencyRepository = $currencyRepository;
+        $this->purchaseItemRepository = $purchaseItemRepository;
 
         request()->request->add(['entity_type' => 'purchases']);
     }
@@ -65,7 +71,7 @@ class PurchaseController extends Controller
     public function create()
     {
         $persons = $this->personRepository->all();
-        $users = $this->userRepository->all();
+        $users = auth()->guard('user')->user();
         $products = $this->productRepository->all();
         $locations = $this->locationRepository->all();
         $currencies = $this->currencyRepository->all();
@@ -82,15 +88,23 @@ class PurchaseController extends Controller
     public function edit($id)
     {
         $purchase = $this->purchaseRepository->findOrFail($id);
-        $products = $this->materialProductRepository->where('material_id', $purchase->id)->get();
+        $products = $this->purchaseItemRepository->where('purchase_id', $purchase->id)->get();
         $users = $this->userRepository->where('id', $purchase->user_id)->get();
+        $persons = $this->personRepository->where('id', $purchase->person_id)->get();
+        $locations = $this->locationRepository->where('id', $purchase->location_id)->get();
 
-        return view('admin::purchases.edit');
+        return view('admin::purchases.edit', compact('purchase', 'users', 'products', 'persons', 'locations'));
     }
 
     public function view($id)
     {
-        return view('admin::purchases.show');
+        $purchase = $this->purchaseRepository->findOrFail($id);
+        $products = $this->purchaseItemRepository->where('purchase_id', $purchase->id)->get();
+        $users = $this->userRepository->where('id', $purchase->user_id)->get();
+        $persons = $this->personRepository->where('id', $purchase->person_id)->get();
+        $locations = $this->locationRepository->where('id', $purchase->location_id)->get();
+
+        return view('admin::purchases.show', compact('purchase', 'users', 'products', 'persons', 'locations'));
     }
 
     /**
@@ -101,8 +115,7 @@ class PurchaseController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'purchase_no'      => 'required',
-            'date'             => 'nullable',
+            'purchase_no'      => 'required|unique:purchases',
             'user_id'          => 'nullable',
             'person_id'        => 'nullable',
             'product_id'       => 'nullable',
@@ -113,7 +126,63 @@ class PurchaseController extends Controller
         $purchase = $this->purchaseRepository->create($data);
         $purchase->save();
 
+        if (isset($data['products'])) {
+            foreach ($data['products'] as $product) {
+                $purchaseItemData = $this->purchaseItemRepository->create(array_merge($product, [
+                    'amount'        => $product['price'] * $product['quantity'],
+                    'name'          => $product['name'],
+                    'sku'           => $product['sku'],
+                    'description'   => $product['description'],
+                    'quantity'      => $product['quantity'],
+                    'price'         => $product['price'],
+                    'purchase_id'   => $purchase->id
+                ]));
+            }
+
+            $purchaseItemData->save();
+        }
+
         session()->flash('success', trans('admin::app.purchases.create-success'));
+
+        return redirect()->route('admin.purchases.index');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = request()->all();
+
+        $purchase = $this->purchaseRepository->update([
+            'expired_date'      => request('expired_date'),
+            'progress_status'   => request('progress_status'),
+            'approved'          => request('approved'),
+            'user_id'           => request('user_id'),
+            'person_id'         => request('person_id'),
+            'location_id'       => request('location_id')
+        ], $id);
+
+        if (request('approved') == 1) {
+            $approved = $this->purchaseRepository->update([
+                'approved_date'     => Carbon::now(),
+                'approved_by'       => session('login_user_59ba36addc2b2f9401580f014c7f58ea4e30989d')
+            ], $id);
+        }
+
+        if (isset($data['products'])) {
+            foreach ($data['products'] as $productId => $product) {
+                $purchaseItemData = $this->purchaseItemRepository->create(array_merge($product, [
+                    'amount'        => $product['price'] * $product['quantity'],
+                    'name'          => $product['name'],
+                    'sku'           => $product['sku'],
+                    'description'   => $product['description'],
+                    'quantity'      => $product['quantity'],
+                    'price'         => $product['price'],
+                    'purchase_id'   => $purchase->id
+                ]));
+            }
+            $purchaseItemData->save();
+        }
+
+        session()->flash('success', trans('admin::app.purchases.update-success'));
 
         return redirect()->route('admin.purchases.index');
     }
@@ -182,8 +251,9 @@ class PurchaseController extends Controller
     public function print($id)
     {
         $purchase = $this->purchaseRepository->findOrFail($id);
+        $products = $this->purchaseItemRepository->where('purchase_id', $purchase->id)->get();
 
-        return PDF::loadHTML(view('admin::purchases.pdf', compact('purchase'))->render())
+        return PDF::loadHTML(view('admin::purchases.pdf', compact('purchase', 'products'))->render())
             ->setPaper('a4')
             ->download('Purchase_Request_' . $purchase->purchase_no . '.pdf');
     }

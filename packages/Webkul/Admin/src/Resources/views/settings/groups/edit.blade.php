@@ -12,7 +12,7 @@
             
             {{ Breadcrumbs::render('settings.groups.edit', $group) }}
 
-            <div class="page-title">
+            <div class="page-title"style="padding-top:25px;">
                 <h1>{{ __('admin::app.settings.groups.edit-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.groups.edit.form_buttons.before', ['group' => $group]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.settings.groups.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.groups.index') }}">
-                                {{ __('admin::app.layouts.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.groups.edit.form_buttons.after', ['group' => $group]) !!}
-                        </div>
-
                         <div class="panel-body">
                             {!! view_render_event('admin.settings.groups.edit.form_controls.before', ['group' => $group]) !!}
 
@@ -82,7 +68,39 @@
                                 </span>
                             </div>
 
+                            <div class="form-group" :class="[errors.has('address') ? 'has-error' : '']">
+                                <label>
+                                    {{ __('admin::app.settings.groups.address') }}
+                                </label>
+
+                                <textarea
+                                    class="control"
+                                    name="address"
+                                    placeholder="{{ __('admin::app.settings.groups.address') }}"
+                                    v-validate="'required'"
+                                    data-vv-as="{{ __('admin::app.settings.groups.address') }}"
+                                >{{ old('address') ?: $group->address }}</textarea>
+
+                                <span class="control-error" v-if="errors.has('address')">
+                                    @{{ errors.first('address') }}
+                                </span>
+                            </div>
+
                             {!! view_render_event('admin.settings.groups.edit.form_controls.after', ['group' => $group]) !!}
+                        </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.groups.edit.form_buttons.before', ['group' => $group]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.settings.groups.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.groups.index') }}">
+                                {{ __('admin::app.layouts.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.groups.edit.form_buttons.after', ['group' => $group]) !!}
                         </div>
                     </div>
                 </div>

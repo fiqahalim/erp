@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Http\Requests\AttributeForm;
 
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Str;
 
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\MaterialRepository;
@@ -65,15 +66,17 @@ class MaterialController extends Controller
     public function view($id)
     {
         $material = $this->materialRepository->findOrFail($id);
+        $products = $this->materialProductRepository->where('material_id', $material->id)->get();
+        $users = $this->userRepository->where('id', $material->user_id)->get();
 
-        return view('admin::materials.show', compact('material'));
+        return view('admin::materials.show', compact('material', 'products', 'users'));
     }
 
     public function store()
     {
         $this->validate(request(), [
             'date'              => 'required',
-            'qc_insp_req_no'    => 'nullable',
+            'qc_insp_req_no'    => 'nullable|unique:materials',
             'inspection_method' => 'nullable',
             'finish_status'     => 'nullable',
         ]);
@@ -106,7 +109,21 @@ class MaterialController extends Controller
     {
         $data = request()->all();
 
-        $material = $this->materialRepository->update(request()->all(), $id);
+        $material = $this->materialRepository->update([
+            'date'              => request('date'),
+            'qc_insp_req_no'    => request('qc_insp_req_no'),
+            'inspection_method' => request('inspection_method'),
+            'finish_status'     => request('finish_status'),
+            'approved'          => request('approved'),
+            'user_id'           => request('user_id')
+        ], $id);
+
+        if (request('approved') == 1) {
+            $approved = $this->materialRepository->update([
+                'approved_date'     => Carbon::now(),
+                'approved_by'       => session('login_user_59ba36addc2b2f9401580f014c7f58ea4e30989d')
+            ], $id);
+        }
 
         if (isset($data['products'])) {
             foreach ($data['products'] as $productId => $product) {
@@ -167,5 +184,15 @@ class MaterialController extends Controller
         return response()->json([
             'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.materials.title')]),
         ]);
+    }
+
+    public function print($id)
+    {
+        $material = $this->materialRepository->findOrFail($id);
+        $products = $this->materialProductRepository->where('material_id', $material->id)->get();
+
+        return PDF::loadHTML(view('admin::materials.pdf', compact('material', 'products'))->render())
+            ->setPaper('a4')
+            ->download('Material_Request_' . $material->qc_insp_req_no . '.pdf');
     }
 }

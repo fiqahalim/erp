@@ -100,20 +100,30 @@
                         <img class="logo" src="{{ asset('/images/cellaax_logo_main.png') }}" style="width:auto; height:100px;"/>
                     </div>
                     <div class="col-6">
-                        <h1 class="text-center">{{ __('admin::app.purchases.title') }}</h1>
+                        <h3 class="text-center">{{ __('admin::app.purchases.title') }}</h3>
                     </div>
                 </div>
             </div>
 
             <div class="quote-summary">
                 <div class="row">
-                    <span class="label">{{ __('admin::app.quotes.quote-id') }} -</span>
-                    <span class="value">#{{ $purchase->purchase_no }}</span>
+                    <span class="label">{{ __('admin::app.purchases.purchase_no') }} -</span>
+                    <span class="value">{{ $purchase->purchase_no }}</span>
                 </div>
 
                 <div class="row">
-                    <span class="label">{{ __('admin::app.quotes.quote-date') }} -</span>
-                    <span class="value">{{ $purchase->date->format('d-m-Y') }}</span>
+                    <span class="label">{{ __('admin::app.purchases.ref_no') }} -</span>
+                    <span class="value">{{ $purchase->ref_no }}</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">{{ __('admin::app.purchases.delivery_date') }} -</span>
+                    <span class="value">{{ $purchase->created_at->format('d/m/Y') }}</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Prepared by procurement officer -</span>
+                    <span class="value">{{ $purchase->user->name ?? '' }}</span>
                 </div>
 
                 <div class="table address">
@@ -121,9 +131,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 50%">Vendor</th>
-                                @if ($purchase->shipping_address)
-                                    <th>{{ __('admin::app.quotes.ship-to') }}</th>
-                                @endif
+                                <th>{{ __('admin::app.quotes.ship-to') }}</th>
                             </tr>
                         </thead>
 
@@ -139,13 +147,14 @@
                                     </td>
                                 @endif
 
-                                @if (isset($purchase->shipping_address))
-                                    <td>
-                                        <p>{{ $purchase->shipping_address['address'] ?? '' }}</p>
-                                        <p>{{ $purchase->shipping_address['postcode'] . ' ' .$purchase->shipping_address['city'] ?? '' }} </p>
-                                        <p>{{ $purchase->shipping_address['state'] ?? '' }}</p>
-                                        <p>{{ core()->country_name($purchase->shipping_address['country']) ?? '' }}</p>
-                                    </td>
+                                @if (isset($purchase->user))
+                                    @if(isset($purchase->user->groups))
+                                        @foreach($purchase->user->groups as $department)
+                                        <td>
+                                            <p>{{ $department->address ?? 'No Information' }}</p>
+                                        </td>
+                                        @endforeach
+                                    @endif
                                 @endif
                             </tr>
                         </tbody>
@@ -162,65 +171,133 @@
                                     {{ __('admin::app.products.item_name') }}[Spec.]
                                 </th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.price') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.price') }}</th> --}}
 
                                 <th class="text-center">{{ __('admin::app.quotes.quantity') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.amount') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.amount') }}</th> --}}
 
-                                <th class="text-center">{{ __('admin::app.quotes.tax') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.tax') }}</th> --}}
 
-                                <th class="text-center">{{ __('admin::app.quotes.total') }}</th>
+                                {{-- <th class="text-center">{{ __('admin::app.quotes.total') }}</th> --}}
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach ($purchase as $item)
+                            @foreach ($products as $item)
                                 <tr>
                                     <td>{{ $item->sku ?? '' }}</td>
 
                                     <td>
-                                        {{ $item->name ?? '' }}
+                                        {{ $item->name ?? '' }} [{{ $item->description ?? '' }}]
                                     </td>
 
-                                    <td>RM{{ number_format($item->price, 2) }}</td>
+                                    {{-- <td>RM{{ number_format($item->price, 2) }}</td> --}}
 
                                     <td class="text-center">{{ $item->quantity }}</td>
 
-                                    <td class="text-center">RM{!! number_format($item->total, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->amount, 2) !!}</td> --}}
 
-                                    <td class="text-center">RM{!! number_format($item->tax_amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->tax_amount, 2) !!}</td> --}}
 
-                                    <td class="text-center">RM{!! number_format($item->total + $item->tax_amount, 2) !!}</td>
+                                    {{-- <td class="text-center">RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</td> --}}
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
 
                 <table class="sale-summary">
-                    <tr>
+                    {{-- @foreach ($products as $item) --}}
+                    {{-- <tr>
                         <td>{{ __('admin::app.quotes.sub-total') }}</td>
                         <td>-</td>
-                        <td>RM{!! number_format($quote->sub_total, 2) ?? '0' !!}</td>
+                        <td>RM{!! number_format($item->amount, 2) ?? '0' !!}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('admin::app.quotes.tax') }}</td>
                         <td>-</td>
-                        <td>RM{!! number_format($quote->tax_amount, 2) ?? '0' !!}</td>
+                        <td>RM{!! number_format($item->tax_amount, 2) ?? '0' !!}</td>
                     </tr>
 
                     <tr>
                         <td><strong>{{ __('admin::app.quotes.total') }}</strong></td>
                         <td><strong>-</strong></td>
-                        <td><strong>RM{!! number_format($quote->grand_total, 2) ?? '0' !!}</strong></td>
+                        <td><strong>RM{!! number_format($item->amount + $item->tax_amount, 2) !!}</strong></td>
+                    </tr> --}}
+                    <tr>
+                        <td></td>
                     </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Reviewed By:</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><hr></td>
+                    </tr>
+                    <tr>
+                        <td>Name: {{ $purchase->approvedBy->name ?? '' }}</td>
+                    </tr>
+                    @if(isset($purchase->approved_date) && !is_null($purchase->approved_date))
+                    <tr>
+                        <td>Date: {{ $purchase->approved_date->format('d/m/Y') }}</td>
+                    </tr>
+                    @endif
+                    {{-- @endforeach --}}
                 </table>
 
+                <div class="row">
+                    <small>Notes and Instructions:</small>
+                    <small>
+                        <ol type="1">
+                            <li>Please mention purchase order number in the invoice.</li>
+                            <li>All deliveries to be made to the shipping address mentioned above.</li>
+                            <li>Please notify us immediately if you are unable to ship as specified.</li>
+                            <li>
+                                We reserve the right to reject items or require refund for the items<br>
+                                that are not in good order or condition as determined by our quality<br>
+                                control. A notification will be given within
+                                seven (7) working days<br>
+                                after order received.
+                            </li>
+                            <li>
+                                For quality problems that cannot be identified at the time of <br>
+                                receipt, if any problem found during use, we may provide a record<br>
+                                of the experimental process. If the product is found to be<br>
+                                a problem itself, the seller must provide a replacement or<br>
+                                refund in time, which must be completed in seven (7) days.
+                            </li>
+                            <li>
+                                Please arrange our order with products of at least or more<br>
+                                than half of the assigned shelf life.
+                            </li>
+                        </ol>
+                    </small>
+                </div>
             </div>
-
         </div>
     </body>
 </html>

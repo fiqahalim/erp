@@ -12,7 +12,7 @@
 
             {{ Breadcrumbs::render('settings.locations.edit', $location) }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.locations.edit-title') }}</h1>
             </div>
         </div>
@@ -23,20 +23,6 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
-                        <div class="panel-header">
-                            {!! view_render_event('admin.settings.locations.edit.form_buttons.before', ['location' => $location]) !!}
-
-                            <button type="submit" class="btn btn-md btn-primary">
-                                {{ __('admin::app.locations.save-btn-title') }}
-                            </button>
-
-                            <a href="{{ route('admin.settings.locations.index') }}">
-                                {{ __('admin::app.layouts.back') }}
-                            </a>
-
-                            {!! view_render_event('admin.settings.locations.edit.form_buttons.after', ['location' => $location]) !!}
-                        </div>
-
                         <div class="panel-body">
                             {!! view_render_event('admin.settings.locations.edit.form_controls.before', ['location' => $location]) !!}
 
@@ -101,6 +87,20 @@
                                     @{{ errors.first('type') }}
                                 </span>
                             </div>
+                        </div>
+
+                        <div class="panel-header">
+                            {!! view_render_event('admin.settings.locations.edit.form_buttons.before', ['location' => $location]) !!}
+
+                            <button type="submit" class="btn btn-md btn-primary">
+                                {{ __('admin::app.locations.save-btn-title') }}
+                            </button>
+
+                            <a href="{{ route('admin.settings.locations.index') }}">
+                                {{ __('admin::app.layouts.back') }}
+                            </a>
+
+                            {!! view_render_event('admin.settings.locations.edit.form_buttons.after', ['location' => $location]) !!}
                         </div>
                     </div>
                 </div>

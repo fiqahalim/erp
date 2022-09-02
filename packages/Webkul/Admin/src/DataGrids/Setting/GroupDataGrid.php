@@ -18,7 +18,8 @@ class GroupDataGrid extends DataGrid
             ->addSelect(
                 'groups.id',
                 'groups.name',
-                'groups.description'
+                'groups.description',
+                'groups.address'
             );
 
         $this->addFilter('id', 'groups.id');
@@ -50,6 +51,13 @@ class GroupDataGrid extends DataGrid
         $this->addColumn([
             'index'    => 'description',
             'label'    => trans('admin::app.datagrid.description'),
+            'type'     => 'string',
+            'sortable' => false,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'address',
+            'label'    => trans('admin::app.settings.groups.address'),
             'type'     => 'string',
             'sortable' => false,
         ]);

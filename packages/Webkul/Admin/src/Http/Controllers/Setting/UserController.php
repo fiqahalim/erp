@@ -107,11 +107,12 @@ class UserController extends Controller
 
         $admin->groups()->sync(request('groups') ?? []);
 
-        try {
-            Mail::queue(new Create($admin));
-        } catch (\Exception $e) {
-            report($e);
-        }
+        // commented due to proc_open()
+        // try {
+        //     Mail::queue(new Create($admin));
+        // } catch (\Exception $e) {
+        //     report($e);
+        // }
 
         Event::dispatch('settings.user.create.after', $admin);
 

@@ -13,12 +13,16 @@ class Material extends Model implements MaterialContract
 {
     protected $table = 'materials';
 
+    protected $with = ['users', 'approvedBy'];
+
     protected $casts = [
         'date' => 'date',
+        'approved_date' => 'datetime',
     ];
 
     protected $fillable = [
-        'date', 'qc_insp_req_no', 'inspection_method', 'finish_status', 'product_id', 'user_id',
+        'date', 'qc_insp_req_no', 'inspection_method', 'finish_status', 'approved',
+        'product_id', 'user_id', 'approved_by', 'created_at', 'updated_at', 'approved_date',
     ];
 
     /**
@@ -34,6 +38,11 @@ class Material extends Model implements MaterialContract
      */
     public function users()
     {
-        return $this->belongsTo(UserProxy::modelClass());
+        return $this->belongsTo(UserProxy::modelClass(), 'user_id');
+    }
+
+    public function approvedBy()
+    {
+        return $this->belongsTo(UserProxy::modelClass(), 'approved_by');
     }
 }

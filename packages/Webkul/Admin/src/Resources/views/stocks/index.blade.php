@@ -18,12 +18,6 @@
                     {!! view_render_event('admin.stocks.index.header.after') !!}
                 </h1>
             </template>
-
-            @if (bouncer()->hasPermission('stocks.create'))
-                <template v-slot:table-action>
-                    <a href="{{ route('admin.stocks.create') }}" class="btn btn-md btn-primary">{{ __('admin::app.stocks.create-title') }}</a>
-                </template>
-            @endif
         <table-component>
     </div>
 @stop

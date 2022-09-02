@@ -83,6 +83,37 @@ Breadcrumbs::for('purchases.edit', function (BreadcrumbTrail $trail, $purchase) 
     $trail->push(trans('admin::app.purchases.edit-title'), route('admin.purchases.edit', $purchase->id));
 });
 
+// Dashboard > Purchases > View Purchases
+Breadcrumbs::for('purchases.view', function (BreadcrumbTrail $trail, $purchase) {
+    $trail->parent('purchases');
+    $trail->push(trans('admin::app.purchases.view-title'), route('admin.purchases.view', $purchase->id));
+});
+
+
+// Purchase Order
+Breadcrumbs::for('purchases-orders', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin::app.layouts.purchases_order'), route('admin.purchases-orders.index'));
+});
+
+// Dashboard > Purchases > Create Purchase Order
+Breadcrumbs::for('purchases-orders.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('purchases-orders');
+    $trail->push(trans('admin::app.purchases_order.create-title'), route('admin.purchases-orders.create'));
+});
+
+// Dashboard > Purchases > Edit Purchase Order
+Breadcrumbs::for('purchases-orders.edit', function (BreadcrumbTrail $trail, $purchase) {
+    $trail->parent('purchases-orders');
+    $trail->push(trans('admin::app.purchases_order.edit-title'), route('admin.purchases-orders.edit', $purchase->id));
+});
+
+// Dashboard > Purchases > View Purchase Order
+Breadcrumbs::for('purchases-orders.view', function (BreadcrumbTrail $trail, $purchase) {
+    $trail->parent('purchases-orders');
+    $trail->push(trans('admin::app.purchases_order.view-title'), route('admin.purchases-orders.view', $purchase->id));
+});
+
 
 // Dashboard > Quotes
 Breadcrumbs::for('quotes', function (BreadcrumbTrail $trail) {
@@ -301,6 +332,18 @@ Breadcrumbs::for('settings.locations', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('settings.locations.edit', function (BreadcrumbTrail $trail, $location) {
     $trail->parent('settings.locations');
     $trail->push(trans('admin::app.locations.edit-title'), route('admin.settings.locations.edit', $location->id));
+});
+
+// Settings > Transaction Types
+Breadcrumbs::for('settings.transaction-types', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push(trans('admin::app.locations.title'), route('admin.settings.locations.index'));
+});
+
+// Settings > Transaction Types > Edit
+Breadcrumbs::for('settings.transaction-types.edit', function (BreadcrumbTrail $trail, $transactionType) {
+    $trail->parent('settings.transaction-types');
+    $trail->push(trans('admin::app.locations.edit-title'), route('admin.settings.locations.edit', $transactionType->id));
 });
 
 

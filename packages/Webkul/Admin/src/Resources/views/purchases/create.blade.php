@@ -12,7 +12,7 @@
 
             {{ Breadcrumbs::render('purchases.create') }}
 
-            <div class="page-title">
+            <div class="page-title" style="padding-top:25px;">
                 <h1>{{ __('admin::app.purchases.create-title') }}</h1>
             </div>
         </div>
@@ -23,6 +23,27 @@
             <div class="page-content">
                 <div class="form-container">
                     <div class="panel">
+                        @csrf()
+
+                        <tabs>
+                            <tab name="{{ __('admin::app.purchases.title') }}">
+                                @include('admin::purchases.common.purchases')
+                            </tab>
+
+                            {!! view_render_event('admin.purchases.create.form_controls.details.after') !!}
+
+                            {!! view_render_event('admin.purchases.create.form_controls.before') !!}
+
+                            <tab name="{{ __('admin::app.products.title') }}">
+                                @include('admin::purchases.common.products')
+
+                                <product-list :data='@json(old('products'))'></product-list>
+                            </tab>
+
+                            {!! view_render_event('admin.purchases.create.form_controls.products.after') !!}
+
+                        </tabs>
+
                         <div class="panel-header">
                             {!! view_render_event('admin.purchases.create.form_buttons.before') !!}
 
@@ -33,166 +54,6 @@
                             <a href="{{ route('admin.purchases.index') }}">{{ __('admin::app.purchases.back') }}</a>
 
                             {!! view_render_event('admin.purchases.create.form_buttons.after') !!}
-                        </div>
-
-                        <div class="panel-body">
-                            {!! view_render_event('admin.purchases.create.form_controls.before') !!}
-
-                            @csrf()
-
-                            <div class="form-group" :class="[errors.has('purchase_no') ? 'has-error' : '']">
-                                <label class="required">
-                                    {{ __('admin::app.purchases.purchase_no') }}
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="purchase_no"
-                                    class="control"
-                                    placeholder="{{ __('admin::app.purchases.purchase_no') }}"
-                                    v-validate="'required'"
-                                    data-vv-as="{{ __('admin::app.purchases.purchase_no') }}"
-                                />
-
-                                <span class="control-error" v-if="errors.has('purchase_no')">
-                                    @{{ errors.first('purchase_no') }}
-                                </span>
-                            </div>
-
-                            <div class="form-group date">
-                                <label>{{ __('admin::app.purchases.date') }}</label>
-                                <date>
-                                    <input
-                                        type="date"
-                                        name="date"
-                                        class="control"
-                                        placeholder="{{ __('admin::app.purchases.date') }}"
-                                        data-vv-as="{{ __('admin::app.purchases.date') }}"
-                                    />
-
-                                    <span class="control-error" v-if="errors.has('date')">
-                                        @{{ errors.first('date') }}
-                                    </span>
-                                </date>
-                            </div>
-
-                            <div class="form-group" :class="[errors.has('person') ? 'has-error' : '']">
-                                <label>
-                                    {{ __('admin::app.contacts.persons.title') }}
-                                </label>
-
-                                <select
-                                    name="person_id"
-                                    class="control"
-                                    data-vv-as="{{ __('admin::app.contacts.persons.title') }}"
-                                    v-validate="'required'"
-                                    >
-                                    @foreach ($persons as $person)
-                                    <option value="{{ $person->id }}" {{ old('person_id') == $person->id ? 'selected' : '' }}>
-                                        {{ $person->code }} | {{ $person->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('person_id')">
-                                    @{{ errors.first('person_id') }}
-                                </span>
-                            </div>
-
-                            <div class="form-group" :class="[errors.has('user') ? 'has-error' : '']">
-                                <label>
-                                    {{ __('admin::app.settings.users.title') }}
-                                </label>
-
-                                <select
-                                    name="user_id"
-                                    class="control"
-                                    data-vv-as="{{ __('admin::app.settings.users.title') }}"
-                                    v-validate="'required'"
-                                    >
-                                    @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                        {{ $user->code }} | {{ $user->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('user_id')">
-                                    @{{ errors.first('user_id') }}
-                                </span>
-                            </div>
-
-                            <div class="form-group" :class="[errors.has('location') ? 'has-error' : '']">
-                                <label>
-                                    {{ __('admin::app.locations.title') }}
-                                </label>
-
-                                <select
-                                    name="location_id"
-                                    class="form control"
-                                    data-vv-as="{{ __('admin::app.locations.title') }}"
-                                    v-validate="'required'"
-                                    >
-                                    @foreach ($locations as $location)
-                                    <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
-                                        {{ $location->location_code }} | {{ $location->location_name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('location_id')">
-                                    @{{ errors.first('location_id') }}
-                                </span>
-                            </div>
-
-                            <div class="form-group" :class="[errors.has('currency') ? 'has-error' : '']">
-                                <label>
-                                    {{ __('admin::app.currencies.title') }}
-                                </label>
-
-                                <select
-                                    name="currency_id"
-                                    class="form control"
-                                    data-vv-as="{{ __('admin::app.currencies.title') }}"
-                                    v-validate="'required'"
-                                    >
-                                    @foreach ($currencies as $currency)
-                                    <option value="{{ $currency->id }}" {{ old('currency_id') == $currency->id ? 'selected' : '' }}>
-                                        {{ $currency->currency_name }} | {{ $currency->fx_rate }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('currency_id')">
-                                    @{{ errors.first('currency_id') }}
-                                </span>
-                            </div>
-
-                            <div class="form-group" :class="[errors.has('product') ? 'has-error' : '']">
-                                <label>
-                                    {{ __('admin::app.products.title') }}
-                                </label>
-
-                                <select
-                                    name="product_id"
-                                    class="control"
-                                    data-vv-as="{{ __('admin::app.products.title') }}"
-                                    v-validate="'required'"
-                                    >
-                                    @foreach ($products as $product)
-                                    <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
-                                        {{ $product->sku }} | {{ $product->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('product_id')">
-                                    @{{ errors.first('product_id') }}
-                                </span>
-                            </div>
-
-
-                            {!! view_render_event('admin.purchases.create.form_controls.after') !!}
                         </div>
                     </div>
                 </div>

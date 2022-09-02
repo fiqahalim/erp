@@ -105,20 +105,30 @@
                         <img class="logo" src="{{ asset('/images/cellaax_logo_main.png') }}" style="width:auto; height:100px;"/>
                     </div>
                     <div class="col-6">
-                        <h1 class="text-center">{{ __('admin::app.quotes.quote') }}</h1>
+                        <h3 class="text-center">{{ __('admin::app.quotes.quote') }}</h3>
                     </div>
                 </div>
             </div>
 
             <div class="quote-summary">
                 <div class="row">
-                    <span class="label">{{ __('admin::app.quotes.quote-id') }} -</span>
-                    <span class="value">#{{ $quote->id }}</span>
+                    <span class="label">{{ __('admin::app.quotes.subject') }} -</span>
+                    <span class="value">#{{ $quote->subject }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('admin::app.quotes.quote-date') }} -</span>
-                    <span class="value">{{ $quote->created_at->format('d-m-Y') }}</span>
+                    <span class="value">{{ $quote->created_at->format('d/m/Y') }}</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">{{ __('admin::app.quotes.expired_at') }} -</span>
+                    <span class="value">{{ $quote->expired_at->format('d/m/Y') }}</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Prepared by procurement officer -</span>
+                    <span class="value">{{ $quote->user->name ?? '' }}</span>
                 </div>
 
                 <div class="table address">
@@ -126,32 +136,30 @@
                         <thead>
                             <tr>
                                 <th style="width: 50%">Vendor</th>
-
-                                @if ($quote->shipping_address)
-                                    <th>{{ __('admin::app.quotes.ship-to') }}</th>
-                                @endif
+                                <th>{{ __('Cellaax Address') }}</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                @if (isset($quote->billing_address))
+                                @if (isset($quote->person))
                                     <td>
                                         <p>{{ $quote->person->name ?? '' }}</p>
-                                        <p>{{ $quote->billing_address['address'] }}</p>
-                                        <p>{{ $quote->billing_address['postcode'] . ' ' .$quote->billing_address['city'] }} </p>
-                                        <p>{{ $quote->billing_address['state'] }}</p>
-                                        <p>{{ core()->country_name($quote->billing_address['country']) }}</p>
+                                        <p>{{ $quote->person->address_1['address'] }}</p>
+                                        <p>{{ $quote->person->address_1['postcode'] . ' ' .$quote->person->address_1['city'] }} </p>
+                                        <p>{{ $quote->person->address_1['state'] }}</p>
+                                        <p>{{ core()->country_name($quote->person->address_1['country']) }}</p>
                                     </td>
                                 @endif
 
-                                @if (isset($quote->shipping_address))
-                                    <td>
-                                        <p>{{ $quote->shipping_address['address'] }}</p>
-                                        <p>{{ $quote->shipping_address['postcode'] . ' ' .$quote->shipping_address['city'] }} </p>
-                                        <p>{{ $quote->shipping_address['state'] }}</p>
-                                        <p>{{ core()->country_name($quote->shipping_address['country']) }}</p>
-                                    </td>
+                                @if (isset($quote->user))
+                                    @if(isset($quote->user->groups))
+                                        @foreach($quote->user->groups as $department)
+                                        <td>
+                                            <p>{{ $department->address ?? 'No Information' }}</p>
+                                        </td>
+                                        @endforeach
+                                    @endif
                                 @endif
                             </tr>
                         </tbody>
@@ -283,7 +291,7 @@
                     <small>Notes and Instructions:</small>
                     <small>
                         <ol type="1">
-                            <li>Please mention purchase order number in the invoice.</li>
+                            <li>Please mention quotation number in the invoice.</li>
                             <li>All deliveries to be made to the shipping address mentioned above.</li>
                             <li>Please notify us immediately if you are unable to ship as specified.</li>
                             <li>

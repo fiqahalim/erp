@@ -22,7 +22,7 @@ class ProductDataGrid extends DataGrid
                 'products.sku',
                 'products.name',
                 'products.unit',
-                'products.spec',
+                'products.description',
                 'products.additional_spec',
                 'products.quantity',
                 'products.lead_time',
@@ -71,7 +71,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'spec',
+            'index'    => 'description',
             'label'    => trans('admin::app.products.spec'),
             'type'     => 'string',
             'sortable' => true,

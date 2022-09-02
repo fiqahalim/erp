@@ -7,6 +7,8 @@ use Webkul\User\Contracts\Group as GroupContract;
 
 class Group extends Model implements GroupContract
 {
+    protected $table = 'groups';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +17,7 @@ class Group extends Model implements GroupContract
     protected $fillable = [
         'name',
         'description',
+        'address',
     ];
 
     /**
