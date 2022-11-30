@@ -42,6 +42,7 @@ class PersonDataGrid extends DataGrid
                 'persons.code',
                 'persons.name as company_name',
                 'persons.pic_name',
+                'persons.department',
                 'persons.emails',
                 'persons.contact_numbers',
                 'persons.business_type',
@@ -157,6 +158,15 @@ class PersonDataGrid extends DataGrid
             'label'            => trans('admin::app.contacts.persons.vendor_status'),
             'type'             => 'string',
             'searchable'       => false,
+            'closure'          => function ($row) {
+                if ($row->vendor_status == 1) {
+                    return trans('admin::app.contacts.persons.approved');
+                } elseif ($row->vendor_status == 2) {
+                    return trans('admin::app.contacts.persons.pending');
+                } else {
+                    return trans('admin::app.contacts.persons.reject');
+                }
+            },
             
         ]);
 

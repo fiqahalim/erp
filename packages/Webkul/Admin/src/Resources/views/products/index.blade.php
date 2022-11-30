@@ -13,7 +13,7 @@
 
                     {{ Breadcrumbs::render('products') }}
 
-                    {{ __('admin::app.products.title') }}
+                    {{ __('admin::app.products.info') }}
 
                     {!! view_render_event('admin.products.index.header.after') !!}
                 </h1>

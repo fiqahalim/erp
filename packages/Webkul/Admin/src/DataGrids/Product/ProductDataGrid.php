@@ -22,7 +22,8 @@ class ProductDataGrid extends DataGrid
                 'products.sku',
                 'products.name',
                 'products.unit',
-                'products.description',
+                'products.spec',
+                'products.packaging',
                 'products.additional_spec',
                 'products.quantity',
                 'products.lead_time',
@@ -78,15 +79,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'description',
+            'index'    => 'spec',
             'label'    => trans('admin::app.products.spec'),
-            'type'     => 'string',
-            'sortable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'    => 'additional_spec',
-            'label'    => trans('admin::app.products.additional_spec'),
             'type'     => 'string',
             'sortable' => true,
         ]);
@@ -121,23 +115,23 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'lead_time',
             'label'      => trans('admin::app.products.lead_time'),
-            'type'       => 'date_range',
+            'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'closure'    => function ($row) {
-                return core()->formatDate($row->lead_time);
-            },
+            // 'closure'    => function ($row) {
+            //     return core()->formatDate($row->lead_time);
+            // },
         ]);
 
         $this->addColumn([
             'index'      => 'shelf_life',
             'label'      => trans('admin::app.products.shelf_life'),
-            'type'       => 'date_range',
+            'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'closure'    => function ($row) {
-                return core()->formatDate($row->shelf_life);
-            },
+            // 'closure'    => function ($row) {
+            //     return core()->formatDate($row->shelf_life);
+            // },
         ]);
 
         // $this->addColumn([
@@ -158,6 +152,43 @@ class ProductDataGrid extends DataGrid
             'label'    => trans('admin::app.products.item_category'),
             'type'     => 'string',
             'sortable' => false,
+            'closure'          => function ($row) {
+                if ($row->item_category == 4) {
+                    return trans('admin::app.products.ca');
+                } elseif ($row->item_category == 5) {
+                    return trans('admin::app.products.ba');
+                } elseif ($row->item_category == 6) {
+                    return trans('admin::app.products.bb');
+                } elseif ($row->item_category == 7) {
+                    return trans('admin::app.products.ma');
+                } elseif ($row->item_category == 8) {
+                    return trans('admin::app.products.mb_1');
+                } elseif ($row->item_category == 9) {
+                    return trans('admin::app.products.mb_3');
+                } elseif ($row->item_category == 10) {
+                    return trans('admin::app.products.mb_4');
+                } elseif ($row->item_category == 11) {
+                    return trans('admin::app.products.mb_5');
+                } elseif ($row->item_category == 12) {
+                    return trans('admin::app.products.mc');
+                } elseif ($row->item_category == 13) {
+                    return trans('admin::app.products.md_1');
+                } elseif ($row->item_category == 14) {
+                    return trans('admin::app.products.me');
+                } elseif ($row->item_category == 15) {
+                    return trans('admin::app.products.general');
+                } elseif ($row->item_category == 16) {
+                    return trans('admin::app.products.maintenance');
+                } elseif ($row->item_category == 17) {
+                    return trans('admin::app.products.ppm');
+                } elseif ($row->item_category == 18) {
+                    return trans('admin::app.products.repair');
+                } elseif ($row->item_category == 19) {
+                    return trans('admin::app.products.service');
+                } else {
+                    return trans('admin::app.products.validation');
+                }
+            },
         ]);
 
         $this->addColumn([
@@ -166,10 +197,18 @@ class ProductDataGrid extends DataGrid
             'type'             => 'string',
             'searchable'       => false,
             'closure'          => function ($row) {
-                if ($row->status == 1) {
-                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.datagrid.active');
+                if ($row->status == 21) {
+                    return trans('admin::app.products.main');
+                } elseif ($row->status == 22) {
+                    return trans('admin::app.products.secondary');
+                } elseif ($row->status == 23) {
+                    return trans('admin::app.products.secondary');
+                } elseif ($row->status == 24) {
+                    return trans('admin::app.products.secondary');
+                } elseif ($row->status == 25) {
+                    return trans('admin::app.products.secondary');
                 } else {
-                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.datagrid.inactive');
+                    return trans('admin::app.products.stationery');
                 }
             },
         ]);
