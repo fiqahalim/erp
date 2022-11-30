@@ -89,10 +89,10 @@ class MaterialController extends Controller
         if (isset($data['products'])) {
             foreach ($data['products'] as $product) {
                 $materialProdData = $this->materialProductRepository->create(array_merge($product, [
-                    'amount'        => $product['price'] * $product['quantity'],
+                    // 'amount'        => $product['price'] * $product['quantity'],
                     'name'          => $product['name'],
                     'quantity'      => $product['quantity'],
-                    'price'         => $product['price'],
+                    // 'price'         => $product['price'],
                     'material_id'   => $material->id
                 ]));
             }
@@ -128,10 +128,10 @@ class MaterialController extends Controller
         if (isset($data['products'])) {
             foreach ($data['products'] as $productId => $product) {
                 $materialProdData = $this->materialProductRepository->create(array_merge($product, [
-                    'amount'        => $product['price'] * $product['quantity'],
+                    // 'amount'        => $product['price'] * $product['quantity'],
                     'name'          => $product['name'],
                     'quantity'      => $product['quantity'],
-                    'price'         => $product['price'],
+                    // 'price'         => $product['price'],
                     'material_id'   => $material->id
                 ]));
             }

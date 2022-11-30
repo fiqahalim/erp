@@ -22,6 +22,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->datetime('delivery_date')->nullable();
             $table->datetime('expired_date')->nullable();
             $table->datetime('approved_date')->nullable();
+            $table->datetime('slip_date')->nullable();
 
             $table->integer('location_id')->unsigned()->nullable();
             $table->integer('currency_id')->unsigned()->nullable();

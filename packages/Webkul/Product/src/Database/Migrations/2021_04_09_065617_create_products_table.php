@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->longText('remarks')->nullable();
             $table->integer('quantity')->default(0);
             $table->string('unit')->nullable();
+            $table->string('packaging')->nullable();
             $table->string('item_category')->nullable();
             $table->string('catalogue_number')->nullable();
 
@@ -31,7 +32,7 @@ class CreateProductsTable extends Migration
 
             $table->datetime('lead_time')->nullable();
             $table->datetime('shelf_life')->nullable();
-            $table->boolean('status')->default(0);
+            $table->string('status')->nullable();
 
             $table->integer('person_id')->unsigned()->nullable();
             $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');

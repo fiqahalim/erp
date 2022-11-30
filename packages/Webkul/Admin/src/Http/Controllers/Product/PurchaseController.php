@@ -129,12 +129,12 @@ class PurchaseController extends Controller
         if (isset($data['products'])) {
             foreach ($data['products'] as $product) {
                 $purchaseItemData = $this->purchaseItemRepository->create(array_merge($product, [
-                    'amount'        => $product['price'] * $product['quantity'],
+                    // 'amount'        => $product['price'] * $product['quantity'],
                     'name'          => $product['name'],
                     'sku'           => $product['sku'],
                     'description'   => $product['description'],
                     'quantity'      => $product['quantity'],
-                    'price'         => $product['price'],
+                    // 'price'         => $product['price'],
                     'purchase_id'   => $purchase->id
                 ]));
             }
@@ -170,12 +170,12 @@ class PurchaseController extends Controller
         if (isset($data['products'])) {
             foreach ($data['products'] as $productId => $product) {
                 $purchaseItemData = $this->purchaseItemRepository->create(array_merge($product, [
-                    'amount'        => $product['price'] * $product['quantity'],
+                    // 'amount'        => $product['price'] * $product['quantity'],
                     'name'          => $product['name'],
                     'sku'           => $product['sku'],
                     'description'   => $product['description'],
                     'quantity'      => $product['quantity'],
-                    'price'         => $product['price'],
+                    // 'price'         => $product['price'],
                     'purchase_id'   => $purchase->id
                 ]));
             }

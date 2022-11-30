@@ -17,7 +17,9 @@ class CreatePersonsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('code')->nullable();
-            $table->string('ceo_name')->nullable();
+            $table->string('pic_name')->nullable();
+            $table->string('department')->nullable();
+            $table->string('position')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('account_no')->nullable();
             $table->string('account_holder')->nullable();
@@ -32,7 +34,7 @@ class CreatePersonsTable extends Migration
 
             $table->json('address_1')->nullable();
             $table->longText('remarks')->nullable();
-            $table->boolean('status')->default(0);
+            $table->string('vendor_status')->nullable();
 
             $table->integer('organization_id')->unsigned()->nullable();
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');

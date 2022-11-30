@@ -73,7 +73,6 @@
                         :name="[inputName + '[sku]']"
                         class="control"
                         v-model="product.sku"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.products.item_code') }}&quot;"
                         readonly
                     />
@@ -91,7 +90,6 @@
                         :name="[inputName + '[description]']"
                         class="control"
                         v-model="product.description"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.products.spec') }}&quot;"
                         readonly
                     />
@@ -109,7 +107,6 @@
                         :name="[inputName + '[remarks]']"
                         class="control"
                         v-model="product.remarks"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.products.remarks') }}&quot;"
                     />
 

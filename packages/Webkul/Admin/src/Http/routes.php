@@ -337,6 +337,94 @@ Route::group(['middleware' => ['web']], function () {
                     Route::get('download', 'AttributeController@download')->name('admin.settings.attributes.download');
                 });
 
+                // Lead Pipelines Routes
+                Route::prefix('pipelines')->group(function () {
+                    Route::get('', 'PipelineController@index')->name('admin.settings.pipelines.index');
+
+                    Route::get('create', 'PipelineController@create')->name('admin.settings.pipelines.create');
+
+                    Route::post('create', 'PipelineController@store')->name('admin.settings.pipelines.store');
+
+                    Route::get('edit/{id?}', 'PipelineController@edit')->name('admin.settings.pipelines.edit');
+
+                    Route::put('edit/{id}', 'PipelineController@update')->name('admin.settings.pipelines.update');
+
+                    Route::delete('{id}', 'PipelineController@destroy')->name('admin.settings.pipelines.delete');
+                });
+
+                // Lead Sources Routes
+                Route::prefix('sources')->group(function () {
+                    Route::get('', 'SourceController@index')->name('admin.settings.sources.index');
+
+                    Route::post('create', 'SourceController@store')->name('admin.settings.sources.store');
+
+                    Route::get('edit/{id?}', 'SourceController@edit')->name('admin.settings.sources.edit');
+
+                    Route::put('edit/{id}', 'SourceController@update')->name('admin.settings.sources.update');
+
+                    Route::delete('{id}', 'SourceController@destroy')->name('admin.settings.sources.delete');
+                });
+
+                // Lead Types Routes
+                Route::prefix('types')->group(function () {
+                    Route::get('', 'TypeController@index')->name('admin.settings.types.index');
+
+                    Route::post('create', 'TypeController@store')->name('admin.settings.types.store');
+
+                    Route::get('edit/{id?}', 'TypeController@edit')->name('admin.settings.types.edit');
+
+                    Route::put('edit/{id}', 'TypeController@update')->name('admin.settings.types.update');
+
+                    Route::delete('{id}', 'TypeController@destroy')->name('admin.settings.types.delete');
+                });
+
+                // Email Templates Routes
+                Route::prefix('email-templates')->group(function () {
+                    Route::get('', 'EmailTemplateController@index')->name('admin.settings.email_templates.index');
+
+                    Route::get('create', 'EmailTemplateController@create')->name('admin.settings.email_templates.create');
+
+                    Route::post('create', 'EmailTemplateController@store')->name('admin.settings.email_templates.store');
+
+                    Route::get('edit/{id?}', 'EmailTemplateController@edit')->name('admin.settings.email_templates.edit');
+
+                    Route::put('edit/{id}', 'EmailTemplateController@update')->name('admin.settings.email_templates.update');
+
+                    Route::delete('{id}', 'EmailTemplateController@destroy')->name('admin.settings.email_templates.delete');
+                });
+
+                // Workflows Routes
+                Route::prefix('workflows')->group(function () {
+                    Route::get('', 'WorkflowController@index')->name('admin.settings.workflows.index');
+
+                    Route::get('create', 'WorkflowController@create')->name('admin.settings.workflows.create');
+
+                    Route::post('create', 'WorkflowController@store')->name('admin.settings.workflows.store');
+
+                    Route::get('edit/{id?}', 'WorkflowController@edit')->name('admin.settings.workflows.edit');
+
+                    Route::put('edit/{id}', 'WorkflowController@update')->name('admin.settings.workflows.update');
+
+                    Route::delete('{id}', 'WorkflowController@destroy')->name('admin.settings.workflows.delete');
+                });
+
+                // Tags Routes
+                Route::prefix('tags')->group(function () {
+                    Route::get('', 'TagController@index')->name('admin.settings.tags.index');
+
+                    Route::post('create', 'TagController@store')->name('admin.settings.tags.store');
+
+                    Route::get('edit/{id?}', 'TagController@edit')->name('admin.settings.tags.edit');
+
+                    Route::put('edit/{id}', 'TagController@update')->name('admin.settings.tags.update');
+
+                    Route::get('search', 'TagController@search')->name('admin.settings.tags.search');
+
+                    Route::delete('{id}', 'TagController@destroy')->name('admin.settings.tags.delete');
+
+                    Route::put('mass-destroy', 'TagController@massDestroy')->name('admin.settings.tags.mass_delete');
+                });
+
                 // Currencies
                 Route::prefix('currencies')->group(function () {
                     Route::get('', 'CurrencyController@index')->name('admin.settings.currencies.index');

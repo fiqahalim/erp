@@ -30,9 +30,10 @@ class Person extends Model implements PersonContract
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'ceo_name', 'bank_name', 'account_no', 'account_holder',
+        'name', 'code', 'pic_name', 'department', 'position', 'bank_name', 'account_no', 'account_holder',
         'business_type', 'business_item', 'contact_numbers', 'phone_numbers', 'fax_numbers',
-        'emails', 'keyword', 'supplier_type', 'address_1', 'remarks', 'status', 'created_at', 'updated_at',
+        'emails', 'keyword', 'supplier_type', 'address_1', 'remarks', 'vendor_status',
+        'created_at', 'updated_at',
     ];
 
     /**

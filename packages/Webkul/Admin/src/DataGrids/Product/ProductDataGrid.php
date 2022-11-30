@@ -71,6 +71,13 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'    => 'packaging',
+            'label'    => trans('admin::app.products.packaging'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
             'index'    => 'description',
             'label'    => trans('admin::app.products.spec'),
             'type'     => 'string',
@@ -106,7 +113,7 @@ class ProductDataGrid extends DataGrid
 
         $this->addColumn([
             'index'    => 'quantity',
-            'label'    => trans('admin::app.products.quantity'),
+            'label'    => trans('admin::app.products.min_order_unit'),
             'type'     => 'string',
             'sortable' => true,
         ]);
@@ -133,18 +140,18 @@ class ProductDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'      => 'person',
-            'label'      => trans('admin::app.contacts.persons.code'),
-            'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => false,
-            'closure'    => function ($row) {
-                $route = urldecode(route('admin.contacts.persons.index', ['id[eq]' => $row->person_id]));
+        // $this->addColumn([
+        //     'index'      => 'person',
+        //     'label'      => trans('admin::app.contacts.persons.code'),
+        //     'type'       => 'string',
+        //     'searchable' => false,
+        //     'sortable'   => false,
+        //     'closure'    => function ($row) {
+        //         $route = urldecode(route('admin.contacts.persons.index', ['id[eq]' => $row->person_id]));
 
-                return "<a href='" . $route . "'>" . $row->person_name . "</a>";
-            },
-        ]);
+        //         return "<a href='" . $route . "'>" . $row->person_name . "</a>";
+        //     },
+        // ]);
 
         $this->addColumn([
             'index'    => 'item_category',

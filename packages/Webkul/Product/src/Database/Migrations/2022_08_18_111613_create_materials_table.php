@@ -19,7 +19,7 @@ class CreateMaterialsTable extends Migration
             $table->string('qc_insp_req_no')->unique()->nullable();
             $table->string('inspection_method')->nullable();
             $table->string('finish_status')->nullable();
-            $table->boolean('approved')->default(0)->nullable();
+            $table->string('status')->nullable();
 
             $table->integer('product_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();

@@ -89,6 +89,15 @@
                 "
             ></line-chart>
 
+            <pie-chart
+                :id="`pie-chart-${cardId}`"
+                :data="dataCollection.data"
+                v-if="
+                    cardType == 'pie_chart'
+                    && dataCollection
+                "
+            ></pie-chart>
+
             <template v-else-if="['activities', 'pipelines_bar'].indexOf(cardType) > -1">
                 <h3 v-if="dataCollection.header_data">
                     <template v-for="(header_data, index) in dataCollection.header_data">

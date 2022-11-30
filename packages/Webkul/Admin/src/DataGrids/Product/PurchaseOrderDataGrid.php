@@ -32,6 +32,7 @@ class PurchaseOrderDataGrid extends DataGrid
                 'purchase_order_items.id as purchase_order_items_id',
                 'purchase_order_items.name as purchase_order_items_name',
                 'purchase_order_items.amount as purchase_order_items_amount',
+                'purchase_order_items.quantity as purchase_order_items_quantity',
             )
             ->leftJoin('users', 'purchase_orders.user_id', '=', 'users.id')
             ->leftJoin('purchase_order_items', 'purchase_order_items.purchase_order_id', '=', 'purchase_orders.id');
@@ -111,6 +112,14 @@ class PurchaseOrderDataGrid extends DataGrid
             'closure'  => function ($row) {
                 return number_format($row->purchase_order_items_amount, 2);
             },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'purchase_order_items_quantity',
+            'label'      => trans('admin::app.products.quantity'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([

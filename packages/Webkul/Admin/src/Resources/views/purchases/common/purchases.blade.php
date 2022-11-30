@@ -90,6 +90,7 @@
                         v-validate="'required'"
                         >
 
+                        <option>Please Select</option>
                         <option value="{{ $users->id }}" {{ old('user_id') == $users->id ? 'selected' : '' }}>
                             {{ $users->code }} | {{ $users->name }}
                         </option>
@@ -107,6 +108,7 @@
                         data-vv-as="{{ __('admin::app.contacts.persons.title') }}"
                         v-validate="'required'"
                         >
+                        <option>Please Select</option>
                         @foreach ($persons as $person)
                         <option value="{{ $person->id }}" {{ old('person_id') == $person->id ? 'selected' : '' }}>
                             {{ $person->code }} | {{ $person->name }}
@@ -126,6 +128,7 @@
                         data-vv-as="{{ __('admin::app.locations.title') }}"
                         v-validate="'required'"
                         >
+                        <option>Please Select</option>
                         @foreach ($locations as $location)
                         <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
                             {{ $location->location_code }} - {{ $location->location_name }}

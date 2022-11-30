@@ -17,8 +17,8 @@ class PurchaseDataGrid extends DataGrid
         $queryBuilder = DB::table('purchases')
             ->addSelect(
                 'purchases.id',
-                'purchases.delivery_date',
-                'purchases.expired_date',
+                'purchases.created_at',
+                // 'purchases.expired_date',
                 'purchases.purchase_no',
                 'purchases.progress_status',
                 'purchases.approved',
@@ -54,26 +54,26 @@ class PurchaseDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'delivery_date',
-            'label'      => trans('admin::app.purchases.delivery_date'),
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.purchases.created_at'),
             'type'       => 'date_range',
             'searchable' => false,
             'sortable'   => true,
             'closure'    => function ($row) {
-                return core()->formatDate($row->delivery_date);
+                return core()->formatDate($row->created_at);
             },
         ]);
 
-        $this->addColumn([
-            'index'      => 'expired_date',
-            'label'      => trans('admin::app.purchases.expired_date'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'sortable'   => true,
-            'closure'    => function ($row) {
-                return core()->formatDate($row->expired_date);
-            },
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'expired_date',
+        //     'label'      => trans('admin::app.purchases.expired_date'),
+        //     'type'       => 'date_range',
+        //     'searchable' => false,
+        //     'sortable'   => true,
+        //     'closure'    => function ($row) {
+        //         return core()->formatDate($row->expired_date);
+        //     },
+        // ]);
 
         $this->addColumn([
             'index'    => 'purchase_no',
@@ -117,19 +117,19 @@ class PurchaseDataGrid extends DataGrid
             'sortable'   => false,
         ]);
 
-        $this->addColumn([
-            'index'            => 'approved',
-            'label'            => trans('admin::app.purchases.approved'),
-            'type'             => 'string',
-            'searchable'       => false,
-            'closure'          => function ($row) {
-                if ($row->approved == 1) {
-                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.purchases.approved');
-                } else {
-                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.purchases.not_approved');
-                }
-            },
-        ]);
+        // $this->addColumn([
+        //     'index'            => 'approved',
+        //     'label'            => trans('admin::app.purchases.approved'),
+        //     'type'             => 'string',
+        //     'searchable'       => false,
+        //     'closure'          => function ($row) {
+        //         if ($row->approved == 1) {
+        //             return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.purchases.approved');
+        //         } else {
+        //             return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.purchases.not_approved');
+        //         }
+        //     },
+        // ]);
 
         $this->addColumn([
             'index'      => 'approved_date',

@@ -29,7 +29,7 @@ class CreatePurchasesTable extends Migration
 
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
-            $table->foreign('transaction_type_id')->references('id')->on('transaction_types')->onDelete('cascade');
+            // $table->foreign('transaction_type_id')->references('id')->on('transaction_types')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -40,21 +40,21 @@ class PersonDataGrid extends DataGrid
             ->addSelect(
                 'persons.id',
                 'persons.code',
-                'persons.name as person_name',
-                'persons.ceo_name',
+                'persons.name as company_name',
+                'persons.pic_name',
                 'persons.emails',
                 'persons.contact_numbers',
                 'persons.business_type',
                 'persons.bank_name',
                 'persons.account_no',
                 'persons.account_holder',
-                'persons.status',
+                'persons.vendor_status',
                 // 'organizations.name as organization'
             );
             // ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id');
 
         $this->addFilter('id', 'persons.id');
-        $this->addFilter('person_name', 'persons.name');
+        $this->addFilter('company_name', 'persons.name');
         $this->addFilter('emails', 'persons.emails');
         // $this->addFilter('organization', 'organizations.id');
 
@@ -83,14 +83,14 @@ class PersonDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'person_name',
+            'index'    => 'company_name',
             'label'    => trans('admin::app.contacts.persons.name'),
             'type'     => 'string',
             'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'    => 'ceo_name',
+            'index'    => 'pic_name',
             'label'    => trans('admin::app.contacts.persons.ceo_name'),
             'type'     => 'string',
             'sortable' => true,
@@ -153,17 +153,11 @@ class PersonDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'            => 'status',
-            'label'            => trans('admin::app.datagrid.status'),
+            'index'            => 'vendor_status',
+            'label'            => trans('admin::app.contacts.persons.vendor_status'),
             'type'             => 'string',
             'searchable'       => false,
-            'closure'          => function ($row) {
-                if ($row->status == 1) {
-                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.datagrid.active');
-                } else {
-                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.datagrid.inactive');
-                }
-            },
+            
         ]);
 
         // $this->addColumn([

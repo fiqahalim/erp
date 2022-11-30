@@ -133,7 +133,7 @@
                 'delete-failed'     => 'Supplier can not be deleted.',
                 'name'              => 'Company Name',
                 'code'              => 'Supplier Code',
-                'ceo_name'          => 'CEO Name',
+                'ceo_name'          => 'Person In Charge',
                 'business_type'     => 'Business Type',
                 'business_item'     => 'Business Item',
                 'contact_numbers'   => 'Mobile',
@@ -147,6 +147,10 @@
                 'keyword'           => 'Keyword',
                 'address_1'         => 'Address',
                 'remarks'           => 'Remarks',
+                'vendor_status'     => 'Vendor Status',
+                'approved'          => 'Approved',
+                'pending'           => 'Pending for Approval',
+                'reject'            => 'Reject',
             ],
         ],
 
@@ -566,6 +570,8 @@
             'barcode'               => 'Barcode',
             'quantity'              => 'Quantity',
             'status'                => 'Active',
+            'min_order_unit'        => 'Minimum Order Unit',
+            'packaging'             => 'Packaging',
         ],
 
         'purchases' => [
@@ -586,7 +592,7 @@
             'ref_no'                => 'Ref No.',
             'delivery_date'         => 'Delivery Date',
             'expired_date'          => 'Expiration Date',
-            'created_at'            => 'Requested Date',
+            'created_at'            => 'Date of Request',
             'approved_date'         => 'Approved Date',
             'progress_status'       => 'Progress Status',
             'approved'              => 'Approved',

@@ -37,12 +37,21 @@ return [
         'icon-class' => 'products-icon',
     ],
 
+    // SALES AND QUOTATION MENU
+    [
+        'key'        => 'sales',
+        'name'       => 'admin::app.layouts.quotes',
+        'route'      => 'admin.quotes.index',
+        'sort'       => 4,
+        'icon-class' => 'quotes-icon',
+    ],
+
     // PURCHASE REQ and PURCHASE ORDER MENU
     [
         'key'        => 'purchases',
         'name'       => 'admin::app.layouts.purchases',
         'route'      => 'admin.purchases.index',
-        'sort'       => 4,
+        'sort'       => 5,
         'icon-class' => 'activities-icon',
     ], [
         'key'        => 'purchases.requests',
@@ -54,15 +63,6 @@ return [
         'name'       => 'admin::app.layouts.purchases_order',
         'route'      => 'admin.purchases-orders.index',
         'sort'       => 2,
-    ],
-
-    // SALES AND QUOTATION MENU
-    [
-        'key'        => 'sales',
-        'name'       => 'admin::app.layouts.quotes',
-        'route'      => 'admin.quotes.index',
-        'sort'       => 5,
-        'icon-class' => 'quotes-icon',
     ],
 
     // STOCK COUNT

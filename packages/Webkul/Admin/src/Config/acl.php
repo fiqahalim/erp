@@ -393,7 +393,7 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => ['admin.settings.locations.delete', 'admin.settings.locations.mass_delete'],
         'sort'  => 3,
-    ],
+    ], 
 
     // CONFIGURATION
     [
