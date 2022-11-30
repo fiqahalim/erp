@@ -16,9 +16,9 @@ class Product extends Model implements ProductContract
 
     protected $with = ['persons'];
 
-    protected $casts = [
-        'item_category'   => 'array',
-    ];
+    // protected $casts = [
+    //     'item_category'   => 'array',
+    // ];
 
     /**
      * The attributes that are mass assignable.
