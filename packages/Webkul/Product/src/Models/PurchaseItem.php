@@ -15,6 +15,7 @@ class PurchaseItem extends Model implements PurchaseItemContract
 
     protected $fillable = [
         'name', 'sku', 'description', 'remarks', 'quantity', 'price',
+        'spec', 'unit', 'packaging', 'additional_spec',
         'amount', 'purchase_id', 'product_id', 'created_at', 'updated_at',
     ];
 

@@ -151,6 +151,8 @@
                 'approved'          => 'Approved',
                 'pending'           => 'Pending for Approval',
                 'reject'            => 'Reject',
+                'department'        => 'Department',
+                'position'          => 'Position',
             ],
         ],
 
@@ -570,6 +572,8 @@
             'quality_inspect_id'    => 'Quality Inspect ID',
             'barcode'               => 'Barcode',
             'quantity'              => 'Quantity',
+            'order_unit'            => 'Order Unit',
+            'requestor_remark'      => 'Requestor Remark',
             'status'                => 'Status',
             'min_order_unit'        => 'Minimum Order Unit',
             'packaging'             => 'Packaging',

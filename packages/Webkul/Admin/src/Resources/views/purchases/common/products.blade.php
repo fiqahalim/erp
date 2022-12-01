@@ -65,7 +65,7 @@
             </div>
 
             <div class="top-control-group">
-                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]') ? 'has-error' : '']">
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]') ? 'has-error' : '']" style="margin-top:1rem;">
                     <label for="sku">{{ __('admin::app.products.item_code') }}</label>
 
                     <input
@@ -82,24 +82,24 @@
                     </span>
                 </div>
 
-                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[description]') ? 'has-error' : '']">
-                    <label for="description">{{ __('admin::app.products.spec') }}</label>
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[spec]') ? 'has-error' : '']" style="margin-top:1rem;">
+                    <label for="spec">{{ __('admin::app.products.spec') }}</label>
 
                     <input
                         type="text"
-                        :name="[inputName + '[description]']"
+                        :name="[inputName + '[spec]']"
                         class="control"
-                        v-model="product.description"
+                        v-model="product.spec"
                         data-vv-as="&quot;{{ __('admin::app.products.spec') }}&quot;"
                         readonly
                     />
 
-                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]')">
-                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[sku]') }}
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[spec]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[spec]') }}
                     </span>
                 </div>
 
-                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[remarks]') ? 'has-error' : '']">
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[remarks]') ? 'has-error' : '']" style="margin-top:1rem;">
                     <label for="remarks">{{ __('admin::app.products.remarks') }}</label>
 
                     <input
@@ -115,20 +115,72 @@
                     </span>
                 </div>
 
-                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]') ? 'has-error' : '']">
-                    <label for="quantity" class="required">{{ __('admin::app.leads.quantity') }}</label>
+                <div class="bottom-control-group" style="margin-top:1rem;padding-right:0;">
+                    <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]') ? 'has-error' : '']">
+                        <label for="quantity" class="required">{{ __('admin::app.products.order_unit') }}</label>
+
+                        <input
+                            type="text"
+                            :name="[inputName + '[quantity]']"
+                            class="control"
+                            v-model="product.quantity"
+                            v-validate="'required'"
+                            data-vv-as="&quot;{{ __('admin::app.products.order_unit') }}&quot;"
+                        />
+
+                        <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]')">
+                            @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[quantity]') }}
+                        </span>
+                    </div>
+
+                    <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[unit]') ? 'has-error' : '']">
+                        <label for="unit" class="required">{{ __('admin::app.products.unit') }}</label>
+
+                        <input
+                            type="text"
+                            :name="[inputName + '[unit]']"
+                            class="control"
+                            v-model="product.unit"
+                            data-vv-as="&quot;{{ __('admin::app.products.unit') }}&quot;"
+                            readonly
+                        />
+
+                        <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[unit]')">
+                            @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[unit]') }}
+                        </span>
+                    </div>
+
+                    <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[packaging]') ? 'has-error' : '']">
+                        <label for="packaging" class="required">{{ __('admin::app.products.packaging') }}</label>
+
+                        <input
+                            type="text"
+                            :name="[inputName + '[packaging]']"
+                            class="control"
+                            v-model="product.packaging"
+                            data-vv-as="&quot;{{ __('admin::app.products.packaging') }}&quot;"
+                            readonly
+                        />
+
+                        <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[packaging]')">
+                            @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[packaging]') }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[additional_spec]') ? 'has-error' : '']" style="margin-top:1rem;margin-bottom:1rem;">
+                    <label for="additional_spec">{{ __('admin::app.products.requestor_remark') }}</label>
 
                     <input
                         type="text"
-                        :name="[inputName + '[quantity]']"
+                        :name="[inputName + '[additional_spec]']"
                         class="control"
-                        v-model="product.quantity"
-                        v-validate="'required'"
-                        data-vv-as="&quot;{{ __('admin::app.leads.quantity') }}&quot;"
+                        v-model="product.additional_spec"
+                        data-vv-as="&quot;{{ __('admin::app.products.requestor_remark') }}&quot;"
                     />
 
-                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[quantity]')">
-                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[quantity]') }}
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[additional_spec]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[additional_spec]') }}
                     </span>
                 </div>
 
@@ -215,9 +267,12 @@
                         'product_id': null,
                         'name': '',
                         'sku': null,
-                        'description': null,
+                        'spec': null,
                         'remarks': null,
+                        'additional_spec': null,
                         'quantity': null,
+                        'unit': null,
+                        'packaging': null,
                         'price': null,
                         'amount': null,
                     })
@@ -304,10 +359,13 @@
                     Vue.set(this.product, 'product_id', result.id)
                     Vue.set(this.product, 'name', result.name)
                     Vue.set(this.product, 'sku', result.sku)
-                    Vue.set(this.product, 'description', result.description)
+                    Vue.set(this.product, 'spec', result.spec)
                     Vue.set(this.product, 'remarks', result.remarks)
+                    Vue.set(this.product, 'additional_spec', result.additional_spec)
                     Vue.set(this.product, 'price', result.price)
                     Vue.set(this.product, 'quantity', result.quantity)
+                    Vue.set(this.product, 'unit', result.unit)
+                    Vue.set(this.product, 'packaging', result.packaging)
                 },
 
                 removeProduct: function () {

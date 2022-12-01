@@ -30,7 +30,7 @@ class Product extends Model implements ProductContract
         'spec', 'additional_spec', 'remarks', 'unit',
         'item_category', 'catalogue_number', 'sale_price',
         'lead_time', 'shelf_life', 'status', 'person_id',
-        'created_at', 'updated_at', 'packaging',
+        'created_at', 'updated_at', 'packaging', 'shenzhen_material_no',
     ];
 
     public function persons()

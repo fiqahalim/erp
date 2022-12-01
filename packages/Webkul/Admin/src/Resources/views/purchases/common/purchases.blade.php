@@ -1,24 +1,24 @@
-<div class="form-group date" :class="[errors.has('delivery_date') || errors.has('expired_date') ? 'has-error' : '']">
+<div class="form-group date">
     <label class="required">
-        {{ __('admin::app.purchases.date') }}
+        {{ __('admin::app.purchases.created_at') }}
     </label>
 
     <div class="input-group">
         <date>
             <input
                 type="text"
-                name="delivery_date"
+                name="created_at"
                 class="control"
-                placeholder="{{ __('admin::app.purchases.delivery_date') }}"
+                placeholder="{{ __('admin::app.purchases.created_at') }}"
                 v-validate="'required'"
-                data-vv-as="{{ __('admin::app.purchases.delivery_date') }}"
+                data-vv-as="{{ __('admin::app.purchases.created_at') }}"
             />
-            <span class="control-error" v-if="errors.has('delivery_date')">
-                @{{ errors.first('delivery_date') }}
+            <span class="control-error" v-if="errors.has('created_at')">
+                @{{ errors.first('created_at') }}
             </span>
         </date>
 
-        <date>
+        {{-- <date>
             <input
                 type="text"
                 name="expired_date"
@@ -30,7 +30,7 @@
             <span class="control-error" v-if="errors.has('expired_date')">
                 @{{ errors.first('expired_date') }}
             </span>
-        </date>
+        </date> --}}
     </div>
 </div>
 
@@ -99,19 +99,19 @@
             </div>
 
             <div class="form-group" :class="[errors.has('person') ? 'has-error' : '']">
-                <label>{{ __('admin::app.contacts.persons.title') }}</label>
+                <label>{{ __('admin::app.contacts.persons.department') }}</label>
 
                 <div class="control-faker">
                     <select
                         name="person_id"
                         class="control"
-                        data-vv-as="{{ __('admin::app.contacts.persons.title') }}"
+                        data-vv-as="{{ __('admin::app.contacts.persons.department') }}"
                         v-validate="'required'"
                         >
                         <option>Please Select</option>
                         @foreach ($persons as $person)
                         <option value="{{ $person->id }}" {{ old('person_id') == $person->id ? 'selected' : '' }}>
-                            {{ $person->code }} | {{ $person->name }}
+                            {{ $person->department }}
                         </option>
                         @endforeach
                     </select>
@@ -131,7 +131,7 @@
                         <option>Please Select</option>
                         @foreach ($locations as $location)
                         <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
-                            {{ $location->location_code }} - {{ $location->location_name }}
+                            {{ $location->location_name }}
                         </option>
                         @endforeach
                     </select>

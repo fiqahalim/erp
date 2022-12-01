@@ -1,21 +1,21 @@
 <div class="form-group date" :class="[errors.has('date') ? 'has-error' : '']">
     <label>
-        {{ __('admin::app.purchases.delivery_date') }} and {{ __('admin::app.purchases.expired_date') }}
+        {{ __('admin::app.purchases.created_at') }} and {{ __('admin::app.purchases.expired_date') }}
     </label>
 
     <div class="input-group">
         <date>
             <input
                 type="text"
-                name="delivery_date"
+                name="created_at"
                 class="control"
-                value="{{ old('delivery_date', $purchase->delivery_date) }}"
-                data-vv-as="{{ __('admin::app.purchases.delivery_date') }}"
+                value="{{ old('created_at', $purchase->created_at) }}"
+                data-vv-as="{{ __('admin::app.purchases.created_at') }}"
                 disabled
             />
         </date>
 
-        <date>
+        {{-- <date>
             <input
                 type="text"
                 name="expired_date"
@@ -24,7 +24,7 @@
                 data-vv-as="{{ __('admin::app.purchases.expired_date') }}"
                 disabled
             />
-        </date>
+        </date> --}}
     </div>
 </div>
 
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="top-control-group">
+        {{-- <div class="top-control-group">
             <div class="form-group">
                 <label>{{ __('admin::app.purchases.ref_no') }}</label>
 
@@ -63,7 +63,7 @@
                     />
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0;">
             <div class="form-group">
