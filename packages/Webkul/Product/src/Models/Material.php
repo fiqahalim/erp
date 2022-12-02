@@ -21,8 +21,9 @@ class Material extends Model implements MaterialContract
     ];
 
     protected $fillable = [
-        'date', 'qc_insp_req_no', 'inspection_method', 'finish_status', 'approved',
+        'date', 'qc_insp_req_no', 'inspection_method', 'finish_status', 'approved', 'status',
         'product_id', 'user_id', 'approved_by', 'created_at', 'updated_at', 'approved_date',
+        'requestor_remark', 'stock_balance', 'spec',
     ];
 
     /**

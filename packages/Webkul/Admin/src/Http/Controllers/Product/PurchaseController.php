@@ -17,13 +17,14 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\PurchaseItemRepository;
 use Webkul\Core\Repositories\LocationRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\User\Repositories\GroupRepository;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
 class PurchaseController extends Controller
 {
     protected $purchaseRepository, $purchaseItemRepository, $productRepository;
-    protected $personRepository, $userRepository;
+    protected $personRepository, $userRepository, $groupRepository;
     protected $locationRepository, $currencyRepository;
 
     /**
@@ -40,7 +41,8 @@ class PurchaseController extends Controller
         ProductRepository $productRepository,
         LocationRepository $locationRepository,
         CurrencyRepository $currencyRepository,
-        PurchaseItemRepository $purchaseItemRepository
+        PurchaseItemRepository $purchaseItemRepository,
+        GroupRepository $groupRepository
     )
     {
         $this->purchaseRepository = $purchaseRepository;
@@ -50,6 +52,7 @@ class PurchaseController extends Controller
         $this->locationRepository = $locationRepository;
         $this->currencyRepository = $currencyRepository;
         $this->purchaseItemRepository = $purchaseItemRepository;
+        $this->groupRepository = $groupRepository;
 
         request()->request->add(['entity_type' => 'purchases']);
     }
@@ -71,12 +74,13 @@ class PurchaseController extends Controller
     public function create()
     {
         $persons = $this->personRepository->all();
+        $groups = $this->groupRepository->all();
         $users = auth()->guard('user')->user();
         $products = $this->productRepository->all();
         $locations = $this->locationRepository->all();
         $currencies = $this->currencyRepository->all();
 
-        return view('admin::purchases.create', compact('persons', 'users', 'products', 'locations', 'currencies'));
+        return view('admin::purchases.create', compact('persons', 'users', 'products', 'locations', 'currencies', 'groups'));
     }
 
     /**
@@ -132,8 +136,11 @@ class PurchaseController extends Controller
                     // 'amount'        => $product['price'] * $product['quantity'],
                     'name'          => $product['name'],
                     'sku'           => $product['sku'],
-                    'description'   => $product['description'],
+                    'spec'          => $product['spec'],
                     'quantity'      => $product['quantity'],
+                    'unit'          => $product['unit'],
+                    'packaging'     => $product['packaging'],
+                    'additional_spec'  => $product['additional_spec'],
                     // 'price'         => $product['price'],
                     'purchase_id'   => $purchase->id
                 ]));

@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="top-control-group">
+        {{-- <div class="top-control-group">
             <div class="form-group">
                 <label>{{ __('admin::app.purchases.ref_no') }}</label>
 
@@ -76,9 +76,9 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0;">
+        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0; margin-top: 1rem;">
             <div class="form-group">
                 <label>{{ __('admin::app.settings.users.title') }}</label>
 
@@ -90,7 +90,6 @@
                         v-validate="'required'"
                         >
 
-                        <option>Please Select</option>
                         <option value="{{ $users->id }}" {{ old('user_id') == $users->id ? 'selected' : '' }}>
                             {{ $users->code }} | {{ $users->name }}
                         </option>
@@ -103,15 +102,15 @@
 
                 <div class="control-faker">
                     <select
-                        name="person_id"
+                        name="group_id"
                         class="control"
                         data-vv-as="{{ __('admin::app.contacts.persons.department') }}"
                         v-validate="'required'"
                         >
                         <option>Please Select</option>
-                        @foreach ($persons as $person)
-                        <option value="{{ $person->id }}" {{ old('person_id') == $person->id ? 'selected' : '' }}>
-                            {{ $person->department }}
+                        @foreach ($groups as $group)
+                        <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                            {{ $group->name }}
                         </option>
                         @endforeach
                     </select>

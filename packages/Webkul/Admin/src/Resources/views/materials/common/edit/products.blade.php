@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:1rem;">
                 <label>{{ __('admin::app.products.item_code') }}</label>
 
                 <div class="control-faker">
@@ -19,15 +19,15 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:1rem;">
                 <label>{{ __('admin::app.products.spec') }}</label>
 
                 <div class="control-faker">
-                    {{ $product->description }}
+                    {{ $product->spec }}
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:1rem;">
                 <label>{{ __('admin::app.products.remarks') }}</label>
 
                 <div class="control-faker">
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:1rem;">
                 <label>{{ __('admin::app.leads.quantity') }}</label>
 
                 <div class="control-faker">
