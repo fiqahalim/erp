@@ -18,7 +18,7 @@
             @{{ errors.first('delivery_date') }}
         </span>
 
-        <date>
+        {{-- <date>
             <input
                 type="text"
                 name="expired_date"
@@ -29,7 +29,7 @@
         </date>
         <span class="control-error" v-if="errors.has('expired_date')">
             @{{ errors.first('expired_date') }}
-        </span>
+        </span> --}}
     </div>
 </div>
 

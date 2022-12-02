@@ -55,6 +55,7 @@
                                                         'user_id',
                                                         'subject',
                                                         'description',
+                                                        'payment_term',
                                                         'expired_at',
                                                         'person_id',
                                                     ]);
@@ -163,6 +164,14 @@
                                     </label>
                                 </div>
                             </th>
+
+                            <th class="product_code">
+                                <div class="form-group">
+                                    <label>
+                                        {{ __('admin::app.quotes.product_code') }}
+                                    </label>
+                                </div>
+                            </th>
                             
                             <th class="quantity">
                                 <div class="form-group">
@@ -181,12 +190,12 @@
                                 </div>
                             </th>
 
-                            <th class="amount">
+                            {{-- <th class="amount">
                                 <div class="form-group">                                    
                                     {{ __('admin::app.quotes.amount') }}                               
                                     <span class="currency-code">(RM)</span>
                                 </div>
-                            </th>
+                            </th> --}}
 
                             {{-- <th class="discount">
                                 <div class="form-group">
@@ -197,14 +206,14 @@
                                 </div>
                             </th> --}}
 
-                            <th class="tax">
+                            {{-- <th class="tax">
                                 <div class="form-group">
                                     <label class="required">                                         
                                         {{ __('admin::app.quotes.tax') }}
                                         <span class="currency-code">(RM)</span>
                                     </label>
                                 </div>
-                            </th>
+                            </th> --}}
 
                             <th class="total">
                                 <div class="form-group">                                
@@ -266,7 +275,7 @@
                         </td>
                     </tr> --}}
 
-                    <tr>
+                    {{-- <tr>
                         <td>
                             {{ __('admin::app.quotes.tax') }}
                             <span class="currency-code">(RM)</span>
@@ -279,7 +288,7 @@
                                 <input type="text" name="tax_amount" class="control" :value="taxAmount" readonly>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
 
                     {{-- <tr>
                         <td>
@@ -372,6 +381,23 @@
             </td>
 
             <td>
+                <div class="form-group" :class="[errors.has(inputName + '[sku]') ? 'has-error' : '']">
+                    <input
+                        type="text"
+                        :name="[inputName + '[sku]']"
+                        class="control"
+                        v-model="product.sku"
+                        data-vv-as="&quot;{{ __('admin::app.products.item_code') }}&quot;"
+                        readonly
+                    />
+
+                    <span class="control-error" v-if="errors.has(inputName + '[sku]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[sku]') }}
+                    </span>
+                </div>
+            </td>
+
+            <td>
                 <div class="form-group" :class="[errors.has(inputName + '[quantity]') ? 'has-error' : '']">
                     <input
                         type="text"
@@ -395,8 +421,8 @@
                         :name="[inputName + '[price]']"
                         class="control"
                         v-model="product.price"
-                        v-validate="'required|decimal:4'"
                         data-vv-as="&quot;{{ __('admin::app.quotes.price') }}&quot;"
+                        readonly
                     />
 
                     <span class="control-error" v-if="errors.has(inputName + '[price]')">
@@ -405,7 +431,7 @@
                 </div>
             </td>
 
-            <td>
+            {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[price]') ? 'has-error' : '']">
                     <input
                         type="text"
@@ -415,7 +441,7 @@
                         readonly
                     />
                 </div>
-            </td>
+            </td> --}}
 
             {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[discount_amount]') ? 'has-error' : '']">
@@ -434,7 +460,7 @@
                 </div>
             </td> --}}
 
-            <td>
+            {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[tax_amount]') ? 'has-error' : '']">
                     <input
                         type="text"
@@ -449,7 +475,7 @@
                         @{{ errors.first(inputName + '[tax_amount]') }}
                     </span>
                 </div>
-            </td>
+            </td> --}}
 
             <td>
                 <div class="form-group" :class="[errors.has(inputName + '[price]') ? 'has-error' : '']">
@@ -484,6 +510,7 @@
                         'id': null,
                         'product_id': null,
                         'name': '',
+                        'sku': null,
                         'quantity': 0,
                         'price': 0,
                         'discount_amount': 0,
@@ -540,6 +567,7 @@
                         'id': null,
                         'product_id': null,
                         'name': '',
+                        'sku': null,
                         'quantity': null,
                         'price': null,
                         'discount_amount': null,
@@ -553,6 +581,7 @@
                             'id': null,
                             'product_id': null,
                             'name': '',
+                            'sku': null,
                             'quantity': null,
                             'price': null,
                             'discount_amount': null,
@@ -639,6 +668,7 @@
 
                     Vue.set(this.product, 'product_id', result.id);
                     Vue.set(this.product, 'name', result.name);
+                    Vue.set(this.product, 'sku', result.sku);
                     Vue.set(this.product, 'price', result.price);
                     Vue.set(this.product, 'quantity', result.quantity);
                     Vue.set(this.product, 'discount_amount', 0);

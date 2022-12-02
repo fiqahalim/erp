@@ -31,6 +31,7 @@ class Quote extends Model implements QuoteContract
     protected $fillable = [
         'subject',
         'description',
+        'payment_term',
         'billing_address',
         'shipping_address',
         'discount_percent',

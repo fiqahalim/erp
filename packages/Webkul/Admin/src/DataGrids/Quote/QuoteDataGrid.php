@@ -62,15 +62,20 @@ class QuoteDataGrid extends DataGrid
             ->addSelect(
                 'quotes.id',
                 'quotes.subject',
+                'quotes.payment_term',
                 'quotes.expired_at',
                 'quotes.grand_total',
                 'quotes.created_at',
                 'persons.id as person_id',
                 'persons.name as person_name',
+                'users.id as user_id',
+                'users.name as pic_name',
+                'users.email as pic_email',
                 'quote_items.id as quote_item_id',
                 'quote_items.name as quote_item_name',
             )
             ->leftJoin('quote_items', 'quote_items.quote_id', '=', 'quotes.id')
+            ->leftJoin('users', 'quotes.user_id', '=', 'users.id')
             ->leftJoin('persons', 'quotes.person_id', '=', 'persons.id');
 
         $currentUser = auth()->guard('user')->user();
@@ -138,8 +143,38 @@ class QuoteDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'    => 'pic_name',
+            'label'    => trans('admin::app.settings.users.title'),
+            'type'     => 'string',
+            'sortable' => true,
+            'closure'  => function ($row) {
+                $route = urldecode(route('admin.settings.users.index', ['id[eq]' => $row->user_id]));
+
+                return "<a href='" . $route . "'>" . $row->pic_name . "</a>";
+            },
+        ]);
+
+        $this->addColumn([
+            'index'    => 'pic_email',
+            'label'    => trans('admin::app.settings.users.pic_email'),
+            'type'     => 'string',
+            'sortable' => true,
+            'closure'  => function ($row) {
+                return $row->pic_email;
+            },
+        ]);
+
+        $this->addColumn([
             'index'      => 'quote_item_name',
             'label'      => trans('admin::app.products.item_name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'payment_term',
+            'label'      => trans('admin::app.quotes.payment_term'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -164,11 +199,18 @@ class QuoteDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('ui::app.datagrid.download'),
+            'title'  => trans('ui::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.quotes.print',
-            'icon'   => 'export-icon',
+            'route'  => 'admin.quotes.view',
+            'icon'   => 'eye-icon',
         ]);
+
+        // $this->addAction([
+        //     'title'  => trans('ui::app.datagrid.download'),
+        //     'method' => 'GET',
+        //     'route'  => 'admin.quotes.print',
+        //     'icon'   => 'export-icon',
+        // ]);
 
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),

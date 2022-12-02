@@ -151,6 +151,8 @@
                 'approved'          => 'Approved',
                 'pending'           => 'Pending for Approval',
                 'reject'            => 'Reject',
+                'department'        => 'Department',
+                'position'          => 'Position',
             ],
         ],
 
@@ -317,6 +319,7 @@
             'address-information' => 'Address Information',
             'quote-items'         => 'Quotation Items',
             'name'                => 'Name',
+            'product_code'        => 'Product Code',
             'discount'            => 'Discount',
             'tax'                 => 'Tax',
             'total'               => 'Total',
@@ -335,9 +338,9 @@
             'ship-to'             => 'Ship To',
             'sku'                 => 'Sku',
             'product-name'        => 'Product Name',
-            'price'               => 'Price',
+            'price'               => 'Price per Unit',
             'amount'              => 'Amount',
-            'quantity'            => 'Quantity',
+            'quantity'            => 'Quantity Unit',
             'sub-total'           => 'Sub Total',
             'tax'                 => 'Tax',
             'adjustment'          => 'Adjustment',
@@ -349,6 +352,7 @@
             'approved'            => 'Approved',
             'progress_status'     => 'Progress Status',
             'not_approved'        => 'Not Approved',
+            'payment_term'        => 'Payment Term',
         ],
 
         'sales' => [
@@ -402,10 +406,11 @@
 
         'materials' => [
             'title'                   => 'Material Req.',
-            'date'                    => 'Date',
+            'date'                    => 'Slip Date',
             'qc_insp_req_no'          => 'QC Insp. Request No',
             'inspection_method'       => 'Inspection Method',
             'finish_status'           => 'Finish Status',
+            'status'                  => 'Status',
             'create-success'          => 'Material Request created successfully.',
             'update-success'          => 'Material Request updated successfully.',
             'delete-success'          => 'Material Request deleted successfully.',
@@ -420,6 +425,12 @@
             'approved_date'           => 'Approval Date',
             'approved_by'             => 'Approved By',
             'request_qty'             => 'Requested Qty',
+            'department_pic'          => 'Department/PIC',
+            'requested_units'         => 'Requested Units',
+            'approval_slip_date'      => 'Approver Slip Date',
+            'request_qty'             => 'Requested Qty.',
+            'approver'                => 'Approver',
+            'stock_balance'           => 'Stock Balance',
         ],
 
         'stocks' => [
@@ -570,6 +581,8 @@
             'quality_inspect_id'    => 'Quality Inspect ID',
             'barcode'               => 'Barcode',
             'quantity'              => 'Quantity',
+            'order_unit'            => 'Order Unit',
+            'requestor_remark'      => 'Requestor Remark',
             'status'                => 'Status',
             'min_order_unit'        => 'Minimum Order Unit',
             'packaging'             => 'Packaging',
@@ -651,6 +664,8 @@
             'progress_status'       => 'Progress Status',
             'not_approved'          => 'Not Approved',
             'amount'                => 'Total Purchase Order Amount',
+            'slip_date'             => 'Slip Date',
+            'delivery_location'     => 'Delivery Location',
         ],
 
         'sessions' => [
@@ -731,6 +746,7 @@
                 'permission'          => 'Permission',
                 'name'                => 'Name',
                 'email'               => 'Email',
+                'pic_email'           => 'PIC Email',
                 'back'                => 'Back',
                 'password'            => 'Password',
                 'groups'              => 'Departments',

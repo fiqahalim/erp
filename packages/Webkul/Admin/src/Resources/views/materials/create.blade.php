@@ -28,19 +28,30 @@
                         @csrf()
 
                         <tabs>
-                            <tab name="{{ __('admin::app.materials.title') }}">
+                            <tab>
+
+                                <h2>{{ __('admin::app.materials.title') }}</h2>
+
                                 @include('admin::materials.common.materials')
+
+                                <hr style="margin-top:2rem;">
+
+                                <h2 style="margin-top:2rem;">{{ __('admin::app.products.title') }}</h2>
+
+                                @include('admin::materials.common.products')
+
+                                <product-list :data='@json(old('products'))'></product-list>
                             </tab>
 
                             {!! view_render_event('admin.materials.create.form_controls.details.after') !!}
 
                             {!! view_render_event('admin.materials.create.form_controls.before') !!}
 
-                            <tab name="{{ __('admin::app.products.title') }}">
+                            {{-- <tab name="{{ __('admin::app.products.title') }}">
                                 @include('admin::materials.common.products')
 
                                 <product-list :data='@json(old('products'))'></product-list>
-                            </tab>
+                            </tab> --}}
 
                             {!! view_render_event('admin.materials.create.form_controls.products.after') !!}
 

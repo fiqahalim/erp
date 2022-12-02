@@ -27,7 +27,7 @@ class PurchaseDataGrid extends DataGrid
                 'users.name as sales_person',
                 'purchase_items.id as purchase_items_id',
                 'purchase_items.name as purchase_items_name',
-                'purchase_items.amount as purchase_items_amount',
+                // 'purchase_items.amount as purchase_items_amount',
             )
             ->leftJoin('users', 'purchases.user_id', '=', 'users.id')
             ->leftJoin('purchase_items', 'purchase_items.purchase_id', '=', 'purchases.id');
@@ -98,16 +98,16 @@ class PurchaseDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'purchase_items_amount',
-            'label'      => trans('admin::app.purchases.amount'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'closure'  => function ($row) {
-                return number_format($row->purchase_items_amount, 2);
-            },
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'purchase_items_amount',
+        //     'label'      => trans('admin::app.purchases.amount'),
+        //     'type'       => 'string',
+        //     'searchable' => true,
+        //     'sortable'   => true,
+        //     'closure'  => function ($row) {
+        //         return number_format($row->purchase_items_amount, 2);
+        //     },
+        // ]);
 
         $this->addColumn([
             'index'      => 'progress_status',

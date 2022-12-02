@@ -130,14 +130,14 @@
                                 </div>
                             </th>
 
-                            <th class="amount">
+                            {{-- <th class="amount">
                                 <div class="form-group">
                                     <label class="required">
                                         {{ __('admin::app.quotes.amount') }}
                                         <span class="currency-code">(RM)</span>
                                     </label>
                                 </div>
-                            </th>
+                            </th> --}}
 
                             {{-- <th class="discount">
                                 <div class="form-group">
@@ -148,14 +148,14 @@
                                 <div>
                             </th> --}}
 
-                            <th class="tax">
+                            {{-- <th class="tax">
                                 <div class="form-group">
                                     <label class="required">
                                         {{ __('admin::app.quotes.tax') }}
                                         <span class="currency-code">(RM)</span>
                                     </label>
                                 </div>
-                            </th>
+                            </th> --}}
 
                             <th class="total">
                                 <div class="form-group">
@@ -182,7 +182,7 @@
 
                 </table>
 
-                <a class="add-more-link" href @click.prevent="addProduct">+ {{ __('admin::app.common.add_more') }}</a>
+                {{-- <a class="add-more-link" href @click.prevent="addProduct">+ {{ __('admin::app.common.add_more') }}</a> --}}
             </div>
 
             {!! view_render_event('admin.quotes.edit.form_controls.summary.before', ['quote' => $quote]) !!}
@@ -219,7 +219,7 @@
                         </td>
                     </tr> --}}
 
-                    <tr>
+                    {{-- <tr>
                         <td>
                             {{ __('admin::app.quotes.tax') }}
                             <span class="currency-code">(RM)</span>
@@ -232,7 +232,7 @@
                                 <input type="text" name="tax_amount" class="control" :value="taxAmount" readonly>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
 
                     {{-- <tr>
                         <td>
@@ -300,8 +300,8 @@
                         type="hidden"
                         :name="[inputName + '[product_id]']"
                         v-model="product.product_id"
-                        v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.quotes.name') }}&quot;"
+                        readonly
                     />
 
                     <div class="lookup-results" v-if="state == ''">
@@ -331,8 +331,8 @@
                         :name="[inputName + '[quantity]']"
                         class="control"
                         v-model="product.quantity"
-                        v-validate="'required|decimal:4'"
                         data-vv-as="&quot;{{ __('admin::app.quotes.quantity') }}&quot;"
+                        readonly
                     />
 
                     <span class="control-error" v-if="errors.has(inputName + '[quantity]')">
@@ -358,7 +358,7 @@
                 </div>
             </td>
 
-            <td>
+            {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[price]') ? 'has-error' : '']">
                     <input
                         type="text"
@@ -368,7 +368,7 @@
                         readonly
                     />
                 </div>
-            </td>
+            </td> --}}
 
             {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[discount_amount]') ? 'has-error' : '']">
@@ -387,7 +387,7 @@
                 </div>
             </td> --}}
 
-            <td>
+            {{-- <td>
                 <div class="form-group" :class="[errors.has(inputName + '[tax_amount]') ? 'has-error' : '']">
                     <input
                         type="text"
@@ -402,7 +402,7 @@
                         @{{ errors.first(inputName + '[tax_amount]') }}
                     </span>
                 </div>
-            </td>
+            </td> --}}
 
             <td>
                 <div class="form-group" :class="[errors.has(inputName + '[price]') ? 'has-error' : '']">

@@ -15,24 +15,28 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\MaterialRepository;
 use Webkul\Product\Repositories\MaterialProductRepository;
 use Webkul\User\Repositories\UserRepository;
+use Webkul\User\Repositories\GroupRepository;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
 class MaterialController extends Controller
 {
-    protected $userRepository, $productRepository, $materialRepository, $materialProductRepository;
+    protected $userRepository, $productRepository, $materialRepository,
+    $materialProductRepository, $groupRepository;
 
     public function __construct(
         UserRepository $userRepository,
         ProductRepository $productRepository,
         MaterialRepository $materialRepository,
-        MaterialProductRepository $materialProductRepository
+        MaterialProductRepository $materialProductRepository,
+        GroupRepository $groupRepository
     )
     {
         $this->userRepository = $userRepository;
         $this->productRepository = $productRepository;
         $this->materialRepository = $materialRepository;
         $this->materialProductRepository = $materialProductRepository;
+        $this->groupRepository = $groupRepository;
 
         request()->request->add(['entity_type' => 'materials']);
     }
@@ -48,10 +52,14 @@ class MaterialController extends Controller
 
     public function create()
     {
-        $users = $this->userRepository->all();
+        $users = auth()->guard('user')->user();
         $products = $this->productRepository->all();
 
-        return view('admin::materials.create', compact('users', 'products'));
+        foreach ($users->groups as $group) {
+            $dept = $group->name;
+        }
+
+        return view('admin::materials.create', compact('users', 'products', 'dept'));
     }
 
     public function edit($id)
@@ -59,6 +67,12 @@ class MaterialController extends Controller
         $material = $this->materialRepository->findOrFail($id);
         $products = $this->materialProductRepository->where('material_id', $material->id)->get();
         $users = $this->userRepository->where('id', $material->user_id)->get();
+
+        // $user_group = $users->;
+
+        // foreach ($users->groups as $group) {
+        //     $dept = $group->name;
+        // }
 
         return view('admin::materials.edit', compact('material', 'products', 'users'));
     }

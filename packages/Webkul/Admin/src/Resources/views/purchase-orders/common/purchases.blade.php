@@ -1,24 +1,24 @@
-<div class="form-group date" :class="[errors.has('delivery_date') || errors.has('expired_date') ? 'has-error' : '']">
+<div class="form-group date">
     <label class="required">
-        {{ __('admin::app.purchases.date') }}
+        {{ __('admin::app.purchases_order.slip_date') }}
     </label>
 
     <div class="input-group">
         <date>
             <input
                 type="text"
-                name="delivery_date"
+                name="slip_date"
                 class="control"
-                placeholder="{{ __('admin::app.purchases.delivery_date') }}"
+                placeholder="{{ __('admin::app.purchases_order.slip_date') }}"
                 v-validate="'required'"
-                data-vv-as="{{ __('admin::app.purchases.delivery_date') }}"
+                data-vv-as="{{ __('admin::app.purchases_order.slip_date') }}"
             />
-            <span class="control-error" v-if="errors.has('delivery_date')">
-                @{{ errors.first('delivery_date') }}
+            <span class="control-error" v-if="errors.has('slip_date')">
+                @{{ errors.first('slip_date') }}
             </span>
         </date>
 
-        <date>
+        {{-- <date>
             <input
                 type="text"
                 name="expired_date"
@@ -30,7 +30,7 @@
             <span class="control-error" v-if="errors.has('expired_date')">
                 @{{ errors.first('expired_date') }}
             </span>
-        </date>
+        </date> --}}
     </div>
 </div>
 
@@ -38,16 +38,16 @@
     <div class="lead-product">
         <div class="top-control-group">
             <div class="form-group">
-                <label>{{ __('admin::app.purchases.purchase_no') }}</label>
+                <label>{{ __('admin::app.purchases_order.purchase_no') }}</label>
 
                 <div class="control-faker">
                     <input
                         type="text"
                         name="purchase_no"
                         class="control"
-                        placeholder="{{ __('admin::app.purchases.purchase_no') }}"
+                        placeholder="{{ __('admin::app.purchases_order.purchase_no') }}"
                         v-validate="'required'"
-                        data-vv-as="{{ __('admin::app.purchases.purchase_no') }}"
+                        data-vv-as="{{ __('admin::app.purchases_order.purchase_no') }}"
                     />
 
                     <span class="control-error" v-if="errors.has('purchase_no')">
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="top-control-group">
+        <div class="top-control-group" style="margin-top:1rem;">
             <div class="form-group">
                 <label>{{ __('admin::app.purchases.ref_no') }}</label>
 
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0;">
+        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0;margin-top: 1rem;">
             <div class="form-group">
                 <label>{{ __('admin::app.settings.users.title') }}</label>
 
@@ -89,11 +89,9 @@
                         data-vv-as="{{ __('admin::app.settings.users.title') }}"
                         v-validate="'required'"
                         >
-                        @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                            {{ $user->code }} | {{ $user->name }}
+                        <option value="{{ $users->id }}" {{ old('user_id') == $users->id ? 'selected' : '' }}>
+                            {{ $users->code }} | {{ $users->name }}
                         </option>
-                        @endforeach
                     </select>
                 </div>
             </div>
@@ -118,13 +116,13 @@
             </div>
 
             <div class="form-group" :class="[errors.has('location') ? 'has-error' : '']">
-                <label>{{ __('admin::app.locations.title') }}</label>
+                <label>{{ __('admin::app.purchases_order.delivery_location') }}</label>
 
                 <div class="control-faker">
                     <select
                         name="location_id"
                         class="control"
-                        data-vv-as="{{ __('admin::app.locations.title') }}"
+                        data-vv-as="{{ __('admin::app.purchases_order.delivery_location') }}"
                         v-validate="'required'"
                         >
                         @foreach ($locations as $location)
