@@ -96,8 +96,9 @@ class PurchaseController extends Controller
         $users = $this->userRepository->where('id', $purchase->user_id)->get();
         $persons = $this->personRepository->where('id', $purchase->person_id)->get();
         $locations = $this->locationRepository->where('id', $purchase->location_id)->get();
+        $groups = $this->groupRepository->where('id', $purchase->group_id)->get();
 
-        return view('admin::purchases.edit', compact('purchase', 'users', 'products', 'persons', 'locations'));
+        return view('admin::purchases.edit', compact('purchase', 'users', 'products', 'persons', 'locations', 'groups'));
     }
 
     public function view($id)
