@@ -21,8 +21,8 @@ class PurchaseOrderDataGrid extends DataGrid
         $queryBuilder = DB::table('purchase_orders')
             ->addSelect(
                 'purchase_orders.id',
+                'purchase_orders.slip_date',
                 'purchase_orders.delivery_date',
-                'purchase_orders.expired_date',
                 'purchase_orders.purchase_no',
                 'purchase_orders.progress_status',
                 'purchase_orders.approved',
@@ -31,6 +31,7 @@ class PurchaseOrderDataGrid extends DataGrid
                 'users.name as sales_person',
                 'purchase_order_items.id as purchase_order_items_id',
                 'purchase_order_items.name as purchase_order_items_name',
+                'purchase_order_items.spec as purchase_order_items_spec',
                 'purchase_order_items.amount as purchase_order_items_amount',
                 'purchase_order_items.quantity as purchase_order_items_quantity',
             )
@@ -59,8 +60,19 @@ class PurchaseOrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'      => 'slip_date',
+            'label'      => trans('admin::app.purchases_order.slip_date'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'sortable'   => true,
+            'closure'    => function ($row) {
+                return core()->formatDate($row->slip_date);
+            },
+        ]);
+
+        $this->addColumn([
             'index'      => 'delivery_date',
-            'label'      => trans('admin::app.purchases.delivery_date'),
+            'label'      => trans('admin::app.purchases_order.delivery_date'),
             'type'       => 'date_range',
             'searchable' => false,
             'sortable'   => true,
@@ -70,19 +82,8 @@ class PurchaseOrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'expired_date',
-            'label'      => trans('admin::app.purchases.expired_date'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'sortable'   => true,
-            'closure'    => function ($row) {
-                return core()->formatDate($row->expired_date);
-            },
-        ]);
-
-        $this->addColumn([
             'index'    => 'purchase_no',
-            'label'    => trans('admin::app.purchases.purchase_no'),
+            'label'    => trans('admin::app.purchases_order.purchase_no'),
             'type'     => 'string',
             'sortable' => true,
         ]);
@@ -104,8 +105,16 @@ class PurchaseOrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'      => 'purchase_order_items_spec',
+            'label'      => trans('Item Description'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'purchase_order_items_amount',
-            'label'      => trans('admin::app.purchases.amount'),
+            'label'      => trans('admin::app.purchases_order.total_po'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -130,23 +139,23 @@ class PurchaseOrderDataGrid extends DataGrid
             'sortable'   => false,
         ]);
 
-        $this->addColumn([
-            'index'            => 'approved',
-            'label'            => trans('admin::app.purchases.approved'),
-            'type'             => 'string',
-            'searchable'       => false,
-            'closure'          => function ($row) {
-                if ($row->approved == 1) {
-                    return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.purchases.approved');
-                } else {
-                    return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.purchases.not_approved');
-                }
-            },
-        ]);
+        // $this->addColumn([
+        //     'index'            => 'approved',
+        //     'label'            => trans('admin::app.purchases.approved'),
+        //     'type'             => 'string',
+        //     'searchable'       => false,
+        //     'closure'          => function ($row) {
+        //         if ($row->approved == 1) {
+        //             return '<span class="badge badge-round badge-primary"></span>' . trans('admin::app.purchases.approved');
+        //         } else {
+        //             return '<span class="badge badge-round badge-danger"></span>' . trans('admin::app.purchases.not_approved');
+        //         }
+        //     },
+        // ]);
 
         $this->addColumn([
             'index'      => 'approved_date',
-            'label'      => trans('admin::app.purchases.approved_date'),
+            'label'      => trans('admin::app.purchases_order.release_date'),
             'type'       => 'date_range',
             'searchable' => false,
             'sortable'   => true,

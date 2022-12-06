@@ -58,4 +58,14 @@ class PurchaseOrder extends Model implements PurchaseOrderContract
     {
         return $this->hasMany(ProductProxy::modelClass(), 'product_id');
     }
+
+    // public static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function($model) {
+    //         $model->id = PurchaseOrder::where('id')->max('id')+1;
+    //         $model->purchase_no = 'PO' . str_pad($model->id, 5, 0, STR_PAD_LEFT);
+    //     });
+    // }
 }

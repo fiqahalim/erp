@@ -18,6 +18,7 @@ class PurchaseOrderItem extends Model implements PurchaseOrderItemContract
     protected $fillable = [
         'name', 'sku', 'description', 'remarks', 'quantity', 'price',
         'amount', 'purchase_order_id', 'product_id', 'created_at', 'updated_at',
+        'spec', 'purchaser_remark', 'stock_balance', 'delivery_date',
     ];
 
     public function purchase()

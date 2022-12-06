@@ -209,6 +209,19 @@ Breadcrumbs::for('stocks.view', function (BreadcrumbTrail $trail, $stock) {
 });
 
 
+// Dashbord > Incoming Stock
+Breadcrumbs::for('incoming-stocks', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin::app.incoming_stocks.title'), route('admin.incoming-stocks.index'));
+});
+
+// Dashboard > Stock Count > Create Stock Count
+Breadcrumbs::for('incoming-stocks.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('incoming-stocks');
+    $trail->push(trans('admin::app.incoming_stocks.create-title'), route('admin.incoming-stocks.create'));
+});
+
+
 // Settings
 Breadcrumbs::for('settings', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

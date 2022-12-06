@@ -114,6 +114,77 @@
                 </div>
             </div>
 
+            <div class="bottom-control-group" style="margin-top:1rem;margin-bottom:1rem;padding-right:0;">
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]') ? 'has-error' : '']">
+                    <label for="sku">{{ __('admin::app.products.item_code') }}</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[sku]']"
+                        class="control"
+                        v-model="product.sku"
+                        data-vv-as="&quot;{{ __('admin::app.products.item_code') }}&quot;"
+                        readonly
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[sku]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[sku]') }}
+                    </span>
+                </div>
+
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[spec]') ? 'has-error' : '']">
+                    <label for="spec">{{ __('admin::app.products.spec') }}</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[spec]']"
+                        class="control"
+                        v-model="product.spec"
+                        data-vv-as="&quot;{{ __('admin::app.products.spec') }}&quot;"
+                        readonly
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[spec]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[spec]') }}
+                    </span>
+                </div>
+
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[remarks]') ? 'has-error' : '']">
+                    <label for="remarks" class="required">{{ __('admin::app.products.remarks') }}</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[remarks]']"
+                        class="control"
+                        v-model="product.remarks"
+                        data-vv-as="&quot;{{ __('admin::app.products.remarks') }}&quot;"
+                        readonly
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[remarks]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[remarks]') }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="top-control-group">
+                <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[purchaser_remark]') ? 'has-error' : '']" style="margin-top:1rem;margin-bottom:1rem;">
+                    <label for="purchaser_remark">{{ __('admin::app.purchases_order.purchaser_remark') }}</label>
+
+                    <input
+                        type="text"
+                        :name="[inputName + '[purchaser_remark]']"
+                        class="control"
+                        v-model="product.purchaser_remark"
+                        data-vv-as="&quot;{{ __('admin::app.products.requestor_remark') }}&quot;"
+                    />
+
+                    <span class="control-error" v-if="errors.has('{!! $formScope ?? '' !!}' + inputName + '[purchaser_remark]')">
+                        @{{ errors.first('{!! $formScope ?? '' !!}' + inputName + '[purchaser_remark]') }}
+                    </span>
+                </div>
+            </div>
+
             <div class="bottom-control-group">
                 <div class="form-group" :class="[errors.has('{!! $formScope ?? '' !!}' + inputName + '[price]') ? 'has-error' : '']">
                     <label for="email" class="required">{{ __('admin::app.leads.price') }}</label>

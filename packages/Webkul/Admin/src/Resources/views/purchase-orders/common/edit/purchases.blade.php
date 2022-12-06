@@ -1,6 +1,6 @@
 <div class="form-group date" :class="[errors.has('date') ? 'has-error' : '']">
-    <label class="required">
-        {{ __('admin::app.materials.date') }}
+    <label>
+        {{ __('admin::app.materials.date') }} and {{ __('admin::app.purchases_order.delivery_date') }}
     </label>
 
     <div class="input-group">
@@ -21,14 +21,14 @@
         <date>
             <input
                 type="text"
-                name="expired_date"
+                name="delivery_date"
                 class="control"
-                value="{{ old('expired_date', $purchase->expired_date) }}"
-                data-vv-as="{{ __('admin::app.purchases.expired_date') }}"
+                value="{{ old('delivery_date', $purchase->delivery_date) }}"
+                data-vv-as="{{ __('admin::app.purchases_order.delivery_date') }}"
             />
         </date>
-        <span class="control-error" v-if="errors.has('expired_date')">
-            @{{ errors.first('expired_date') }}
+        <span class="control-error" v-if="errors.has('delivery_date')">
+            @{{ errors.first('delivery_date') }}
         </span>
     </div>
 </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="top-control-group">
+        <div class="top-control-group" style="margin-top:1rem;">
             <div class="form-group">
                 <label>{{ __('admin::app.purchases.ref_no') }}</label>
 
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0;">
+        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0; margin-top: 1rem;">
             <div class="form-group">
                 <label>{{ __('admin::app.settings.users.title') }}</label>
 
@@ -136,7 +136,7 @@
     </div>
 </div>
 
-<div class="form-group" :class="[errors.has('progress_status') ? 'has-error' : '']">
+<div class="form-group" :class="[errors.has('progress_status') ? 'has-error' : '']" style="margin-top:1rem;">
     <label>
         {{ __('admin::app.purchases.progress_status') }}
     </label>
@@ -147,13 +147,13 @@
         data-vv-as="{{ __('admin::app.purchases.progress_status') }}"
         v-validate="'required'"
         >
-        <option value="In Progress">In Progress</option>
-        <option value="Finish">Finished</option>
-        <option value="Cancel">Cancel</option>
+        <option value="Pending for Approval">Pending for Approval</option>
+        <option value="Ready to Release">Ready to Release</option>
+        <option value="Cancelled">Cancelled</option>
     </select>
 </div>
 
-<div class="form-group" :class="[errors.has('approved') ? 'has-error' : '']">
+<div class="form-group" :class="[errors.has('approved') ? 'has-error' : '']" style="margin-top:1rem;">
     <label>
         {{ __('admin::app.purchases.approved') }}?
     </label>

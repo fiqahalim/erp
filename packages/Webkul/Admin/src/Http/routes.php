@@ -185,6 +185,31 @@ Route::group(['middleware' => ['web']], function () {
             });
 
 
+            // Incoming Stock
+            Route::group([
+                'prefix'    => 'incoming-stocks',
+                'namespace' => 'Webkul\Admin\Http\Controllers\Product'
+            ], function () {
+                Route::get('', 'IncomingStockController@index')->name('admin.incoming-stocks.index');
+
+                Route::get('create', 'IncomingStockController@create')->name('admin.incoming-stocks.create');
+
+                Route::post('create', 'IncomingStockController@store')->name('admin.incoming-stocks.store');
+
+                Route::get('edit/{id}', 'IncomingStockController@edit')->name('admin.incoming-stocks.edit');
+
+                Route::get('view/{id?}', 'IncomingStockController@view')->name('admin.incoming-stocks.view');
+
+                Route::put('edit/{id}', 'IncomingStockController@update')->name('admin.incoming-stocks.update');
+
+                Route::get('search', 'IncomingStockController@search')->name('admin.incoming-stocks.search');
+
+                Route::delete('{id}', 'IncomingStockController@destroy')->name('admin.incoming-stocks.delete');
+
+                Route::put('mass-destroy', 'IncomingStockController@massDestroy')->name('admin.incoming-stocks.mass_delete');
+            });
+
+
             // Material Requests
             Route::group([
                 'prefix'    => 'materials',

@@ -72,6 +72,11 @@ return [
         'route'      => 'admin.stocks.index',
         'sort'       => 7,
         'icon-class' => 'activities-icon',
+    ], [
+        'key'        => 'stocks.incomings',
+        'name'       => 'admin::app.dashboard.incoming_stocks',
+        'route'      => 'admin.incoming-stocks.index',
+        'sort'       => 8,
     ],
 
     // MATERIAL REQ.
@@ -88,7 +93,7 @@ return [
         'key'        => 'settings',
         'name'       => 'admin::app.layouts.settings',
         'route'      => 'admin.settings.index',
-        'sort'       => 8,
+        'sort'       => 9,
         'icon-class' => 'settings-icon',
     ], [
         'key'        => 'settings.user',
@@ -164,7 +169,7 @@ return [
         'key'        => 'configuration',
         'name'       => 'admin::app.layouts.configuration',
         'route'      => 'admin.configuration.index',
-        'sort'       => 9,
+        'sort'       => 10,
         'icon-class' => 'tools-icon',
     ]
 ];

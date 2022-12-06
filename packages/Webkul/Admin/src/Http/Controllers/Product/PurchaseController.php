@@ -181,8 +181,11 @@ class PurchaseController extends Controller
                     // 'amount'        => $product['price'] * $product['quantity'],
                     'name'          => $product['name'],
                     'sku'           => $product['sku'],
-                    'description'   => $product['description'],
+                    'spec'          => $product['spec'],
                     'quantity'      => $product['quantity'],
+                    'unit'          => $product['unit'],
+                    'packaging'     => $product['packaging'],
+                    'additional_spec'  => $product['additional_spec'],
                     // 'price'         => $product['price'],
                     'purchase_id'   => $purchase->id
                 ]));

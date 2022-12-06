@@ -7,6 +7,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Http\Requests\AttributeForm;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -44,7 +45,7 @@ class PurchaseOrderController extends Controller
         $this->currencyRepository = $currencyRepository;
         $this->purchaseOrderItemRepository = $purchaseOrderItemRepository;
 
-        request()->request->add(['entity_type' => 'purchases']);
+        request()->request->add(['entity_type' => 'purchase_orders']);
     }
 
     public function index()
@@ -109,9 +110,11 @@ class PurchaseOrderController extends Controller
                     'amount'            => $product['price'] * $product['quantity'],
                     'name'              => $product['name'],
                     'sku'               => $product['sku'],
-                    'description'       => $product['description'],
+                    'spec'              => $product['spec'],
+                    'purchaser_remark'  => $product['purchaser_remark'],
                     'quantity'          => $product['quantity'],
                     'price'             => $product['price'],
+                    'stock_balance'     => $stock_balance,
                     'purchase_order_id' => $purchase->id
                 ]));
             }
@@ -150,7 +153,8 @@ class PurchaseOrderController extends Controller
                     'amount'            => $product['price'] * $product['quantity'],
                     'name'              => $product['name'],
                     'sku'               => $product['sku'],
-                    'description'       => $product['description'],
+                    'spec'              => $product['spec'],
+                    'purchaser_remark'  => $product['purchaser_remark'],
                     'quantity'          => $product['quantity'],
                     'price'             => $product['price'],
                     'purchase_order_id' => $purchase->id
