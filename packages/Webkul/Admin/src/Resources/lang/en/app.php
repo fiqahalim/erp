@@ -27,6 +27,7 @@
             'graph_material_req'    => 'Graph Material Request',
             'incoming_stocks'       => 'Incoming Stock',
             'stocks'                => 'Stocks',
+            'materials_approval'    => 'Material Approval List',
         ],
 
         'layouts' => [
@@ -433,6 +434,10 @@
             'request_qty'             => 'Requested Qty.',
             'approver'                => 'Approver',
             'stock_balance'           => 'Stock Balance',
+        ],
+
+        'materials_approval' => [
+            'title'                   => 'Material Approval List',
         ],
 
         'stocks' => [

@@ -14,7 +14,7 @@ class Person extends Model implements PersonContract
 
     protected $table = 'persons';
 
-    protected $with = ['organization', 'products'];
+    protected $with = ['organization'];
 
     protected $casts = [
         'emails'          => 'array',
@@ -44,8 +44,8 @@ class Person extends Model implements PersonContract
         return $this->belongsTo(OrganizationProxy::modelClass());
     }
 
-    public function products()
-    {
-        return $this->belongsTo(ProductProxy::modelClass());
-    }
+    // public function products()
+    // {
+    //     return $this->belongsTo(ProductProxy::modelClass());
+    // }
 }

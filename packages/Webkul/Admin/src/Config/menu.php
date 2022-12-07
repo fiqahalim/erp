@@ -76,7 +76,7 @@ return [
         'key'        => 'stocks.incomings',
         'name'       => 'admin::app.dashboard.incoming_stocks',
         'route'      => 'admin.incoming-stocks.index',
-        'sort'       => 8,
+        'sort'       => 1,
     ],
 
     // MATERIAL REQ.
@@ -86,6 +86,11 @@ return [
         'route'      => 'admin.materials.index',
         'sort'       => 6,
         'icon-class' => 'leads-icon',
+    ], [
+        'key'        => 'materials.approvals',
+        'name'       => 'admin::app.dashboard.materials_approval',
+        'route'      => 'admin.materials-approval.index',
+        'sort'       => 1,
     ],
 
     // SETTINGS MENU

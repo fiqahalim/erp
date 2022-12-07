@@ -235,6 +235,31 @@ Route::group(['middleware' => ['web']], function () {
             });
 
 
+            // Material Approval List
+            Route::group([
+                'prefix'    => 'materials-approval',
+                'namespace' => 'Webkul\Admin\Http\Controllers\Product',
+            ], function () {
+                Route::get('', 'MaterialApprovalController@index')->name('admin.materials-approval.index');
+
+                Route::get('create/{id?}', 'MaterialApprovalController@create')->name('admin.materials-approval.create');
+
+                Route::post('create', 'MaterialApprovalController@store')->name('admin.materials-approval.store');
+
+                Route::get('view/{id?}', 'MaterialApprovalController@view')->name('admin.materials-approval.view');
+
+                Route::get('edit/{id?}', 'MaterialApprovalController@edit')->name('admin.materials-approval.edit');
+
+                Route::put('edit/{id}', 'MaterialApprovalController@update')->name('admin.materials-approval.update');
+
+                Route::get('print/{id?}', 'MaterialApprovalController@print')->name('admin.materials-approval.print');
+
+                Route::delete('{id}', 'MaterialApprovalController@destroy')->name('admin.materials-approval.delete');
+
+                Route::put('mass-destroy', 'MaterialApprovalController@massDestroy')->name('admin.materials-approval.mass_delete');
+            });
+
+
             // Contacts
             Route::group([
                 'prefix'    => 'contacts',

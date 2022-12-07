@@ -42,6 +42,7 @@ class PersonDataGrid extends DataGrid
                 'persons.code',
                 'persons.name as company_name',
                 'persons.pic_name',
+                'persons.position',
                 'persons.department',
                 'persons.emails',
                 'persons.contact_numbers',
@@ -69,12 +70,12 @@ class PersonDataGrid extends DataGrid
      */
     public function addColumns()
     {
-        $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'string',
-            'sortable'   => true,
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'id',
+        //     'label'      => trans('admin::app.datagrid.id'),
+        //     'type'       => 'string',
+        //     'sortable'   => true,
+        // ]);
 
         $this->addColumn([
             'index'    => 'code',
@@ -93,6 +94,20 @@ class PersonDataGrid extends DataGrid
         $this->addColumn([
             'index'    => 'pic_name',
             'label'    => trans('admin::app.contacts.persons.ceo_name'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'position',
+            'label'    => trans('admin::app.contacts.persons.position'),
+            'type'     => 'string',
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'    => 'department',
+            'label'    => trans('admin::app.contacts.persons.department'),
             'type'     => 'string',
             'sortable' => true,
         ]);

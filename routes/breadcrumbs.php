@@ -183,6 +183,12 @@ Breadcrumbs::for('materials.view', function (BreadcrumbTrail $trail, $material) 
     $trail->push(trans('admin::app.materials.view-title'), route('admin.materials.view', $material->id));
 });
 
+// Critical Material Approval
+Breadcrumbs::for('material-approval', function (BreadcrumbTrail $trail) {
+    $trail->parent('materials');
+    $trail->push(trans('admin::app.materials_approval.title'), route('admin.incoming-stocks.index'));
+});
+
 
 // Dashbord > Stock Count
 Breadcrumbs::for('stocks', function (BreadcrumbTrail $trail) {
@@ -215,7 +221,7 @@ Breadcrumbs::for('incoming-stocks', function (BreadcrumbTrail $trail) {
     $trail->push(trans('admin::app.incoming_stocks.title'), route('admin.incoming-stocks.index'));
 });
 
-// Dashboard > Stock Count > Create Stock Count
+// Dashboard > Stock Count > Create Incoming Stock Count
 Breadcrumbs::for('incoming-stocks.create', function (BreadcrumbTrail $trail) {
     $trail->parent('incoming-stocks');
     $trail->push(trans('admin::app.incoming_stocks.create-title'), route('admin.incoming-stocks.create'));
