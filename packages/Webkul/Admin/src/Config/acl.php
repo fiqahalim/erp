@@ -227,12 +227,50 @@ return [
         'sort'  => 6,
     ],
 
+    // MATERIAL APPROVAL LIST
+    [
+        'key'   => 'materials-approval',
+        'name'  => 'admin::app.acl.materials_approve',
+        'route' => 'admin.materials-approval.index',
+        'sort'  => 8,
+    ], [
+        'key'   => 'materials-approval.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => ['admin.materials-approval.create', 'admin.materials-approval.store'],
+        'sort'  => 1,
+    ], [
+        'key'   => 'materials-approval.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => ['admin.materials-approval.edit', 'admin.materials-approval.update'],
+        'sort'  => 2,
+    ], [
+        'key'   => 'materials-approval.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => ['admin.materials-approval.view', 'admin.materials-approval.view'],
+        'sort'  => 3,
+    ], [
+        'key'   => 'materials-approval.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => ['admin.materials-approval.delete', 'admin.materials-approval.mass_delete'],
+        'sort'  => 4,
+    ], [
+        'key'   => 'materials-approval.print',
+        'name'  => 'admin::app.acl.print',
+        'route' => 'admin.materials-approval.print',
+        'sort'  => 5,
+    ], [
+        'key'   => 'materials-approval.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'ui.datagrid.export',
+        'sort'  => 6,
+    ],
+
     // STOCK COUNT
     [
         'key'   => 'stocks',
         'name'  => 'admin::app.acl.stocks',
         'route' => 'admin.stocks.index',
-        'sort'  => 8,
+        'sort'  => 9,
     ], [
         'key'   => 'stocks.export',
         'name'  => 'admin::app.acl.export',
@@ -240,12 +278,50 @@ return [
         'sort'  => 1,
     ],
 
+    // INCOMING STOCK
+    [
+        'key'   => 'incoming-stocks',
+        'name'  => 'admin::app.acl.incoming_stocks',
+        'route' => 'admin.incoming-stocks.index',
+        'sort'  => 10,
+    ], [
+        'key'   => 'incoming-stocks.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => ['admin.incoming-stocks.create', 'admin.incoming-stocks.store'],
+        'sort'  => 1,
+    ], [
+        'key'   => 'incoming-stocks.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => ['admin.incoming-stocks.edit', 'admin.incoming-stocks.update'],
+        'sort'  => 2,
+    ], [
+        'key'   => 'incoming-stocks.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => ['admin.incoming-stocks.view', 'admin.incoming-stocks.view'],
+        'sort'  => 3,
+    ], [
+        'key'   => 'incoming-stocks.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => ['admin.incoming-stocks.delete', 'admin.incoming-stocks.mass_delete'],
+        'sort'  => 4,
+    ], [
+        'key'   => 'incoming-stocks.print',
+        'name'  => 'admin::app.acl.print',
+        'route' => 'admin.incoming-stocks.print',
+        'sort'  => 5,
+    ], [
+        'key'   => 'incoming-stocks.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'ui.datagrid.export',
+        'sort'  => 6,
+    ],
+
     // SETTINGS DEPARTMENT
     [
         'key'   => 'settings',
         'name'  => 'admin::app.acl.settings',
         'route' => 'admin.settings.index',
-        'sort'  => 9,
+        'sort'  => 11,
     ], [
         'key'   => 'settings.user',
         'name'  => 'admin::app.acl.user',
@@ -400,6 +476,6 @@ return [
         'key'   => 'configuration',
         'name'  => 'admin::app.acl.configuration',
         'route' => 'admin.configuration.index',
-        'sort'  => 10,
+        'sort'  => 11,
     ]
 ];
