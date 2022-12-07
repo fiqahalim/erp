@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Product;
 use Webkul\UI\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 
-class StockCountDataGrid extends DataGrid
+class IncomingStockDataGrid extends DataGrid
 {
     protected $export;
 
@@ -18,29 +18,41 @@ class StockCountDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('purchase_orders')
+        $queryBuilder = DB::table('incoming_stocks')
             ->addSelect(
-                'purchase_orders.id',
-                'purchase_orders.expired_date',
-                'purchase_orders.purchase_no',
-                'users.id as user_id',
-                'users.name as sales_person',
-                'purchase_order_items.id as purchase_order_items_id',
-                'purchase_order_items.sku as purchase_order_items_sku',
-                'purchase_order_items.name as purchase_order_items_name',
-                'purchase_order_items.spec as purchase_order_items_spec',
-                'purchase_order_items.quantity as purchase_order_items_quantity',
-                'products.id as product_id',
-                'products.unit as products_unit',
+                'incoming_stocks.id',
+                'incoming_stocks.purchasing_organization',
+                'incoming_stocks.23_material_no',
+                'incoming_stocks.quantity_receive',
+                'incoming_stocks.quantity_unreceive',
+                'incoming_stocks.spec',
+                'incoming_stocks.coa_msds',
+                'incoming_stocks.remarks',
+                'incoming_stocks.receive_date',
+                'incoming_stocks.expiry_date',
+                'incoming_stocks.actual_receive_date',
+                'incoming_stocks.manufacture_date',
+                'incoming_stocks.status',
+                'persons.id as person_id',
+                'persons.name as sales_person',
+                // 'purchase_orders.id as purchase_order_id',
+                // 'purchase_orders.purchase_no as purchase__orders_purchase_no',
+                // 'purchase_orders.created_at as purchase_orders_created_at',
+                // 'products.id as product_id',
+                // 'products.sku as products_sku',
+                // 'products.name as products_name',
+                // 'products.spec as products_spec',
+                // 'products.spec as products_spec',
+                // 'products.unit as products_unit',
             )
-            ->leftJoin('users', 'purchase_orders.user_id', '=', 'users.id')
-            ->leftJoin('purchase_order_items', 'purchase_order_items.purchase_order_id', '=', 'purchase_orders.id')
-            ->leftJoin('products', 'purchase_order_items.product_id', '=', 'products.id');
+            ->leftJoin('persons', 'incoming_stocks.person_id', '=', 'persons.id');
+            // ->leftJoin('purchase_order_items', 'purchase_order_items.purchase_order_id', '=', 'purchase_orders.id')
+            // ->leftJoin('products', 'purchase_order_items.product_id', '=', 'products.id');
 
-        $this->addFilter('id', 'purchase_orders.id');
-        $this->addFilter('user', 'purchase_orders.user_id');
-        $this->addFilter('sales_person', 'purchase_orders.user_id');
-        $this->addFilter('products_unit', 'purchase_order_items.user_id');
+        $this->addFilter('id', 'incoming_stocks.id');
+        $this->addFilter('persons', 'incoming_stocks.person_id');
+        // $this->addFilter('sales_person', 'purchase_orders.user_id');
+        // $this->addFilter('products_unit', 'purchase_order_items.user_id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -69,7 +81,7 @@ class StockCountDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'purchase_order_items_spec',
+            'index'      => 'purchase_order_items_description',
             'label'      => trans('admin::app.products.spec'),
             'type'       => 'string',
             'searchable' => false,
@@ -86,19 +98,19 @@ class StockCountDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'purchase_order_items_quantity',
-            'label'      => trans('Current Unit Quantity'),
+            'label'      => trans('admin::app.purchases.quantity_order'),
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
         ]);
 
-        // $this->addColumn([
-        //     'index'    => 'purchase_no',
-        //     'label'    => trans('admin::app.purchases.purchase_no'),
-        //     'type'     => 'string',
-        //     'sortable' => true,
-        //     'searchable' => true,
-        // ]);
+        $this->addColumn([
+            'index'    => 'purchase_no',
+            'label'    => trans('admin::app.purchases.purchase_no'),
+            'type'     => 'string',
+            'sortable' => true,
+            'searchable' => true,
+        ]);
 
         $this->addColumn([
             'index'      => 'expired_date',
@@ -111,13 +123,13 @@ class StockCountDataGrid extends DataGrid
             },
         ]);
 
-        // $this->addColumn([
-        //     'index'      => 'sales_person',
-        //     'label'      => trans('admin::app.settings.users.title'),
-        //     'type'       => 'string',
-        //     'searchable' => false,
-        //     'sortable'   => false,
-        // ]);
+        $this->addColumn([
+            'index'      => 'sales_person',
+            'label'      => trans('admin::app.settings.users.title'),
+            'type'       => 'string',
+            'searchable' => false,
+            'sortable'   => false,
+        ]);
     }
 
     /**

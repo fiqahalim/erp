@@ -422,7 +422,6 @@
                         class="control"
                         v-model="product.price"
                         data-vv-as="&quot;{{ __('admin::app.quotes.price') }}&quot;"
-                        readonly
                     />
 
                     <span class="control-error" v-if="errors.has(inputName + '[price]')">

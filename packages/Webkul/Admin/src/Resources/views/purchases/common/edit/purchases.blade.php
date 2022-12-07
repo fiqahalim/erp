@@ -1,21 +1,21 @@
-<div class="form-group date" :class="[errors.has('date') ? 'has-error' : '']">
+<div class="form-group date">
     <label class="required">
-        {{ __('admin::app.materials.date') }}
+        {{ __('admin::app.purchases.date') }}
     </label>
 
     <div class="input-group">
         <date>
             <input
                 type="text"
-                name="delivery_date"
+                name="created_at"
                 class="control"
-                value="{{ old('delivery_date', $purchase->delivery_date) }}"
-                data-vv-as="{{ __('admin::app.purchases.delivery_date') }}"
+                value="{{ old('created_at', $purchase->created_at) }}"
+                data-vv-as="{{ __('admin::app.purchases.created_at') }}"
                 disabled
             />
         </date>
-        <span class="control-error" v-if="errors.has('delivery_date')">
-            @{{ errors.first('delivery_date') }}
+        <span class="control-error" v-if="errors.has('created_at')">
+            @{{ errors.first('created_at') }}
         </span>
 
         {{-- <date>
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="top-control-group">
+        {{-- <div class="top-control-group">
             <div class="form-group">
                 <label>{{ __('admin::app.purchases.ref_no') }}</label>
 
@@ -76,9 +76,9 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0;">
+        <div class="bottom-control-group" :class="[errors.has('user') ? 'has-error' : '']" style="padding-right: 0; margin-top: 1rem;">
             <div class="form-group">
                 <label>{{ __('admin::app.settings.users.title') }}</label>
 
@@ -103,13 +103,13 @@
 
                 <div class="control-faker">
                     <select
-                        name="person_id"
+                        name="group_id"
                         class="control"
                         data-vv-as="{{ __('admin::app.contacts.persons.title') }}"
                         >
-                        @foreach ($persons as $person)
-                        <option value="{{ $person->id }}" {{ old('person_id') == $person->id ? 'selected' : '' }}>
-                            {{ $person->code }} | {{ $person->name }}
+                        @foreach ($groups as $group)
+                        <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                            {{ $group->name }}
                         </option>
                         @endforeach
                     </select>
@@ -148,8 +148,11 @@
         data-vv-as="{{ __('admin::app.purchases.progress_status') }}"
         v-validate="'required'"
         >
-        <option value="In Progress">In Progress</option>
-        <option value="Finish">Finished</option>
+        <option value="Pending Review by Department HoD">Pending Review by Department HoD</option>
+        <option value="Pending Review by Procurement">Pending Review by Procurement</option>
+        <option value="Request Amendment">Request Amendment</option>
+        <option value="PO Release">PO Release</option>
+        <option value="Received">Received</option>
         <option value="Cancel">Cancel</option>
     </select>
 </div>

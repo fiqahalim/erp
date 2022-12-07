@@ -185,6 +185,31 @@ Route::group(['middleware' => ['web']], function () {
             });
 
 
+            // Incoming Stock
+            Route::group([
+                'prefix'    => 'incoming-stocks',
+                'namespace' => 'Webkul\Admin\Http\Controllers\Product'
+            ], function () {
+                Route::get('', 'IncomingStockController@index')->name('admin.incoming-stocks.index');
+
+                Route::get('create', 'IncomingStockController@create')->name('admin.incoming-stocks.create');
+
+                Route::post('create', 'IncomingStockController@store')->name('admin.incoming-stocks.store');
+
+                Route::get('edit/{id}', 'IncomingStockController@edit')->name('admin.incoming-stocks.edit');
+
+                Route::get('view/{id?}', 'IncomingStockController@view')->name('admin.incoming-stocks.view');
+
+                Route::put('edit/{id}', 'IncomingStockController@update')->name('admin.incoming-stocks.update');
+
+                Route::get('search', 'IncomingStockController@search')->name('admin.incoming-stocks.search');
+
+                Route::delete('{id}', 'IncomingStockController@destroy')->name('admin.incoming-stocks.delete');
+
+                Route::put('mass-destroy', 'IncomingStockController@massDestroy')->name('admin.incoming-stocks.mass_delete');
+            });
+
+
             // Material Requests
             Route::group([
                 'prefix'    => 'materials',
@@ -207,6 +232,31 @@ Route::group(['middleware' => ['web']], function () {
                 Route::delete('{id}', 'MaterialController@destroy')->name('admin.materials.delete');
 
                 Route::put('mass-destroy', 'MaterialController@massDestroy')->name('admin.materials.mass_delete');
+            });
+
+
+            // Material Approval List
+            Route::group([
+                'prefix'    => 'materials-approval',
+                'namespace' => 'Webkul\Admin\Http\Controllers\Product',
+            ], function () {
+                Route::get('', 'MaterialApprovalController@index')->name('admin.materials-approval.index');
+
+                Route::get('create/{id?}', 'MaterialApprovalController@create')->name('admin.materials-approval.create');
+
+                Route::post('create', 'MaterialApprovalController@store')->name('admin.materials-approval.store');
+
+                Route::get('view/{id?}', 'MaterialApprovalController@view')->name('admin.materials-approval.view');
+
+                Route::get('edit/{id?}', 'MaterialApprovalController@edit')->name('admin.materials-approval.edit');
+
+                Route::put('edit/{id}', 'MaterialApprovalController@update')->name('admin.materials-approval.update');
+
+                Route::get('print/{id?}', 'MaterialApprovalController@print')->name('admin.materials-approval.print');
+
+                Route::delete('{id}', 'MaterialApprovalController@destroy')->name('admin.materials-approval.delete');
+
+                Route::put('mass-destroy', 'MaterialApprovalController@massDestroy')->name('admin.materials-approval.mass_delete');
             });
 
 

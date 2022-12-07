@@ -18,19 +18,19 @@
             </span>
         </date>
 
-        {{-- <date>
+        <date>
             <input
                 type="text"
-                name="expired_date"
+                name="delivery_date"
                 class="control"
-                placeholder="{{ __('admin::app.purchases.expired_date') }}"
+                placeholder="{{ __('admin::app.purchases_order.delivery_date') }}"
                 v-validate="'required'"
-                data-vv-as="{{ __('admin::app.purchases.expired_date') }}"
+                data-vv-as="{{ __('admin::app.purchases_order.delivery_date') }}"
             />
-            <span class="control-error" v-if="errors.has('expired_date')">
-                @{{ errors.first('expired_date') }}
+            <span class="control-error" v-if="errors.has('delivery_date')">
+                @{{ errors.first('delivery_date') }}
             </span>
-        </date> --}}
+        </date>
     </div>
 </div>
 
@@ -46,8 +46,9 @@
                         name="purchase_no"
                         class="control"
                         placeholder="{{ __('admin::app.purchases_order.purchase_no') }}"
-                        v-validate="'required'"
                         data-vv-as="{{ __('admin::app.purchases_order.purchase_no') }}"
+                        value="PO000001-2022"
+                        readonly
                     />
 
                     <span class="control-error" v-if="errors.has('purchase_no')">

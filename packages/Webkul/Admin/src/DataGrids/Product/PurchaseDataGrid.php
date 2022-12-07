@@ -27,6 +27,7 @@ class PurchaseDataGrid extends DataGrid
                 'users.name as sales_person',
                 'purchase_items.id as purchase_items_id',
                 'purchase_items.name as purchase_items_name',
+                'purchase_items.spec as purchase_items_spec',
                 // 'purchase_items.amount as purchase_items_amount',
             )
             ->leftJoin('users', 'purchases.user_id', '=', 'users.id')
@@ -93,6 +94,14 @@ class PurchaseDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'purchase_items_name',
             'label'      => trans('admin::app.products.item_name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'purchase_items_spec',
+            'label'      => trans('Item Description'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
