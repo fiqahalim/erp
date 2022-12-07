@@ -28,7 +28,7 @@ class StockCountDataGrid extends DataGrid
                 'purchase_order_items.id as purchase_order_items_id',
                 'purchase_order_items.sku as purchase_order_items_sku',
                 'purchase_order_items.name as purchase_order_items_name',
-                'purchase_order_items.description as purchase_order_items_description',
+                'purchase_order_items.spec as purchase_order_items_spec',
                 'purchase_order_items.quantity as purchase_order_items_quantity',
                 'products.id as product_id',
                 'products.unit as products_unit',
@@ -69,7 +69,7 @@ class StockCountDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'purchase_order_items_description',
+            'index'      => 'purchase_order_items_spec',
             'label'      => trans('admin::app.products.spec'),
             'type'       => 'string',
             'searchable' => false,
@@ -86,19 +86,19 @@ class StockCountDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'purchase_order_items_quantity',
-            'label'      => trans('admin::app.purchases.quantity_order'),
+            'label'      => trans('Current Unit Quantity'),
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
         ]);
 
-        $this->addColumn([
-            'index'    => 'purchase_no',
-            'label'    => trans('admin::app.purchases.purchase_no'),
-            'type'     => 'string',
-            'sortable' => true,
-            'searchable' => true,
-        ]);
+        // $this->addColumn([
+        //     'index'    => 'purchase_no',
+        //     'label'    => trans('admin::app.purchases.purchase_no'),
+        //     'type'     => 'string',
+        //     'sortable' => true,
+        //     'searchable' => true,
+        // ]);
 
         $this->addColumn([
             'index'      => 'expired_date',
@@ -111,13 +111,13 @@ class StockCountDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'      => 'sales_person',
-            'label'      => trans('admin::app.settings.users.title'),
-            'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => false,
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'sales_person',
+        //     'label'      => trans('admin::app.settings.users.title'),
+        //     'type'       => 'string',
+        //     'searchable' => false,
+        //     'sortable'   => false,
+        // ]);
     }
 
     /**

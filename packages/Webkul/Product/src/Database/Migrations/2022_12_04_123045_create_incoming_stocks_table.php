@@ -32,11 +32,12 @@ class CreateIncomingStocksTable extends Migration
             $table->integer('person_id')->unsigned()->nullable();
             $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');
 
-            $table->integer('product_id')->unsigned()->nullable();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
-            $table->integer('purchase_id')->unsigned()->nullable();
-            $table->foreign('purchase_id')->references('id')->on('purchase_orders')->onDelete('cascade');
+            $table->integer('purchase_order_id')->unsigned()->nullable();
+            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('cascade');
+
+            $table->integer('purchase_order_item_id')->unsigned()->nullable();
+            $table->foreign('purchase_order_item_id')->references('id')->on('purchase_order_items')->onDelete('cascade');
 
             $table->timestamps();
         });
